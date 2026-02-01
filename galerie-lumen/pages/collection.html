@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection — Galerie Lumen</title>
+    <meta name="description" content="Browse the Galerie Lumen permanent collection. Paintings, sculptures, photography, and mixed media from emerging and established artists.">
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__inner">
+            <a href="../index.html" class="header__logo">
+                <div class="header__logo-mark"></div>
+                <span class="header__logo-name">Galerie Lumen</span>
+            </a>
+            <nav class="header__nav" id="headerNav">
+                <a href="../index.html" class="header__link">Home</a>
+                <a href="exhibitions.html" class="header__link">Exhibitions</a>
+                <a href="collection.html" class="header__link is-active">Collection</a>
+                <a href="about.html" class="header__link">About</a>
+                <a href="visit.html" class="header__link">Visit</a>
+            </nav>
+            <button class="header__toggle" id="headerToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero__label" data-reveal>02 / Collection</div>
+            <h1 class="page-hero__title" data-reveal data-delay="1">Permanent Collection</h1>
+            <p class="page-hero__subtitle" data-reveal data-delay="2">Over 200 works spanning painting, sculpture, photography, and mixed media. Each piece selected for its capacity to transform a room.</p>
+        </div>
+    </section>
+
+    <!-- Filter + Masonry Grid -->
+    <section class="section">
+        <div class="container container--wide">
+            <div class="tabs" data-reveal>
+                <button class="tab is-active" data-filter="all">All</button>
+                <button class="tab" data-filter="painting">Painting</button>
+                <button class="tab" data-filter="sculpture">Sculpture</button>
+                <button class="tab" data-filter="photography">Photography</button>
+                <button class="tab" data-filter="mixed">Mixed Media</button>
+            </div>
+
+            <div class="masonry" id="collectionGrid">
+
+                <!-- Row 1 -->
+                <div class="masonry__item masonry__item--tall" data-category="painting" data-reveal data-delay="1">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image">
+                            <div class="artwork-card__placeholder">I</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Elena Vasquez</div>
+                            <div class="artwork-card__title">Prism Study No. 7</div>
+                            <div class="artwork-card__meta">Oil on canvas &middot; 180 &times; 240 cm &middot; 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry__item masonry__item--medium" data-category="sculpture" data-reveal data-delay="2">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image artwork-card__image--square">
+                            <div class="artwork-card__placeholder">II</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Marcus Chen</div>
+                            <div class="artwork-card__title">Untitled (Fracture)</div>
+                            <div class="artwork-card__meta">Carrara marble &middot; 90 &times; 60 &times; 45 cm &middot; 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry__item masonry__item--short" data-category="photography" data-reveal data-delay="3">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image artwork-card__image--landscape">
+                            <div class="artwork-card__placeholder">III</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Amara Okafor</div>
+                            <div class="artwork-card__title">Whisper Field</div>
+                            <div class="artwork-card__meta">Archival pigment print &middot; 120 &times; 80 cm &middot; 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="masonry__item masonry__item--medium" data-category="mixed" data-reveal data-delay="1">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image">
+                            <div class="artwork-card__placeholder">IV</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Collective SOLA</div>
+                            <div class="artwork-card__title">Bloom Algorithm</div>
+                            <div class="artwork-card__meta">LEDs, acrylic, code &middot; Variable dimensions &middot; 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry__item masonry__item--tall" data-category="painting" data-reveal data-delay="2">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image">
+                            <div class="artwork-card__placeholder">V</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Ingrid Solheim</div>
+                            <div class="artwork-card__title">Still Water XII</div>
+                            <div class="artwork-card__meta">Oil on linen &middot; 200 &times; 150 cm &middot; 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry__item masonry__item--short" data-category="sculpture" data-reveal data-delay="3">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image artwork-card__image--square">
+                            <div class="artwork-card__placeholder">VI</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Thomas Riedl</div>
+                            <div class="artwork-card__title">Velocity Object #3</div>
+                            <div class="artwork-card__meta">Steel, motors &middot; 110 &times; 80 &times; 80 cm &middot; 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="masonry__item masonry__item--wide" data-category="photography" data-reveal data-delay="1">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image artwork-card__image--landscape">
+                            <div class="artwork-card__placeholder">VII</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Kai Nakamura</div>
+                            <div class="artwork-card__title">Horizon / Memory (Triptych)</div>
+                            <div class="artwork-card__meta">C-print, paint, digital &middot; 300 &times; 100 cm &middot; 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry__item masonry__item--medium" data-category="mixed" data-reveal data-delay="2">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image">
+                            <div class="artwork-card__placeholder">VIII</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Yara Dib</div>
+                            <div class="artwork-card__title">Thread Cartography</div>
+                            <div class="artwork-card__meta">Textile, wire, found objects &middot; 160 &times; 200 cm &middot; 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="masonry__item masonry__item--short" data-category="painting" data-reveal data-delay="1">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image artwork-card__image--landscape">
+                            <div class="artwork-card__placeholder">IX</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Elena Vasquez</div>
+                            <div class="artwork-card__title">Chromatic Descent</div>
+                            <div class="artwork-card__meta">Acrylic on panel &middot; 100 &times; 140 cm &middot; 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry__item masonry__item--medium" data-category="photography" data-reveal data-delay="2">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image">
+                            <div class="artwork-card__placeholder">X</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Amara Okafor</div>
+                            <div class="artwork-card__title">Between Breaths</div>
+                            <div class="artwork-card__meta">Archival pigment print &middot; 90 &times; 120 cm &middot; 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry__item masonry__item--tall" data-category="sculpture" data-reveal data-delay="3">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image">
+                            <div class="artwork-card__placeholder">XI</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Marcus Chen</div>
+                            <div class="artwork-card__title">Monolith (Dawn)</div>
+                            <div class="artwork-card__meta">Black granite &middot; 220 &times; 60 &times; 60 cm &middot; 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry__item masonry__item--medium" data-category="mixed" data-reveal data-delay="1">
+                    <div class="artwork-card">
+                        <div class="artwork-card__image artwork-card__image--square">
+                            <div class="artwork-card__placeholder">XII</div>
+                        </div>
+                        <div class="artwork-card__info">
+                            <div class="artwork-card__artist">Collective SOLA</div>
+                            <div class="artwork-card__title">Spore Network</div>
+                            <div class="artwork-card__meta">Mycelium, sensors, projection &middot; Room-scale &middot; 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container container--wide">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="footer__logo-mark"></div>
+                        <span class="footer__logo-name">Galerie Lumen</span>
+                    </div>
+                    <p class="footer__tagline">"Where light meets intention."<br>A contemporary art gallery experience.</p>
+                </div>
+                <div class="footer__columns">
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Gallery</h4>
+                        <a href="exhibitions.html" class="footer__link">Exhibitions</a>
+                        <a href="collection.html" class="footer__link">Collection</a>
+                        <a href="about.html" class="footer__link">About</a>
+                        <a href="visit.html" class="footer__link">Visit</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Visit</h4>
+                        <a href="visit.html" class="footer__link">Hours &amp; Admission</a>
+                        <a href="visit.html#faq" class="footer__link">FAQ</a>
+                        <a href="visit.html#contact" class="footer__link">Contact</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Connect</h4>
+                        <a href="#" class="footer__link">Instagram</a>
+                        <a href="#" class="footer__link">Twitter</a>
+                        <a href="#" class="footer__link">Newsletter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span class="footer__copy">&copy; 2026 Galerie Lumen. All rights reserved. &mdash; Template by <a href="https://github.com/poseylux/FreeCssDesigns" target="_blank" rel="noopener">FreeCSSDesigns</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+</body>
+</html>

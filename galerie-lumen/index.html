@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie Lumen — Where Light Meets Intention</title>
+    <meta name="description" content="A contemporary art gallery featuring curated exhibitions, emerging artists, and immersive visual experiences. Where light meets intention.">
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__inner">
+            <a href="index.html" class="header__logo">
+                <div class="header__logo-mark"></div>
+                <span class="header__logo-name">Galerie Lumen</span>
+            </a>
+            <nav class="header__nav" id="headerNav">
+                <a href="index.html" class="header__link is-active">Home</a>
+                <a href="pages/exhibitions.html" class="header__link">Exhibitions</a>
+                <a href="pages/collection.html" class="header__link">Collection</a>
+                <a href="pages/about.html" class="header__link">About</a>
+                <a href="pages/visit.html" class="header__link">Visit</a>
+            </nav>
+            <button class="header__toggle" id="headerToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero__bg">
+            <div class="hero__bg-gradient"></div>
+            <div class="hero__spotlight hero__spotlight--1"></div>
+            <div class="hero__spotlight hero__spotlight--2"></div>
+        </div>
+        <div class="container hero__content">
+            <div class="hero__tagline" data-reveal>Where light meets intention</div>
+            <h1 class="hero__title" data-reveal data-delay="1">
+                Galerie
+                <em>Lumen</em>
+            </h1>
+            <p class="hero__subtitle" data-reveal data-delay="2">
+                A contemporary art space dedicated to the dialogue between light, form, and human experience. Curated exhibitions that illuminate the unseen.
+            </p>
+            <div class="hero__actions" data-reveal data-delay="3">
+                <a href="pages/exhibitions.html" class="btn btn--primary">
+                    Current Exhibition
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a href="pages/visit.html" class="btn btn--outline">Plan Your Visit</a>
+            </div>
+        </div>
+        <div class="hero__scroll" data-reveal data-delay="4">
+            <div class="hero__scroll-line"></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Current Exhibition -->
+    <section class="current-exhibition">
+        <div class="container">
+            <div class="current-exhibition__grid">
+                <div class="current-exhibition__visual" data-reveal>
+                    <span class="current-exhibition__visual-text">L</span>
+                </div>
+                <div class="current-exhibition__info" data-reveal data-delay="1">
+                    <span class="section-label">Now Showing</span>
+                    <h2 class="section-title">Luminous Frequencies</h2>
+                    <p class="section-subtitle">An immersive exploration of how light shapes perception, featuring twelve large-scale installations that transform the gallery into a living canvas of color and shadow.</p>
+                    <p class="current-exhibition__dates">January 15 &mdash; March 28, 2026</p>
+                    <div class="divider"></div>
+                    <p style="font-family: var(--gl-font-heading); font-size: 16px; font-weight: 300; color: var(--gl-text-muted); font-style: italic; margin-bottom: 28px;">Featuring works by Elena Vasquez</p>
+                    <a href="pages/exhibitions.html" class="btn btn--primary">
+                        View Exhibition
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Exhibitions Strip -->
+    <section class="upcoming-strip">
+        <div class="container">
+            <span class="section-label" data-reveal>Coming Soon</span>
+            <h2 class="section-title" data-reveal data-delay="1">Upcoming Exhibitions</h2>
+            <div class="upcoming-strip__grid">
+                <div class="upcoming-item" data-reveal data-delay="1">
+                    <div class="upcoming-item__date">Apr 12 &mdash; Jun 20, 2026</div>
+                    <h3 class="upcoming-item__title">Echoes in Marble</h3>
+                    <p class="upcoming-item__artist">by Marcus Chen</p>
+                </div>
+                <div class="upcoming-item" data-reveal data-delay="2">
+                    <div class="upcoming-item__date">Jul 5 &mdash; Sep 14, 2026</div>
+                    <h3 class="upcoming-item__title">The Weight of Silence</h3>
+                    <p class="upcoming-item__artist">by Amara Okafor</p>
+                </div>
+                <div class="upcoming-item" data-reveal data-delay="3">
+                    <div class="upcoming-item__date">Oct 1 &mdash; Dec 18, 2026</div>
+                    <h3 class="upcoming-item__title">Digital Botanica</h3>
+                    <p class="upcoming-item__artist">by Collective SOLA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artist Spotlight -->
+    <section class="artist-spotlight">
+        <div class="container">
+            <span class="section-label" data-reveal>Featured Artists</span>
+            <h2 class="section-title" data-reveal data-delay="1">Artist Spotlight</h2>
+            <div class="artist-spotlight__grid">
+                <div class="artwork-card" data-reveal data-delay="1">
+                    <div class="artwork-card__image">
+                        <div class="artwork-card__placeholder">I</div>
+                    </div>
+                    <div class="artwork-card__info">
+                        <div class="artwork-card__artist">Elena Vasquez</div>
+                        <div class="artwork-card__title">Prism Study No. 7</div>
+                        <div class="artwork-card__meta">Oil on canvas, 2025</div>
+                    </div>
+                </div>
+                <div class="artwork-card" data-reveal data-delay="2">
+                    <div class="artwork-card__image artwork-card__image--landscape">
+                        <div class="artwork-card__placeholder">II</div>
+                    </div>
+                    <div class="artwork-card__info">
+                        <div class="artwork-card__artist">Marcus Chen</div>
+                        <div class="artwork-card__title">Untitled (Fracture)</div>
+                        <div class="artwork-card__meta">Carrara marble, 2024</div>
+                    </div>
+                </div>
+                <div class="artwork-card" data-reveal data-delay="3">
+                    <div class="artwork-card__image">
+                        <div class="artwork-card__placeholder">III</div>
+                    </div>
+                    <div class="artwork-card__info">
+                        <div class="artwork-card__artist">Amara Okafor</div>
+                        <div class="artwork-card__title">Whisper Field</div>
+                        <div class="artwork-card__meta">Photography, 2025</div>
+                    </div>
+                </div>
+                <div class="artwork-card" data-reveal data-delay="4">
+                    <div class="artwork-card__image artwork-card__image--square">
+                        <div class="artwork-card__placeholder">IV</div>
+                    </div>
+                    <div class="artwork-card__info">
+                        <div class="artwork-card__artist">Collective SOLA</div>
+                        <div class="artwork-card__title">Bloom Algorithm</div>
+                        <div class="artwork-card__meta">Mixed media, 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit CTA -->
+    <section class="visit-cta">
+        <div class="container" data-reveal>
+            <h2 class="visit-cta__title">Experience art in a new light</h2>
+            <p class="visit-cta__text">Open Tuesday through Sunday. Free admission on the first Friday of every month.</p>
+            <a href="pages/visit.html" class="btn btn--warm">
+                Plan Your Visit
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container container--wide">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="footer__logo-mark"></div>
+                        <span class="footer__logo-name">Galerie Lumen</span>
+                    </div>
+                    <p class="footer__tagline">"Where light meets intention."<br>A contemporary art gallery experience.</p>
+                </div>
+                <div class="footer__columns">
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Gallery</h4>
+                        <a href="pages/exhibitions.html" class="footer__link">Exhibitions</a>
+                        <a href="pages/collection.html" class="footer__link">Collection</a>
+                        <a href="pages/about.html" class="footer__link">About</a>
+                        <a href="pages/visit.html" class="footer__link">Visit</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Visit</h4>
+                        <a href="pages/visit.html" class="footer__link">Hours &amp; Admission</a>
+                        <a href="pages/visit.html#faq" class="footer__link">FAQ</a>
+                        <a href="pages/visit.html#contact" class="footer__link">Contact</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Connect</h4>
+                        <a href="#" class="footer__link">Instagram</a>
+                        <a href="#" class="footer__link">Twitter</a>
+                        <a href="#" class="footer__link">Newsletter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span class="footer__copy">&copy; 2026 Galerie Lumen. All rights reserved. &mdash; Template by <a href="https://github.com/poseylux/FreeCssDesigns" target="_blank" rel="noopener">FreeCSSDesigns</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

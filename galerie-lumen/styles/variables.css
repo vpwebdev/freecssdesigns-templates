@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Galerie Lumen — Design Tokens
+   Where light meets intention.
+   ========================================================================== */
+
+:root {
+    /* Background palette — deep obsidian */
+    --gl-bg-deep: #0A0A0C;
+    --gl-bg: #0E0E11;
+    --gl-bg-raised: #141418;
+    --gl-bg-card: #18181D;
+    --gl-bg-card-hover: #1E1E24;
+    --gl-bg-surface: #1A1A1E;
+    --gl-bg-overlay: rgba(10, 10, 12, 0.92);
+
+    /* Text — cool snow whites */
+    --gl-text: #F8F8F6;
+    --gl-text-secondary: #D8D8DE;
+    --gl-text-muted: #B0B0BA;
+    --gl-text-dim: #808090;
+    --gl-text-faint: #58586A;
+
+    /* Primary accent — desaturated violet-blue */
+    --gl-accent: #8B7EC8;
+    --gl-accent-hover: #9D92D4;
+    --gl-accent-dim: rgba(139, 126, 200, 0.12);
+    --gl-accent-glow: rgba(139, 126, 200, 0.06);
+    --gl-accent-strong: rgba(139, 126, 200, 0.25);
+
+    /* Secondary accent — warm gallery light */
+    --gl-warm: #C8A882;
+    --gl-warm-hover: #D4B892;
+    --gl-warm-dim: rgba(200, 168, 130, 0.12);
+
+    /* Borders */
+    --gl-border: rgba(255, 255, 255, 0.06);
+    --gl-border-hover: rgba(255, 255, 255, 0.12);
+    --gl-border-accent: rgba(139, 126, 200, 0.2);
+
+    /* Typography */
+    --gl-font-display: 'Playfair Display', 'Georgia', serif;
+    --gl-font-heading: 'Cormorant', 'Georgia', serif;
+    --gl-font-body: 'Inter', -apple-system, sans-serif;
+    --gl-font-mono: 'Space Mono', 'SF Mono', monospace;
+
+    /* Spacing */
+    --gl-nav-height: 76px;
+    --gl-container: 1200px;
+    --gl-container-wide: 1400px;
+    --gl-section-pad: 120px;
+    --gl-section-pad-mobile: 80px;
+
+    /* Easing */
+    --gl-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --gl-ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+    --gl-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Shadows */
+    --gl-shadow-card: 0 8px 40px rgba(0, 0, 0, 0.4);
+    --gl-shadow-glow: 0 0 60px rgba(139, 126, 200, 0.08);
+    --gl-shadow-spotlight: 0 0 120px rgba(139, 126, 200, 0.15);
+
+    /* Transitions */
+    --gl-transition: 0.3s var(--gl-ease-smooth);
+    --gl-transition-slow: 0.6s var(--gl-ease-out);
+}

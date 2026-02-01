@@ -1,0 +1,604 @@
+/* ==========================================================================
+   Galerie Lumen — Components
+   Buttons, Cards, Artwork Cards, Tabs, Forms, Reveal
+   ========================================================================== */
+
+/* --- Buttons --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--gl-font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 0;
+    border: 1px solid transparent;
+    transition: all var(--gl-transition);
+    white-space: nowrap;
+    position: relative;
+    cursor: pointer;
+}
+
+.btn--primary {
+    background: var(--gl-accent);
+    color: var(--gl-bg-deep);
+    border-color: var(--gl-accent);
+}
+
+.btn--primary:hover {
+    background: var(--gl-accent-hover);
+    border-color: var(--gl-accent-hover);
+    box-shadow: 0 4px 24px rgba(139, 126, 200, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn--outline {
+    background: transparent;
+    color: var(--gl-text);
+    border-color: var(--gl-border-hover);
+}
+
+.btn--outline:hover {
+    border-color: var(--gl-accent);
+    color: var(--gl-accent);
+}
+
+.btn--warm {
+    background: var(--gl-warm);
+    color: var(--gl-bg-deep);
+    border-color: var(--gl-warm);
+}
+
+.btn--warm:hover {
+    background: var(--gl-warm-hover);
+    border-color: var(--gl-warm-hover);
+    box-shadow: 0 4px 24px rgba(200, 168, 130, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--gl-text-muted);
+    border-color: transparent;
+    padding: 14px 16px;
+}
+
+.btn--ghost:hover {
+    color: var(--gl-text);
+}
+
+.btn--large {
+    padding: 18px 40px;
+    font-size: 14px;
+}
+
+.btn--small {
+    padding: 10px 22px;
+    font-size: 12px;
+}
+
+.btn svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover svg {
+    transform: translateX(3px);
+}
+
+/* --- Info Cards --- */
+.card {
+    background: var(--gl-bg-card);
+    border: 1px solid var(--gl-border);
+    padding: 36px;
+    transition: border-color var(--gl-transition), box-shadow var(--gl-transition), transform var(--gl-transition);
+}
+
+.card:hover {
+    border-color: var(--gl-border-accent);
+    box-shadow: var(--gl-shadow-glow);
+    transform: translateY(-2px);
+}
+
+.card__label {
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gl-accent);
+    margin-bottom: 12px;
+}
+
+.card__title {
+    font-family: var(--gl-font-heading);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--gl-text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.card__text {
+    font-size: 14px;
+    color: var(--gl-text-muted);
+    line-height: 1.7;
+}
+
+.card__meta {
+    font-family: var(--gl-font-mono);
+    font-size: 11px;
+    color: var(--gl-text-dim);
+    letter-spacing: 0.04em;
+    margin-top: 16px;
+}
+
+/* --- Artwork Card (with Spotlight) --- */
+.artwork-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--gl-bg-card);
+    border: 1px solid var(--gl-border);
+    transition: border-color var(--gl-transition), box-shadow 0.5s ease;
+    cursor: pointer;
+}
+
+.artwork-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+        rgba(139, 126, 200, 0.12),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.artwork-card:hover::before {
+    opacity: 1;
+}
+
+.artwork-card:hover {
+    border-color: var(--gl-border-accent);
+    box-shadow: 0 0 60px rgba(139, 126, 200, 0.08);
+}
+
+.artwork-card__image {
+    aspect-ratio: 3 / 4;
+    background: var(--gl-bg-surface);
+    position: relative;
+    overflow: hidden;
+}
+
+.artwork-card__image--landscape {
+    aspect-ratio: 4 / 3;
+}
+
+.artwork-card__image--square {
+    aspect-ratio: 1;
+}
+
+.artwork-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--gl-font-display);
+    font-size: 48px;
+    color: var(--gl-text-faint);
+    opacity: 0.3;
+    background: linear-gradient(
+        135deg,
+        var(--gl-bg-surface),
+        var(--gl-bg-card)
+    );
+}
+
+.artwork-card__info {
+    padding: 20px 22px;
+    position: relative;
+    z-index: 3;
+}
+
+.artwork-card__artist {
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gl-accent);
+    margin-bottom: 6px;
+}
+
+.artwork-card__title {
+    font-family: var(--gl-font-heading);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--gl-text);
+    margin-bottom: 4px;
+    font-style: italic;
+}
+
+.artwork-card__meta {
+    font-family: var(--gl-font-mono);
+    font-size: 11px;
+    color: var(--gl-text-dim);
+    letter-spacing: 0.02em;
+}
+
+/* --- Exhibition Card --- */
+.exhibition-card {
+    background: var(--gl-bg-card);
+    border: 1px solid var(--gl-border);
+    overflow: hidden;
+    transition: border-color var(--gl-transition), transform var(--gl-transition);
+}
+
+.exhibition-card:hover {
+    border-color: var(--gl-border-accent);
+    transform: translateY(-3px);
+}
+
+.exhibition-card__image {
+    height: 220px;
+    background: linear-gradient(135deg, var(--gl-bg-surface), var(--gl-bg-card));
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.exhibition-card__image-placeholder {
+    font-family: var(--gl-font-display);
+    font-size: 64px;
+    color: var(--gl-text-faint);
+    opacity: 0.2;
+}
+
+.exhibition-card__status {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    background: var(--gl-accent);
+    color: var(--gl-bg-deep);
+}
+
+.exhibition-card__status--upcoming {
+    background: var(--gl-warm);
+}
+
+.exhibition-card__status--past {
+    background: var(--gl-text-dim);
+}
+
+.exhibition-card__body {
+    padding: 28px;
+}
+
+.exhibition-card__dates {
+    font-family: var(--gl-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--gl-text-dim);
+    margin-bottom: 10px;
+}
+
+.exhibition-card__title {
+    font-family: var(--gl-font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--gl-text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.exhibition-card__artist-name {
+    font-family: var(--gl-font-heading);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--gl-accent);
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.exhibition-card__desc {
+    font-size: 14px;
+    color: var(--gl-text-muted);
+    line-height: 1.6;
+}
+
+/* --- Tabs / Filter --- */
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    font-family: var(--gl-font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    color: var(--gl-text-dim);
+    border: 1px solid var(--gl-border);
+    background: transparent;
+    transition: all var(--gl-transition);
+    cursor: pointer;
+}
+
+.tab:hover {
+    color: var(--gl-text);
+    border-color: var(--gl-border-hover);
+}
+
+.tab.is-active {
+    color: var(--gl-bg-deep);
+    background: var(--gl-accent);
+    border-color: var(--gl-accent);
+}
+
+/* --- Forms --- */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: block;
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gl-text-dim);
+    margin-bottom: 10px;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    font-family: var(--gl-font-body);
+    font-size: 15px;
+    color: var(--gl-text);
+    padding: 14px 18px;
+    background: var(--gl-bg-card);
+    border: 1px solid var(--gl-border);
+    transition: border-color var(--gl-transition), box-shadow var(--gl-transition);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: var(--gl-accent);
+    box-shadow: 0 0 0 3px var(--gl-accent-dim);
+    outline: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--gl-text-faint);
+}
+
+.form-textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.form-select {
+    width: 100%;
+    font-family: var(--gl-font-body);
+    font-size: 15px;
+    color: var(--gl-text);
+    padding: 14px 18px;
+    background: var(--gl-bg-card);
+    border: 1px solid var(--gl-border);
+    appearance: none;
+    cursor: pointer;
+    transition: border-color var(--gl-transition);
+}
+
+.form-select:focus {
+    border-color: var(--gl-accent);
+    outline: none;
+}
+
+/* --- Team Card --- */
+.team-card {
+    text-align: center;
+    padding: 40px 28px;
+    background: var(--gl-bg-card);
+    border: 1px solid var(--gl-border);
+    transition: border-color var(--gl-transition), transform var(--gl-transition);
+}
+
+.team-card:hover {
+    border-color: var(--gl-border-accent);
+    transform: translateY(-3px);
+}
+
+.team-card__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--gl-accent-dim), var(--gl-bg-surface));
+    border: 1px solid var(--gl-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--gl-font-display);
+    font-size: 28px;
+    color: var(--gl-accent);
+}
+
+.team-card__name {
+    font-family: var(--gl-font-heading);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--gl-text);
+    margin-bottom: 4px;
+}
+
+.team-card__role {
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gl-accent);
+    margin-bottom: 14px;
+}
+
+.team-card__bio {
+    font-size: 14px;
+    color: var(--gl-text-muted);
+    line-height: 1.6;
+}
+
+/* --- Stats Row --- */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--gl-border);
+    border: 1px solid var(--gl-border);
+}
+
+.stat-item {
+    padding: 36px 28px;
+    background: var(--gl-bg-card);
+    text-align: center;
+    transition: background var(--gl-transition);
+}
+
+.stat-item:hover {
+    background: var(--gl-bg-card-hover);
+}
+
+.stat-item__number {
+    font-family: var(--gl-font-display);
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--gl-accent);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-item__label {
+    font-family: var(--gl-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gl-text-dim);
+}
+
+/* --- Press Marquee --- */
+.marquee {
+    overflow: hidden;
+    padding: 32px 0;
+    border-top: 1px solid var(--gl-border);
+    border-bottom: 1px solid var(--gl-border);
+}
+
+.marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 40s linear infinite;
+}
+
+.marquee__content {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding-right: 48px;
+    white-space: nowrap;
+}
+
+.marquee__item {
+    font-family: var(--gl-font-heading);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gl-text-dim);
+    letter-spacing: 0.04em;
+    font-style: italic;
+}
+
+.marquee__sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gl-text-faint);
+    flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- Scroll Reveal --- */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s var(--gl-ease-out), transform 0.8s var(--gl-ease-out);
+}
+
+[data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-reveal][data-delay="1"] { transition-delay: 0.1s; }
+[data-reveal][data-delay="2"] { transition-delay: 0.2s; }
+[data-reveal][data-delay="3"] { transition-delay: 0.3s; }
+[data-reveal][data-delay="4"] { transition-delay: 0.4s; }
+[data-reveal][data-delay="5"] { transition-delay: 0.5s; }
+
+/* --- Divider --- */
+.divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gl-accent);
+    margin: 32px 0;
+    opacity: 0.4;
+}
+
+.divider--center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

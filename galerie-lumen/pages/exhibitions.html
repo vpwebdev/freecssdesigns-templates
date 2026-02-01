@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibitions — Galerie Lumen</title>
+    <meta name="description" content="Explore current, upcoming, and past exhibitions at Galerie Lumen. Curated contemporary art experiences.">
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header__inner">
+            <a href="../index.html" class="header__logo">
+                <div class="header__logo-mark"></div>
+                <span class="header__logo-name">Galerie Lumen</span>
+            </a>
+            <nav class="header__nav" id="headerNav">
+                <a href="../index.html" class="header__link">Home</a>
+                <a href="exhibitions.html" class="header__link is-active">Exhibitions</a>
+                <a href="collection.html" class="header__link">Collection</a>
+                <a href="about.html" class="header__link">About</a>
+                <a href="visit.html" class="header__link">Visit</a>
+            </nav>
+            <button class="header__toggle" id="headerToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero__label" data-reveal>01 / Exhibitions</div>
+            <h1 class="page-hero__title" data-reveal data-delay="1">Exhibitions</h1>
+            <p class="page-hero__subtitle" data-reveal data-delay="2">Thoughtfully curated shows that challenge perspective and illuminate the human condition.</p>
+        </div>
+    </section>
+
+    <!-- Filter Tabs + Exhibitions -->
+    <section class="section">
+        <div class="container">
+            <div class="tabs" data-reveal>
+                <button class="tab is-active" data-filter="all">All</button>
+                <button class="tab" data-filter="current">Current</button>
+                <button class="tab" data-filter="upcoming">Upcoming</button>
+                <button class="tab" data-filter="past">Past</button>
+            </div>
+
+            <div class="grid grid--2" id="exhibitionGrid">
+
+                <!-- Current -->
+                <article class="exhibition-card" data-category="current" data-reveal data-delay="1">
+                    <div class="exhibition-card__image">
+                        <span class="exhibition-card__image-placeholder">L</span>
+                        <span class="exhibition-card__status">Now Showing</span>
+                    </div>
+                    <div class="exhibition-card__body">
+                        <div class="exhibition-card__dates">Jan 15 &mdash; Mar 28, 2026</div>
+                        <h3 class="exhibition-card__title">Luminous Frequencies</h3>
+                        <p class="exhibition-card__artist-name">Elena Vasquez</p>
+                        <p class="exhibition-card__desc">An immersive exploration of how light shapes perception, featuring twelve large-scale installations that transform the gallery into a living canvas of color and shadow.</p>
+                    </div>
+                </article>
+
+                <article class="exhibition-card" data-category="current" data-reveal data-delay="2">
+                    <div class="exhibition-card__image">
+                        <span class="exhibition-card__image-placeholder">F</span>
+                        <span class="exhibition-card__status">Now Showing</span>
+                    </div>
+                    <div class="exhibition-card__body">
+                        <div class="exhibition-card__dates">Feb 1 &mdash; Apr 10, 2026</div>
+                        <h3 class="exhibition-card__title">Fractured Horizons</h3>
+                        <p class="exhibition-card__artist-name">Kai Nakamura</p>
+                        <p class="exhibition-card__desc">Mixed-media landscapes that deconstruct the boundary between nature and memory. Each piece layers photography, paint, and digital manipulation.</p>
+                    </div>
+                </article>
+
+                <!-- Upcoming -->
+                <article class="exhibition-card" data-category="upcoming" data-reveal data-delay="1">
+                    <div class="exhibition-card__image">
+                        <span class="exhibition-card__image-placeholder">E</span>
+                        <span class="exhibition-card__status exhibition-card__status--upcoming">Upcoming</span>
+                    </div>
+                    <div class="exhibition-card__body">
+                        <div class="exhibition-card__dates">Apr 12 &mdash; Jun 20, 2026</div>
+                        <h3 class="exhibition-card__title">Echoes in Marble</h3>
+                        <p class="exhibition-card__artist-name">Marcus Chen</p>
+                        <p class="exhibition-card__desc">Contemporary sculpture that reimagines classical forms through the lens of digital architecture. Chen's marble works pulse with algorithmic precision.</p>
+                    </div>
+                </article>
+
+                <article class="exhibition-card" data-category="upcoming" data-reveal data-delay="2">
+                    <div class="exhibition-card__image">
+                        <span class="exhibition-card__image-placeholder">W</span>
+                        <span class="exhibition-card__status exhibition-card__status--upcoming">Upcoming</span>
+                    </div>
+                    <div class="exhibition-card__body">
+                        <div class="exhibition-card__dates">Jul 5 &mdash; Sep 14, 2026</div>
+                        <h3 class="exhibition-card__title">The Weight of Silence</h3>
+                        <p class="exhibition-card__artist-name">Amara Okafor</p>
+                        <p class="exhibition-card__desc">A photographic meditation on absence and presence. Okafor's large-format prints capture the quiet spaces between human interaction.</p>
+                    </div>
+                </article>
+
+                <article class="exhibition-card" data-category="upcoming" data-reveal data-delay="3">
+                    <div class="exhibition-card__image">
+                        <span class="exhibition-card__image-placeholder">D</span>
+                        <span class="exhibition-card__status exhibition-card__status--upcoming">Upcoming</span>
+                    </div>
+                    <div class="exhibition-card__body">
+                        <div class="exhibition-card__dates">Oct 1 &mdash; Dec 18, 2026</div>
+                        <h3 class="exhibition-card__title">Digital Botanica</h3>
+                        <p class="exhibition-card__artist-name">Collective SOLA</p>
+                        <p class="exhibition-card__desc">An interdisciplinary collaboration merging generative art, botanical illustration, and augmented reality into a living digital garden.</p>
+                    </div>
+                </article>
+
+                <!-- Past -->
+                <article class="exhibition-card" data-category="past" data-reveal data-delay="1">
+                    <div class="exhibition-card__image">
+                        <span class="exhibition-card__image-placeholder">S</span>
+                        <span class="exhibition-card__status exhibition-card__status--past">Past</span>
+                    </div>
+                    <div class="exhibition-card__body">
+                        <div class="exhibition-card__dates">Sep 8 &mdash; Dec 15, 2025</div>
+                        <h3 class="exhibition-card__title">Still Waters</h3>
+                        <p class="exhibition-card__artist-name">Ingrid Solheim</p>
+                        <p class="exhibition-card__desc">Minimalist oil paintings exploring the meditative quality of water surfaces. Solheim's monochromatic palette invites prolonged contemplation.</p>
+                    </div>
+                </article>
+
+                <article class="exhibition-card" data-category="past" data-reveal data-delay="2">
+                    <div class="exhibition-card__image">
+                        <span class="exhibition-card__image-placeholder">V</span>
+                        <span class="exhibition-card__status exhibition-card__status--past">Past</span>
+                    </div>
+                    <div class="exhibition-card__body">
+                        <div class="exhibition-card__dates">May 20 &mdash; Aug 30, 2025</div>
+                        <h3 class="exhibition-card__title">Velocity &amp; Void</h3>
+                        <p class="exhibition-card__artist-name">Thomas Riedl</p>
+                        <p class="exhibition-card__desc">Kinetic sculptures and motion-capture installations examining the tension between speed and emptiness in urban environments.</p>
+                    </div>
+                </article>
+
+                <article class="exhibition-card" data-category="past" data-reveal data-delay="3">
+                    <div class="exhibition-card__image">
+                        <span class="exhibition-card__image-placeholder">T</span>
+                        <span class="exhibition-card__status exhibition-card__status--past">Past</span>
+                    </div>
+                    <div class="exhibition-card__body">
+                        <div class="exhibition-card__dates">Jan 10 &mdash; Apr 28, 2025</div>
+                        <h3 class="exhibition-card__title">Thread &amp; Threshold</h3>
+                        <p class="exhibition-card__artist-name">Yara Dib</p>
+                        <p class="exhibition-card__desc">Textile-based installations that weave together personal narratives and collective memory. Each thread carries a story of migration and belonging.</p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container container--wide">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="footer__logo-mark"></div>
+                        <span class="footer__logo-name">Galerie Lumen</span>
+                    </div>
+                    <p class="footer__tagline">"Where light meets intention."<br>A contemporary art gallery experience.</p>
+                </div>
+                <div class="footer__columns">
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Gallery</h4>
+                        <a href="exhibitions.html" class="footer__link">Exhibitions</a>
+                        <a href="collection.html" class="footer__link">Collection</a>
+                        <a href="about.html" class="footer__link">About</a>
+                        <a href="visit.html" class="footer__link">Visit</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Visit</h4>
+                        <a href="visit.html" class="footer__link">Hours &amp; Admission</a>
+                        <a href="visit.html#faq" class="footer__link">FAQ</a>
+                        <a href="visit.html#contact" class="footer__link">Contact</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Connect</h4>
+                        <a href="#" class="footer__link">Instagram</a>
+                        <a href="#" class="footer__link">Twitter</a>
+                        <a href="#" class="footer__link">Newsletter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span class="footer__copy">&copy; 2026 Galerie Lumen. All rights reserved. &mdash; Template by <a href="https://github.com/poseylux/FreeCssDesigns" target="_blank" rel="noopener">FreeCSSDesigns</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+</body>
+</html>
