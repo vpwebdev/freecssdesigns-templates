@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sushi Omakase — An intimate omakase experience crafted by Chef Takeshi Yamamoto. Seasonal Japanese cuisine in a refined counter-dining setting.">
+  <title>Sushi Omakase — Intimate Japanese Counter Dining</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/pages.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍣</text></svg>">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">鮨</span>
+        <div>
+          <span class="logo-text">Omakase</span>
+          <span class="logo-sub">Sushi &middot; Est. 2019</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="pages/menu.html" class="nav-link">Menu</a></li>
+          <li><a href="pages/about.html" class="nav-link">About</a></li>
+          <li><a href="pages/reservations.html" class="nav-link">Reservations</a></li>
+          <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <a href="pages/reservations.html" class="nav-cta">Reserve a Seat</a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <a href="index.html" class="nav-link active">Home</a>
+    <a href="pages/menu.html" class="nav-link">Menu</a>
+    <a href="pages/about.html" class="nav-link">About</a>
+    <a href="pages/reservations.html" class="nav-link">Reservations</a>
+    <a href="pages/contact.html" class="nav-link">Contact</a>
+    <a href="pages/reservations.html" class="nav-cta">Reserve a Seat</a>
+  </div>
+
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="hero-label reveal">Omakase Experience</span>
+          <h1 class="reveal reveal-d1">The Art of <em>Trust</em></h1>
+          <p class="hero-text reveal reveal-d2">
+            Surrender to the season. Each evening, Chef Yamamoto composes a
+            personal journey through Japan's finest waters — one piece at a time.
+          </p>
+          <div class="hero-actions reveal reveal-d3">
+            <a href="pages/reservations.html" class="btn btn--primary btn--lg">Reserve Your Evening</a>
+            <a href="pages/menu.html" class="btn btn--ghost">View the Menu</a>
+          </div>
+        </div>
+        <div class="hero-visual reveal reveal-d2">
+          <div class="hero-visual-frame"></div>
+          <div class="hero-visual-accent"></div>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </section>
+
+
+    <!-- ========== PHILOSOPHY ========== -->
+    <section class="section section--elevated">
+      <div class="container philosophy-grid">
+        <div class="philosophy-image reveal">
+          <!-- Image placeholder — replace with actual restaurant photography -->
+        </div>
+        <div class="philosophy-text">
+          <span class="section-label reveal">Our Philosophy</span>
+          <h3 class="reveal reveal-d1">Omakase means<br>"I leave it to you"</h3>
+          <p class="reveal reveal-d2">
+            At our counter, the relationship between chef and guest is everything.
+            Each piece of sushi is prepared with decades of discipline — fish aged
+            to its peak, rice seasoned to balance, and presentation refined to its
+            purest form.
+          </p>
+          <p class="reveal reveal-d3">
+            We source directly from Toyosu Market in Tokyo and sustainable fisheries
+            along the Pacific, ensuring every ingredient speaks to the moment of the
+            season it was taken from.
+          </p>
+          <a href="pages/about.html" class="btn btn--ghost reveal reveal-d4">Our Story</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== OMAKASE EXPERIENCE ========== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <span class="section-label reveal">The Experience</span>
+          <h2 class="section-title reveal reveal-d1">An Evening at the Counter</h2>
+          <div class="omakase-intro reveal reveal-d2">
+            <p>Our omakase unfolds in deliberate courses, each building upon the last — a quiet conversation between craft and palate.</p>
+          </div>
+        </div>
+
+        <div class="grid grid--3 reveal reveal-d2">
+          <div class="card">
+            <div class="card-image">
+              <div class="card-image-overlay"></div>
+            </div>
+            <div class="card-body">
+              <span class="card-label">First Course</span>
+              <h4 class="card-title">Sakizuke</h4>
+              <p class="card-text">A seasonal appetizer to awaken the palate — often a delicate preparation of the day's freshest arrival.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image">
+              <div class="card-image-overlay"></div>
+            </div>
+            <div class="card-body">
+              <span class="card-label">The Heart</span>
+              <h4 class="card-title">Nigiri Progression</h4>
+              <p class="card-text">Twelve to fifteen pieces of hand-formed sushi, progressing from light and delicate to rich and bold.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image">
+              <div class="card-image-overlay"></div>
+            </div>
+            <div class="card-body">
+              <span class="card-label">Finale</span>
+              <h4 class="card-title">Tamago & Miso</h4>
+              <p class="card-text">The meal closes with house-made tamago — a sweet signature — and silky miso soup.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== SIGNATURE DISHES ========== -->
+    <section class="section section--dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">From the Counter</span>
+          <h2 class="section-title reveal reveal-d1">Seasonal Highlights</h2>
+          <p class="section-subtitle reveal reveal-d2">A glimpse of what the current season offers</p>
+        </div>
+
+        <div class="reveal reveal-d2">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Otoro <span class="menu-item-badge">Seasonal</span></h4>
+              <span class="menu-item-jp">大トロ — Bluefin Tuna Belly</span>
+              <p class="menu-item-desc">The most prized cut, melting on the tongue with extraordinary marbling from wild-caught Bluefin.</p>
+            </div>
+            <span class="menu-item-price">Market</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Uni</h4>
+              <span class="menu-item-jp">雲丹 — Hokkaido Sea Urchin</span>
+              <p class="menu-item-desc">Creamy, briny sweetness from the cold waters of northern Japan. Served on warm rice.</p>
+            </div>
+            <span class="menu-item-price">$28</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">A5 Wagyu Tataki</h4>
+              <span class="menu-item-jp">和牛タタキ — Seared Wagyu Beef</span>
+              <p class="menu-item-desc">Lightly torched Miyazaki A5, finished with aged soy and fresh wasabi root.</p>
+            </div>
+            <span class="menu-item-price">$34</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Kohada</h4>
+              <span class="menu-item-jp">小鰭 — Gizzard Shad</span>
+              <p class="menu-item-desc">A true test of the sushi chef's art. House-cured with salt and vinegar for complex umami depth.</p>
+            </div>
+            <span class="menu-item-price">$16</span>
+          </div>
+        </div>
+
+        <div class="text-center reveal reveal-d3" style="margin-top: var(--space-xl);">
+          <a href="pages/menu.html" class="btn btn--outline">View Full Menu</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== CHEF ========== -->
+    <section class="section chef-section">
+      <div class="container chef-grid">
+        <div class="chef-image reveal">
+          <!-- Image placeholder — replace with chef photography -->
+        </div>
+        <div class="chef-info">
+          <span class="section-label reveal">The Craftsman</span>
+          <h3 class="reveal reveal-d1">Chef Takeshi Yamamoto</h3>
+          <p class="chef-title reveal reveal-d2">Itamae &middot; Master Sushi Chef</p>
+          <div class="chef-bio">
+            <p class="reveal reveal-d2">
+              With over 25 years behind the counter — from his apprenticeship in
+              Ginza's famed Sukiyabashi district to the fish markets of Osaka — Chef
+              Yamamoto brings an unwavering dedication to his craft.
+            </p>
+            <p class="reveal reveal-d3">
+              His philosophy is simple: respect the ingredient. Every cut, every
+              press of the rice, every brush of nikiri is performed with the precision
+              that only decades of practice can yield.
+            </p>
+          </div>
+          <a href="pages/about.html" class="btn btn--ghost reveal reveal-d4">Read His Story</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== STATS ========== -->
+    <section class="section--sm section--elevated">
+      <div class="container">
+        <div class="grid grid--4 reveal">
+          <div class="stat">
+            <span class="stat-value">25+</span>
+            <span class="stat-label">Years of Craft</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">12</span>
+            <span class="stat-label">Counter Seats</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">48h</span>
+            <span class="stat-label">Freshness Guarantee</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">季節</span>
+            <span class="stat-label">Seasonal Menu</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <span class="section-label reveal">Guest Voices</span>
+          <h2 class="section-title reveal reveal-d1">From Our Counter</h2>
+        </div>
+
+        <div class="grid grid--3 reveal reveal-d2">
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"The most transcendent dining experience I've had. Each piece told a story of the sea and the season."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">M</div>
+              <div>
+                <span class="testimonial-name">Margaret Chen</span>
+                <span class="testimonial-role">Food Critic, Pacific Standard</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Chef Yamamoto's kohada is perfection — the kind of dish that changes how you think about simplicity."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">R</div>
+              <div>
+                <span class="testimonial-name">Robert Tanaka</span>
+                <span class="testimonial-role">Regular Guest</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Sitting at the counter here feels like being invited into someone's art studio. Intimate, quiet, unforgettable."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">S</div>
+              <div>
+                <span class="testimonial-name">Sarah Okonkwo</span>
+                <span class="testimonial-role">Michelin Guide</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== CTA ========== -->
+    <section class="section section--lg cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <div class="cta-jp reveal">お任せ</div>
+          <h2 class="reveal reveal-d1">Reserve Your Place<br>at the Counter</h2>
+          <p class="reveal reveal-d2">
+            Limited to twelve guests per evening. We recommend booking at least one week in advance.
+          </p>
+          <div class="reveal reveal-d3">
+            <a href="pages/reservations.html" class="btn btn--primary btn--lg">Make a Reservation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-mark">鮨</span>
+            <div>
+              <span class="logo-text">Omakase</span>
+              <span class="logo-sub">Sushi &middot; Est. 2019</span>
+            </div>
+          </a>
+          <p>An intimate counter-dining experience dedicated to the art of Edomae sushi. Twelve seats. One chef. No compromises.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Navigate</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="pages/menu.html">Menu</a>
+            <a href="pages/about.html">About</a>
+            <a href="pages/reservations.html">Reservations</a>
+            <a href="pages/contact.html">Contact</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Hours</h4>
+          <div class="footer-links">
+            <span>Tuesday — Saturday</span>
+            <span>First Seating: 6:00 PM</span>
+            <span>Second Seating: 8:30 PM</span>
+            <span style="margin-top: var(--space-sm); color: var(--color-stone);">Sunday — Monday: Closed</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <div class="footer-links">
+            <a href="tel:+12125551234">(212) 555-1234</a>
+            <a href="mailto:reservations@sushiomakase.com">reservations@sushiomakase.com</a>
+            <span>142 West 10th Street</span>
+            <span>New York, NY 10014</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 Sushi Omakase. All rights reserved.</span>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="Yelp">Yelp</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

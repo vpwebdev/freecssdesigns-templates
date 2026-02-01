@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Our menu at Sushi Omakase — seasonal nigiri, sashimi, maki, and omakase courses prepared by Chef Yamamoto.">
+  <title>Menu — Sushi Omakase</title>
+
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍣</text></svg>">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">鮨</span>
+        <div>
+          <span class="logo-text">Omakase</span>
+          <span class="logo-sub">Sushi &middot; Est. 2019</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="menu.html" class="nav-link active">Menu</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <a href="reservations.html" class="nav-cta">Reserve a Seat</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-overlay" id="mobile-overlay">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="menu.html" class="nav-link active">Menu</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="reservations.html" class="nav-link">Reservations</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="reservations.html" class="nav-cta">Reserve a Seat</a>
+  </div>
+
+
+  <main>
+    <!-- ========== PAGE HERO ========== -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-content">
+          <span class="section-label reveal">Our Menu</span>
+          <h1 class="reveal reveal-d1">What the Season Offers</h1>
+          <p class="reveal reveal-d2">Our selection changes with the tides and the calendar. What you see today reflects the very best of this moment.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== OMAKASE COURSES ========== -->
+    <section class="section section--elevated">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">Chef's Selection</span>
+          <h2 class="section-title reveal reveal-d1">Omakase Courses</h2>
+          <p class="section-subtitle reveal reveal-d2">Leave it to Chef Yamamoto</p>
+        </div>
+
+        <div class="grid grid--3 reveal reveal-d2">
+          <div class="card">
+            <div class="card-body">
+              <span class="card-label">8 Courses</span>
+              <h4 class="card-title">Sakura</h4>
+              <p class="card-text">An introduction to our craft. Eight pieces of seasonal nigiri with miso soup and tamago.</p>
+              <div class="card-footer">
+                <span class="menu-item-price">$95</span>
+                <span class="jp-char">桜</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <span class="card-label">14 Courses</span>
+              <h4 class="card-title">Kaiseki</h4>
+              <p class="card-text">The full experience. Sakizuke, sashimi, fourteen pieces of nigiri, and dessert. Our signature evening.</p>
+              <div class="card-footer">
+                <span class="menu-item-price">$185</span>
+                <span class="jp-char">懐石</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <span class="card-label">18+ Courses</span>
+              <h4 class="card-title">Shokunin</h4>
+              <p class="card-text">The complete journey. Extended courses including rare seasonal fish, wagyu, and aged specialties.</p>
+              <div class="card-footer">
+                <span class="menu-item-price">$280</span>
+                <span class="jp-char">職人</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== A LA CARTE ========== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">À La Carte</span>
+          <h2 class="section-title reveal reveal-d1">Individual Selections</h2>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav reveal reveal-d1" role="tablist">
+          <button class="tab-btn active" data-tab="nigiri" role="tab">Nigiri</button>
+          <button class="tab-btn" data-tab="sashimi" role="tab">Sashimi</button>
+          <button class="tab-btn" data-tab="maki" role="tab">Maki &amp; Rolls</button>
+          <button class="tab-btn" data-tab="appetizers" role="tab">Appetizers</button>
+          <button class="tab-btn" data-tab="drinks" role="tab">Drinks</button>
+        </div>
+
+        <!-- Nigiri -->
+        <div class="tab-panel active" data-panel="nigiri">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Otoro <span class="menu-item-badge">Seasonal</span></h4>
+              <span class="menu-item-jp">大トロ — Bluefin Tuna Belly</span>
+              <p class="menu-item-desc">The pinnacle of tuna, with extraordinary fat marbling from wild-caught Pacific Bluefin.</p>
+            </div>
+            <span class="menu-item-price">Market</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Chutoro</h4>
+              <span class="menu-item-jp">中トロ — Medium Fatty Tuna</span>
+              <p class="menu-item-desc">A balance of rich fat and clean tuna flavor. Aged 3 days for depth.</p>
+            </div>
+            <span class="menu-item-price">$18</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Uni</h4>
+              <span class="menu-item-jp">雲丹 — Hokkaido Sea Urchin</span>
+              <p class="menu-item-desc">Creamy, ocean-sweet urchin from Hokkaido's Rebun Island. Served on hand-pressed rice.</p>
+            </div>
+            <span class="menu-item-price">$28</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Kohada</h4>
+              <span class="menu-item-jp">小鰭 — Gizzard Shad</span>
+              <p class="menu-item-desc">House-cured with salt and rice vinegar. A true measure of the itamae's skill.</p>
+            </div>
+            <span class="menu-item-price">$16</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Kinmedai</h4>
+              <span class="menu-item-jp">金目鯛 — Golden Eye Snapper</span>
+              <p class="menu-item-desc">Delicate white fish with a subtle sweetness, lightly torched to release its natural oils.</p>
+            </div>
+            <span class="menu-item-price">$14</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Shima Aji</h4>
+              <span class="menu-item-jp">縞鯵 — Striped Jack</span>
+              <p class="menu-item-desc">Clean, bright flavor with a firm bite. Wild-caught from the waters of Kyushu.</p>
+            </div>
+            <span class="menu-item-price">$15</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Ikura</h4>
+              <span class="menu-item-jp">いくら — Salmon Roe</span>
+              <p class="menu-item-desc">House-marinated in dashi and soy. Each pearl bursts with the clean taste of autumn rivers.</p>
+            </div>
+            <span class="menu-item-price">$16</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Anago</h4>
+              <span class="menu-item-jp">穴子 — Saltwater Eel</span>
+              <p class="menu-item-desc">Slowly simmered in a sweet soy broth until impossibly tender. Finished with a tsume glaze.</p>
+            </div>
+            <span class="menu-item-price">$14</span>
+          </div>
+        </div>
+
+        <!-- Sashimi -->
+        <div class="tab-panel" data-panel="sashimi">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Sashimi Moriawase</h4>
+              <span class="menu-item-jp">刺身盛り合わせ — Chef's Selection</span>
+              <p class="menu-item-desc">Five varieties of today's freshest fish, artfully arranged. Changes daily.</p>
+            </div>
+            <span class="menu-item-price">$42</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Hirame Usuzukuri</h4>
+              <span class="menu-item-jp">平目薄造り — Thin-sliced Flounder</span>
+              <p class="menu-item-desc">Paper-thin slices of fluke with ponzu, fresh momiji oroshi, and micro shiso.</p>
+            </div>
+            <span class="menu-item-price">$26</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Maguro Tataki</h4>
+              <span class="menu-item-jp">鮪タタキ — Seared Tuna</span>
+              <p class="menu-item-desc">Lightly seared bluefin with garlic chips, aged ponzu, and fresh wasabi root.</p>
+            </div>
+            <span class="menu-item-price">$28</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Hotate</h4>
+              <span class="menu-item-jp">帆立 — Hokkaido Scallop</span>
+              <p class="menu-item-desc">Sweet, plump scallops from Hokkaido. Served with yuzu kosho and a touch of sea salt.</p>
+            </div>
+            <span class="menu-item-price">$22</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">A5 Wagyu Tataki</h4>
+              <span class="menu-item-jp">和牛タタキ — Miyazaki Beef</span>
+              <p class="menu-item-desc">Lightly torched A5 Wagyu with truffle soy, fresh wasabi, and toasted garlic.</p>
+            </div>
+            <span class="menu-item-price">$34</span>
+          </div>
+        </div>
+
+        <!-- Maki & Rolls -->
+        <div class="tab-panel" data-panel="maki">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Negitoro Maki</h4>
+              <span class="menu-item-jp">ネギトロ巻き — Tuna & Scallion</span>
+              <p class="menu-item-desc">Silky minced toro with crisp scallions, wrapped in hand-toasted nori.</p>
+            </div>
+            <span class="menu-item-price">$18</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Kanpyo Maki</h4>
+              <span class="menu-item-jp">干瓢巻き — Dried Gourd Roll</span>
+              <p class="menu-item-desc">A traditional Edomae classic. Sweet simmered gourd strips in seasoned rice.</p>
+            </div>
+            <span class="menu-item-price">$10</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Salmon Avocado</h4>
+              <span class="menu-item-jp">サーモンアボカド — King Salmon</span>
+              <p class="menu-item-desc">Wild King Salmon with ripe avocado and a touch of yuzu. Simple, refined.</p>
+            </div>
+            <span class="menu-item-price">$16</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Spicy Tuna Temaki</h4>
+              <span class="menu-item-jp">辛いマグロ手巻き — Hand Roll</span>
+              <p class="menu-item-desc">Crisp nori cone filled with diced bluefin, spicy mayo, togarashi, and cucumber.</p>
+            </div>
+            <span class="menu-item-price">$14</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Unagi Tempura Roll</h4>
+              <span class="menu-item-jp">鰻天ぷら巻き — Freshwater Eel</span>
+              <p class="menu-item-desc">Tempura-fried unagi with avocado, cucumber, and house unagi sauce.</p>
+            </div>
+            <span class="menu-item-price">$20</span>
+          </div>
+        </div>
+
+        <!-- Appetizers -->
+        <div class="tab-panel" data-panel="appetizers">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Edamame</h4>
+              <span class="menu-item-jp">枝豆 — Salted Soybeans</span>
+              <p class="menu-item-desc">Steamed and finished with Maldon sea salt and a squeeze of sudachi.</p>
+            </div>
+            <span class="menu-item-price">$8</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Chawanmushi</h4>
+              <span class="menu-item-jp">茶碗蒸し — Egg Custard</span>
+              <p class="menu-item-desc">Silky steamed egg custard with shrimp, ginkgo nut, and mitsuba. A comforting classic.</p>
+            </div>
+            <span class="menu-item-price">$14</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Agedashi Tofu</h4>
+              <span class="menu-item-jp">揚げ出し豆腐 — Fried Tofu</span>
+              <p class="menu-item-desc">Crispy fried silken tofu in warm dashi broth with grated daikon and ginger.</p>
+            </div>
+            <span class="menu-item-price">$12</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Tempura Assortment</h4>
+              <span class="menu-item-jp">天ぷら盛り合わせ — Seasonal</span>
+              <p class="menu-item-desc">Lightly battered seasonal vegetables and shrimp, served with matcha salt and tentsuyu.</p>
+            </div>
+            <span class="menu-item-price">$18</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Miso Soup</h4>
+              <span class="menu-item-jp">味噌汁 — Red or White</span>
+              <p class="menu-item-desc">House-made dashi with your choice of red (aka) or white (shiro) miso, tofu, and wakame.</p>
+            </div>
+            <span class="menu-item-price">$6</span>
+          </div>
+        </div>
+
+        <!-- Drinks -->
+        <div class="tab-panel" data-panel="drinks">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Dassai 45 Junmai Daiginjo</h4>
+              <span class="menu-item-jp">獺祭45 — Yamaguchi Prefecture</span>
+              <p class="menu-item-desc">Elegant and refined with notes of melon and white flower. Our house pour.</p>
+            </div>
+            <span class="menu-item-price">$18 / $52</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Kubota Manju</h4>
+              <span class="menu-item-jp">久保田 萬寿 — Niigata Prefecture</span>
+              <p class="menu-item-desc">Complex and layered. A masterful sake with decades of reputation behind it.</p>
+            </div>
+            <span class="menu-item-price">$24 / $70</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Asahi Super Dry</h4>
+              <span class="menu-item-jp">アサヒスーパードライ — Draft</span>
+              <p class="menu-item-desc">Crisp, clean, and perfectly carbonated. The ideal companion to rich nigiri.</p>
+            </div>
+            <span class="menu-item-price">$9</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Matcha</h4>
+              <span class="menu-item-jp">抹茶 — Ceremonial Grade</span>
+              <p class="menu-item-desc">Whisked to order from stone-ground Uji matcha. Served hot or iced.</p>
+            </div>
+            <span class="menu-item-price">$7</span>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <h4 class="menu-item-name">Yuzu Highball</h4>
+              <span class="menu-item-jp">柚子ハイボール — Whisky Cocktail</span>
+              <p class="menu-item-desc">Japanese whisky with fresh yuzu juice and sparkling water. Bright and refreshing.</p>
+            </div>
+            <span class="menu-item-price">$16</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== NOTE ========== -->
+    <section class="section--sm">
+      <div class="container container--narrow text-center">
+        <p class="reveal" style="font-family: var(--font-accent); font-style: italic; font-size: var(--fs-md); color: var(--text-muted); line-height: var(--lh-relaxed); max-width: none;">
+          Our menu reflects what is available today and changes frequently based on seasonal availability. Pricing for market fish is set daily. Please inform your server of any allergies or dietary requirements.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ========== CTA ========== -->
+    <section class="section section--lg cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <div class="cta-jp reveal">予約</div>
+          <h2 class="reveal reveal-d1">Ready to Experience<br>the Counter?</h2>
+          <p class="reveal reveal-d2">Book your seat for an evening of seasonal omakase.</p>
+          <div class="reveal reveal-d3">
+            <a href="reservations.html" class="btn btn--primary btn--lg">Make a Reservation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">鮨</span>
+            <div>
+              <span class="logo-text">Omakase</span>
+              <span class="logo-sub">Sushi &middot; Est. 2019</span>
+            </div>
+          </a>
+          <p>An intimate counter-dining experience dedicated to the art of Edomae sushi. Twelve seats. One chef. No compromises.</p>
+        </div>
+        <div>
+          <h4 class="footer-heading">Navigate</h4>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About</a>
+            <a href="reservations.html">Reservations</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Hours</h4>
+          <div class="footer-links">
+            <span>Tuesday — Saturday</span>
+            <span>First Seating: 6:00 PM</span>
+            <span>Second Seating: 8:30 PM</span>
+            <span style="margin-top: var(--space-sm); color: var(--color-stone);">Sunday — Monday: Closed</span>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <div class="footer-links">
+            <a href="tel:+12125551234">(212) 555-1234</a>
+            <a href="mailto:reservations@sushiomakase.com">reservations@sushiomakase.com</a>
+            <span>142 West 10th Street</span>
+            <span>New York, NY 10014</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 Sushi Omakase. All rights reserved.</span>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="Yelp">Yelp</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

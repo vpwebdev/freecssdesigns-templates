@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ember & Roast — Specialty Coffee Roasters</title>
+  <meta name="description" content="Specialty coffee roasters crafting exceptional single-origin and blended coffees since 2012.">
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/pages.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        Ember <span class="logo-accent">&</span> Roast
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="pages/about.html">Our Story</a>
+        <a href="pages/menu.html">Menu</a>
+        <a href="pages/process.html">Process</a>
+        <a href="pages/contact.html">Visit</a>
+      </nav>
+      <a href="pages/menu.html" class="nav-cta">View Menu</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">Specialty Roasters &mdash; Est. 2012</div>
+        <h1 class="hero-title">
+          Coffee,<br><em>roasted</em><br>to its soul.
+        </h1>
+        <p class="hero-desc">
+          We source the world's finest single-origin beans and roast them with obsessive care &mdash; unlocking the flavors the farmer intended.
+        </p>
+        <div class="hero-actions">
+          <a href="pages/menu.html" class="btn btn--primary">Explore Menu</a>
+          <a href="pages/about.html" class="btn btn--ghost">Our Story</a>
+        </div>
+        <div class="hero-scroll">
+          <span>Scroll</span>
+          <div class="hero-scroll-line"></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img
+          class="hero-img"
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80"
+          alt="Latte art being poured in ceramic cup"
+          loading="eager"
+        >
+      </div>
+    </section>
+
+    <!-- ========== MARQUEE ========== -->
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="marquee-item">Single Origin <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Pour Over <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Cold Brew <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Espresso <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Flat White <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Ethiopian Yirgacheffe <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Chemex <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Cortado <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Single Origin <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Pour Over <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Cold Brew <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Espresso <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Flat White <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Ethiopian Yirgacheffe <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Chemex <div class="marquee-dot"></div></div>
+        <div class="marquee-item">Cortado <div class="marquee-dot"></div></div>
+      </div>
+    </div>
+
+    <!-- ========== FEATURED COFFEES ========== -->
+    <section class="section section--dark" id="featured">
+      <div class="container">
+        <div class="text-center mb-xl reveal">
+          <div class="section-label section-label--center">What's Brewing</div>
+          <h2 class="section-title">This Season's <em>Selections</em></h2>
+          <p class="section-subtitle mx-auto mt-md">Hand-picked lots roasted in micro-batches, each telling the story of its terroir.</p>
+        </div>
+
+        <div class="grid grid--3 mt-2xl">
+          <div class="card reveal reveal-d1">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=600&q=80" alt="Ethiopian coffee beans" loading="lazy">
+              <span class="card-tag">New Arrival</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Ethiopian Sidamo</h3>
+              <p class="card-text">Blueberry, dark chocolate, and jasmine. Washed process from the Bensa district at 2,100 meters.</p>
+              <div class="card-meta">
+                <span class="card-price">$22 / 250g</span>
+                <a href="pages/menu.html" class="btn btn--ghost">Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card reveal reveal-d2">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?auto=format&fit=crop&w=600&q=80" alt="Colombian coffee beans" loading="lazy">
+              <span class="card-tag">Seasonal</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Colombian Huila</h3>
+              <p class="card-text">Caramel, red apple, toasted almond. Natural process from Finca El Para&iacute;so, Huila region.</p>
+              <div class="card-meta">
+                <span class="card-price">$19 / 250g</span>
+                <a href="pages/menu.html" class="btn btn--ghost">Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card reveal reveal-d3">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?auto=format&fit=crop&w=600&q=80" alt="Guatemalan coffee" loading="lazy">
+              <span class="card-tag">Staff Pick</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Guatemala Antigua</h3>
+              <p class="card-text">Smoky cocoa, brown sugar, blood orange. Fully washed, sun-dried at Finca Medina.</p>
+              <div class="card-meta">
+                <span class="card-price">$20 / 250g</span>
+                <a href="pages/menu.html" class="btn btn--ghost">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FEATURES / CRAFT ========== -->
+    <section class="section section--elevated">
+      <div class="container">
+        <div class="grid grid--3 home-features">
+          <div class="reveal reveal-d1">
+            <div class="feature-number">01</div>
+            <h3 class="feature-title">Sourced Directly</h3>
+            <p class="feature-text">We travel to origin, build relationships with farmers, and pay premiums that sustain communities. No middlemen, no shortcuts.</p>
+          </div>
+          <div class="reveal reveal-d2">
+            <div class="feature-number">02</div>
+            <h3 class="feature-title">Roasted Weekly</h3>
+            <p class="feature-text">Small-batch roasting on our Loring S35 every Tuesday and Thursday. Your beans were roasted days ago, not months.</p>
+          </div>
+          <div class="reveal reveal-d3">
+            <div class="feature-number">03</div>
+            <h3 class="feature-title">Brewed with Intent</h3>
+            <p class="feature-text">Every cup is dialed in &mdash; precise water temperature, exact ratios, timed extraction. Science in service of flavor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="section section--dark" id="reviews">
+      <div class="container">
+        <div class="text-center mb-xl reveal">
+          <div class="section-label section-label--center">The Word</div>
+          <h2 class="section-title">What People <em>Are Saying</em></h2>
+        </div>
+
+        <div class="grid grid--3 mt-xl">
+          <div class="testimonial reveal reveal-d1">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="testimonial-quote">&ldquo;</div>
+            <p class="testimonial-text">I've spent years chasing the perfect cup. This is the closest I've come. The Ethiopian Sidamo made me cancel my other subscriptions.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">JM</div>
+              <div>
+                <div class="testimonial-name">James Moreira</div>
+                <div class="testimonial-role">Home Barista</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial reveal reveal-d2">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="testimonial-quote">&ldquo;</div>
+            <p class="testimonial-text">The space itself is worth the visit &mdash; warm, unhurried, intentional. But the pour-over changed how I think about coffee entirely.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">AL</div>
+              <div>
+                <div class="testimonial-name">Anika Lindqvist</div>
+                <div class="testimonial-role">Design Director</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial reveal reveal-d3">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="testimonial-quote">&ldquo;</div>
+            <p class="testimonial-text">As a roaster myself, I respect what they're doing. The attention to roast profiles and sourcing transparency is genuinely rare.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">KT</div>
+              <div>
+                <div class="testimonial-name">Kenji Tanaka</div>
+                <div class="testimonial-role">Head Roaster, Onyx</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== NEWSLETTER / CTA ========== -->
+    <section class="section section--darker">
+      <div class="container container--narrow text-center">
+        <div class="reveal">
+          <div class="section-label section-label--center">Stay Connected</div>
+          <h2 class="section-title">Join the <em>Inner Circle</em></h2>
+          <p class="section-subtitle mx-auto mt-md">
+            New roasts, brewing tips, and first access to limited releases. No spam &mdash; just coffee.
+          </p>
+        </div>
+        <form class="mt-xl reveal reveal-d1" style="max-width: 480px; margin-left: auto; margin-right: auto;" onsubmit="event.preventDefault();">
+          <div style="display: flex; border: 1px solid var(--border-medium);">
+            <input type="email" class="form-input" placeholder="your@email.com" style="padding: 1rem 1.2rem; border: none;" required>
+            <button type="submit" class="btn btn--primary" style="white-space: nowrap;">Subscribe</button>
+          </div>
+          <p style="font-size: var(--fs-xs); color: var(--color-mocha); margin-top: var(--space-sm);">We respect your inbox. Unsubscribe anytime.</p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Ember <span class="logo-accent">&</span> Roast</div>
+          <p class="footer-desc">Specialty coffee roasters committed to sourcing, roasting, and serving exceptional coffee since 2012.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Explore</div>
+          <ul class="footer-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pages/about.html">Our Story</a></li>
+            <li><a href="pages/menu.html">Menu</a></li>
+            <li><a href="pages/process.html">Process</a></li>
+            <li><a href="pages/contact.html">Visit Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Info</div>
+          <ul class="footer-list">
+            <li><a href="#">Wholesale</a></li>
+            <li><a href="#">Subscriptions</a></li>
+            <li><a href="#">Gift Cards</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Newsletter</div>
+          <p class="footer-newsletter-text">First access to new roasts, brewing guides, and limited drops.</p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault();">
+            <input type="email" placeholder="Email address" required>
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Ember & Roast Coffee Co. All rights reserved.</span>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Instagram">IG</a>
+          <a href="#" class="footer-social" aria-label="Twitter">TW</a>
+          <a href="#" class="footer-social" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

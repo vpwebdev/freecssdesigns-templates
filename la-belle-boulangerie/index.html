@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Belle Boulangerie — Artisan Bakery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --parchment: #F5F0E8;
+      --cream: #FBF8F1;
+      --warm-white: #FEFDFB;
+      --espresso: #2C1810;
+      --dark-roast: #3D2517;
+      --mocha: #5C3A2A;
+      --caramel: #8B6914;
+      --gold: #C6963C;
+      --gold-light: #D4A84B;
+      --dusty-rose: #C4A68A;
+      --wheat: #D4C5A9;
+      --linen: #EDE6D6;
+      --shadow-warm: rgba(44, 24, 16, 0.08);
+      --shadow-deep: rgba(44, 24, 16, 0.15);
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+      --font-accent: 'Cormorant Garamond', Georgia, serif;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--espresso);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== GRAIN OVERLAY ===== */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px;
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.25rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.5s var(--ease-out-expo);
+      background: transparent;
+    }
+    .nav.scrolled {
+      background: rgba(251, 248, 241, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0.8rem 3rem;
+      box-shadow: 0 1px 30px var(--shadow-warm);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--espresso);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--mocha);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.4s var(--ease-out-expo);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.8rem;
+      background: var(--espresso);
+      color: var(--cream);
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s var(--ease-out-expo);
+      text-decoration: none;
+    }
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--espresso);
+      transform: translateY(-1px);
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+      background: var(--parchment);
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 6rem 6rem 6rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      font-family: var(--font-accent);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s var(--ease-out-expo) 0.3s forwards;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--espresso);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeSlideUp 1s var(--ease-out-expo) 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .hero-subtitle {
+      font-family: var(--font-accent);
+      font-size: 1.35rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mocha);
+      max-width: 440px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s var(--ease-out-expo) 0.7s forwards;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      opacity: 0;
+      animation: fadeSlideUp 1s var(--ease-out-expo) 0.9s forwards;
+    }
+    .btn-primary {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1.1rem 2.8rem;
+      background: var(--espresso);
+      color: var(--cream);
+      border: none;
+      cursor: pointer;
+      transition: all 0.5s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-101%);
+      transition: transform 0.5s var(--ease-out-expo);
+    }
+    .btn-primary:hover::before { transform: translateX(0); }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary:hover { color: var(--espresso); transform: translateY(-2px); box-shadow: 0 8px 30px var(--shadow-deep); }
+    .btn-secondary {
+      font-family: var(--font-accent);
+      font-size: 1.05rem;
+      color: var(--mocha);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: all 0.4s var(--ease-out-expo);
+      letter-spacing: 0.03em;
+    }
+    .btn-secondary:hover { color: var(--gold); gap: 1.2rem; }
+    .btn-secondary svg { transition: transform 0.4s var(--ease-out-expo); }
+    .btn-secondary:hover svg { transform: translateX(4px); }
+
+    .hero-visual {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      animation: fadeScale 1.4s var(--ease-out-expo) 0.2s forwards;
+    }
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(245, 240, 232, 0.3), transparent 50%);
+    }
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s var(--ease-out-expo) 1.2s forwards;
+    }
+    .hero-scroll-indicator span {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dusty-rose);
+      writing-mode: vertical-lr;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: var(--dusty-rose);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gold);
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+
+    /* ===== MARQUEE ===== */
+    .marquee-section {
+      background: var(--espresso);
+      padding: 1.2rem 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      font-family: var(--font-accent);
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--wheat);
+      white-space: nowrap;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ===== FEATURED PRODUCTS ===== */
+    .featured {
+      padding: 8rem 6rem;
+      background: var(--cream);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+    .section-label {
+      font-family: var(--font-accent);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--espresso);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .section-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--mocha);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: var(--warm-white);
+      border: 1px solid var(--linen);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.6s var(--ease-out-expo);
+      position: relative;
+      group: true;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px var(--shadow-warm), 0 8px 20px var(--shadow-warm);
+      border-color: var(--wheat);
+    }
+    .product-image-wrap {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      background: var(--parchment);
+    }
+    .product-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out-expo);
+    }
+    .product-card:hover .product-image-wrap img {
+      transform: scale(1.08);
+    }
+    .product-tag {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      font-family: var(--font-accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      background: var(--gold);
+      color: var(--espresso);
+    }
+    .product-info {
+      padding: 1.8rem 1.8rem 2rem;
+    }
+    .product-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--espresso);
+      margin-bottom: 0.5rem;
+    }
+    .product-desc {
+      font-family: var(--font-accent);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--mocha);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .product-price {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .product-add {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--linen);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.4s var(--ease-out-expo);
+      color: var(--mocha);
+    }
+    .product-add:hover {
+      background: var(--espresso);
+      border-color: var(--espresso);
+      color: var(--cream);
+    }
+
+    /* ===== ABOUT / STORY ===== */
+    .story {
+      padding: 8rem 6rem;
+      background: var(--parchment);
+      position: relative;
+      overflow: hidden;
+    }
+    .story::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(198, 150, 60, 0.06), transparent 70%);
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .story-image-stack {
+      position: relative;
+      height: 550px;
+    }
+    .story-img-main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 75%;
+      height: 80%;
+      object-fit: cover;
+      border: 6px solid var(--warm-white);
+      box-shadow: 0 20px 60px var(--shadow-warm);
+    }
+    .story-img-accent {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 55%;
+      height: 55%;
+      object-fit: cover;
+      border: 6px solid var(--warm-white);
+      box-shadow: 0 20px 60px var(--shadow-warm);
+    }
+    .story-year {
+      position: absolute;
+      bottom: 15%;
+      left: 35%;
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.15;
+      line-height: 1;
+    }
+    .story-content { position: relative; z-index: 2; }
+    .story-content .section-label { justify-content: flex-start; }
+    .story-content .section-title { text-align: left; }
+    .story-text {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--mocha);
+      margin: 2rem 0;
+    }
+    .story-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--wheat);
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--espresso);
+    }
+    .stat-label {
+      font-family: var(--font-accent);
+      font-size: 0.9rem;
+      color: var(--dusty-rose);
+      margin-top: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== MENU / OFFERINGS ===== */
+    .menu {
+      padding: 8rem 6rem;
+      background: var(--espresso);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .menu::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.04'/%3E%3C/svg%3E");
+    }
+    .menu .section-label { color: var(--gold-light); }
+    .menu .section-label::before,
+    .menu .section-label::after { background: var(--gold-light); }
+    .menu .section-title { color: var(--cream); }
+    .menu .section-title em { color: var(--wheat); }
+
+    .menu-categories {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+    .menu-tab {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.8rem;
+      background: transparent;
+      border: 1px solid rgba(212, 197, 169, 0.2);
+      color: var(--wheat);
+      cursor: pointer;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .menu-tab:hover, .menu-tab.active {
+      background: var(--gold);
+      color: var(--espresso);
+      border-color: var(--gold);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .menu-item {
+      padding: 1.8rem 2rem;
+      border-bottom: 1px solid rgba(212, 197, 169, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .menu-item:hover {
+      background: rgba(198, 150, 60, 0.06);
+      padding-left: 2.5rem;
+    }
+    .menu-item-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+    .menu-item-desc {
+      font-family: var(--font-accent);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--dusty-rose);
+      font-style: italic;
+    }
+    .menu-item-price {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+    .menu-item-dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(212, 197, 169, 0.15);
+      min-width: 30px;
+      margin-bottom: 6px;
+      align-self: flex-end;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      padding: 8rem 6rem;
+      background: var(--cream);
+      position: relative;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--warm-white);
+      border: 1px solid var(--linen);
+      padding: 2.5rem;
+      position: relative;
+      transition: all 0.5s var(--ease-out-expo);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px var(--shadow-warm);
+    }
+    .testimonial-quote-icon {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--gold);
+      line-height: 1;
+      opacity: 0.3;
+      margin-bottom: 1rem;
+    }
+    .testimonial-text {
+      font-family: var(--font-accent);
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.75;
+      color: var(--mocha);
+      margin-bottom: 1.8rem;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--parchment);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold);
+      border: 2px solid var(--linen);
+    }
+    .testimonial-name {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--espresso);
+    }
+    .testimonial-role {
+      font-family: var(--font-accent);
+      font-size: 0.85rem;
+      color: var(--dusty-rose);
+    }
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    /* ===== CONTACT / LOCATION ===== */
+    .contact {
+      padding: 8rem 6rem;
+      background: var(--parchment);
+      position: relative;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .contact-info-group { margin-bottom: 2.5rem; }
+    .contact-info-label {
+      font-family: var(--font-accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .contact-info-value {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--mocha);
+      line-height: 1.8;
+    }
+    .contact-info-value a {
+      color: var(--mocha);
+      text-decoration: none;
+      border-bottom: 1px solid var(--wheat);
+      transition: all 0.3s;
+    }
+    .contact-info-value a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table tr {
+      border-bottom: 1px solid var(--wheat);
+    }
+    .hours-table td {
+      padding: 0.8rem 0;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--mocha);
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      font-weight: 400;
+    }
+    .hours-today {
+      color: var(--gold) !important;
+      font-weight: 500 !important;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .form-group { position: relative; }
+    .form-input {
+      width: 100%;
+      padding: 1rem 0;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--espresso);
+      border: none;
+      border-bottom: 1px solid var(--wheat);
+      background: transparent;
+      outline: none;
+      transition: border-color 0.4s;
+    }
+    .form-input:focus { border-color: var(--gold); }
+    .form-input::placeholder {
+      color: var(--dusty-rose);
+      font-weight: 300;
+    }
+    textarea.form-input {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .form-submit {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1.1rem 2.8rem;
+      background: var(--espresso);
+      color: var(--cream);
+      border: none;
+      cursor: pointer;
+      transition: all 0.5s var(--ease-out-expo);
+      align-self: flex-start;
+    }
+    .form-submit:hover {
+      background: var(--gold);
+      color: var(--espresso);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--shadow-deep);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--espresso);
+      color: var(--wheat);
+      padding: 5rem 6rem 2rem;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(212, 197, 169, 0.1);
+    }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .footer-brand span { color: var(--gold); font-style: italic; }
+    .footer-desc {
+      font-family: var(--font-accent);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--dusty-rose);
+      line-height: 1.7;
+      max-width: 300px;
+    }
+    .footer-heading {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+    }
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .footer-list a {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--dusty-rose);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-list a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+    }
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--dusty-rose);
+      font-weight: 300;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .footer-social {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(212, 197, 169, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--wheat);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .footer-social:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--espresso);
+      transform: translateY(-2px);
+    }
+
+    /* ===== DECORATIVE ELEMENTS ===== */
+    .flour-dusting {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 240, 232, 0.5), transparent 70%);
+      pointer-events: none;
+    }
+    .gold-accent-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeScale {
+      from { opacity: 0; transform: scale(1.05); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes scrollDown {
+      0% { top: -100%; }
+      100% { top: 100%; }
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-content { padding: 10rem 3rem 4rem; }
+      .hero-visual { height: 50vh; }
+      .featured, .story, .menu, .testimonials, .contact { padding: 5rem 3rem; }
+      .nav { padding: 1rem 2rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .story-image-stack { height: 400px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .hero-content { padding: 8rem 1.5rem 3rem; }
+      .hero-title { font-size: 2.4rem; }
+      .nav-links { display: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .story-stats { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .hero-scroll-indicator { left: 1.5rem; }
+      .featured, .story, .menu, .testimonials, .contact { padding: 4rem 1.5rem; }
+      .footer { padding: 3rem 1.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">La Belle <span>B.</span></a>
+    <ul class="nav-links">
+      <li><a href="#featured">Menu</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#offerings">Offerings</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Visit</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Order Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Est. 1987 &mdash; Paris</div>
+      <h1 class="hero-title">
+        Baked with<br><em>passion,</em><br>served with love.
+      </h1>
+      <p class="hero-subtitle">
+        Every morning at dawn, our artisans bring tradition to life &mdash; crafting each loaf, each pastry, each delicate layer with the care it deserves.
+      </p>
+      <div class="hero-actions">
+        <a href="#offerings" class="btn-primary"><span>Explore Our Menu</span></a>
+        <a href="#story" class="btn-secondary">
+          Our Story
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="hero-scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img
+        class="hero-image"
+        src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80"
+        alt="Freshly baked artisan bread and pastries"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-item">Sourdough <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Croissants <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Pain au Chocolat <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Brioche <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Baguettes <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Tarte Tatin <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Madeleines <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Canelés <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Sourdough <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Croissants <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Pain au Chocolat <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Brioche <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Baguettes <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Tarte Tatin <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Madeleines <div class="marquee-dot"></div></div>
+      <div class="marquee-item">Canelés <div class="marquee-dot"></div></div>
+    </div>
+  </div>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="featured" id="featured">
+    <div class="section-header reveal">
+      <div class="section-label">Daily Selection</div>
+      <h2 class="section-title">Our Signature <em>Creations</em></h2>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-image-wrap">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038024a?auto=format&fit=crop&w=600&q=80" alt="Classic French Croissant" loading="lazy">
+          <div class="product-tag">Bestseller</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Classic Croissant</h3>
+          <p class="product-desc">72-hour fermented dough, hand-folded with French butter for 81 flaky layers.</p>
+          <div class="product-footer">
+            <span class="product-price">$4.50</span>
+            <button class="product-add" aria-label="Add to cart">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-image-wrap">
+          <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=600&q=80" alt="Rustic Sourdough Loaf" loading="lazy">
+          <div class="product-tag">House Favorite</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Rustic Sourdough</h3>
+          <p class="product-desc">Wild yeast starter, stone-milled flour. A crackling crust with a soft, tangy heart.</p>
+          <div class="product-footer">
+            <span class="product-price">$8.00</span>
+            <button class="product-add" aria-label="Add to cart">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-3">
+        <div class="product-image-wrap">
+          <img src="https://images.unsplash.com/photo-1558326567-98ae2405596b?auto=format&fit=crop&w=600&q=80" alt="Pain au Chocolat" loading="lazy">
+          <div class="product-tag">Signature</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Pain au Chocolat</h3>
+          <p class="product-desc">Two batons of Valrhona dark chocolate enveloped in our signature puff pastry.</p>
+          <div class="product-footer">
+            <span class="product-price">$5.25</span>
+            <button class="product-add" aria-label="Add to cart">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="story-grid">
+      <div class="story-image-stack reveal">
+        <img class="story-img-main" src="https://images.unsplash.com/photo-1556471013-0001958d2f12?auto=format&fit=crop&w=700&q=80" alt="Baker kneading dough" loading="lazy">
+        <img class="story-img-accent" src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=500&q=80" alt="Freshly baked bread on wooden table" loading="lazy">
+        <div class="story-year">1987</div>
+      </div>
+      <div class="story-content">
+        <div class="section-label reveal">Our Story</div>
+        <h2 class="section-title reveal reveal-delay-1">Three generations of <em>craft & care</em></h2>
+        <div class="gold-accent-line reveal reveal-delay-2"></div>
+        <p class="story-text reveal reveal-delay-2">
+          It began with Grandmother Marie's kitchen in the 7th arrondissement, where the scent of fresh brioche would drift down Rue Cler each morning. What started as a family tradition became a neighborhood institution &mdash; and eventually, a legacy.
+        </p>
+        <p class="story-text reveal reveal-delay-3">
+          Today, we honor her recipes while embracing the art of slow fermentation. Every ingredient is sourced with intention: organic stone-milled flour from Moulin de la Vierge, butter from Normandy, and sea salt from Gu&eacute;rande. No shortcuts. No compromises.
+        </p>
+        <div class="story-stats reveal reveal-delay-4">
+          <div>
+            <div class="stat-number">37</div>
+            <div class="stat-label">Years of Baking</div>
+          </div>
+          <div>
+            <div class="stat-number">4:00<span style="font-size: 0.6em; font-weight: 400;">am</span></div>
+            <div class="stat-label">Ovens Fire Daily</div>
+          </div>
+          <div>
+            <div class="stat-number">12K+</div>
+            <div class="stat-label">Loaves Per Week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU / OFFERINGS -->
+  <section class="menu" id="offerings">
+    <div class="section-header reveal">
+      <div class="section-label">What We Bake</div>
+      <h2 class="section-title">Our <em>Offerings</em></h2>
+    </div>
+
+    <div class="menu-categories reveal reveal-delay-1">
+      <button class="menu-tab active">All</button>
+      <button class="menu-tab">Breads</button>
+      <button class="menu-tab">Viennoiserie</button>
+      <button class="menu-tab">P&acirc;tisserie</button>
+      <button class="menu-tab">Savory</button>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-item reveal">
+        <div>
+          <div class="menu-item-name">Traditional Baguette</div>
+          <div class="menu-item-desc">Crisp crust, airy crumb, timeless</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$3.50</div>
+      </div>
+      <div class="menu-item reveal reveal-delay-1">
+        <div>
+          <div class="menu-item-name">Croissant au Beurre</div>
+          <div class="menu-item-desc">Pure butter, 81 layers of perfection</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$4.50</div>
+      </div>
+      <div class="menu-item reveal">
+        <div>
+          <div class="menu-item-name">Pain de Campagne</div>
+          <div class="menu-item-desc">Rustic country bread, wild yeast</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$7.00</div>
+      </div>
+      <div class="menu-item reveal reveal-delay-1">
+        <div>
+          <div class="menu-item-name">Almond Croissant</div>
+          <div class="menu-item-desc">Frangipane filled, toasted almonds</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$5.75</div>
+      </div>
+      <div class="menu-item reveal">
+        <div>
+          <div class="menu-item-name">Tarte au Citron</div>
+          <div class="menu-item-desc">Meyer lemon curd, torched meringue</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$6.50</div>
+      </div>
+      <div class="menu-item reveal reveal-delay-1">
+        <div>
+          <div class="menu-item-name">Pain au Chocolat</div>
+          <div class="menu-item-desc">Valrhona dark chocolate batons</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$5.25</div>
+      </div>
+      <div class="menu-item reveal">
+        <div>
+          <div class="menu-item-name">Croque Monsieur</div>
+          <div class="menu-item-desc">Gruy&egrave;re b&eacute;chamel, smoked ham</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$9.50</div>
+      </div>
+      <div class="menu-item reveal reveal-delay-1">
+        <div>
+          <div class="menu-item-name">Paris-Brest</div>
+          <div class="menu-item-desc">Praline mousseline, choux pastry</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$7.25</div>
+      </div>
+      <div class="menu-item reveal">
+        <div>
+          <div class="menu-item-name">Brioche Feuillet&eacute;e</div>
+          <div class="menu-item-desc">Buttery, pull-apart, golden</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$6.00</div>
+      </div>
+      <div class="menu-item reveal reveal-delay-1">
+        <div>
+          <div class="menu-item-name">Quiche Lorraine</div>
+          <div class="menu-item-desc">Lardons, cream, hand-rolled crust</div>
+        </div>
+        <div class="menu-item-dots"></div>
+        <div class="menu-item-price">$8.50</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-header reveal">
+      <div class="section-label">What They Say</div>
+      <h2 class="section-title">Words from <em>Our Guests</em></h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <div class="testimonial-quote-icon">&ldquo;</div>
+        <p class="testimonial-text">
+          The sourdough here has ruined all other bread for me. That crust, that tang &mdash; it's what I imagine Parisian mornings taste like.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">EC</div>
+          <div>
+            <div class="testimonial-name">Eleanor Chen</div>
+            <div class="testimonial-role">Food Columnist</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <div class="testimonial-quote-icon">&ldquo;</div>
+        <p class="testimonial-text">
+          I've traveled to bakeries across France and few match the croissant here. The lamination is impeccable &mdash; shattering crust, honeycomb interior. Extraordinary.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MR</div>
+          <div>
+            <div class="testimonial-name">Marc Renault</div>
+            <div class="testimonial-role">Pastry Chef</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-3">
+        <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <div class="testimonial-quote-icon">&ldquo;</div>
+        <p class="testimonial-text">
+          Saturday mornings aren't complete without their brioche and a café cr&egrave;me. My daughter insists it's the best bakery &ldquo;in the whole universe.&rdquo;
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SP</div>
+          <div>
+            <div class="testimonial-name">Sarah Patel</div>
+            <div class="testimonial-role">Loyal Regular</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / LOCATION -->
+  <section class="contact" id="contact">
+    <div class="section-header reveal">
+      <div class="section-label">Find Us</div>
+      <h2 class="section-title">Visit <em>the Bakery</em></h2>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info-group reveal">
+          <div class="contact-info-label">Location</div>
+          <div class="contact-info-value">
+            42 Rue des Artisans<br>
+            Le Quartier Dor&eacute;<br>
+            Paris, 75007 France
+          </div>
+        </div>
+
+        <div class="contact-info-group reveal reveal-delay-1">
+          <div class="contact-info-label">Get in Touch</div>
+          <div class="contact-info-value">
+            <a href="tel:+33142681987">+33 1 42 68 19 87</a><br>
+            <a href="mailto:bonjour@labelleboulangerie.fr">bonjour@labelleboulangerie.fr</a>
+          </div>
+        </div>
+
+        <div class="contact-info-group reveal reveal-delay-2">
+          <div class="contact-info-label">Opening Hours</div>
+          <table class="hours-table">
+            <tr>
+              <td>Monday &ndash; Friday</td>
+              <td>6:30 AM &ndash; 7:00 PM</td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td>7:00 AM &ndash; 6:00 PM</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td>7:00 AM &ndash; 2:00 PM</td>
+            </tr>
+            <tr>
+              <td class="hours-today">Today (Sunday)</td>
+              <td class="hours-today">Open until 2:00 PM</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <form class="contact-form reveal reveal-delay-1" onsubmit="event.preventDefault();">
+        <div class="form-group">
+          <input type="text" class="form-input" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-input" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-input" placeholder="Subject">
+        </div>
+        <div class="form-group">
+          <textarea class="form-input" placeholder="Your Message..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">La Belle <span>Boulangerie</span></div>
+        <p class="footer-desc">
+          Three generations of artisan baking, from our family to your table. Every crumb tells a story.
+        </p>
+      </div>
+      <div>
+        <div class="footer-heading">Navigate</div>
+        <ul class="footer-list">
+          <li><a href="#featured">Menu</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#offerings">Offerings</a></li>
+          <li><a href="#contact">Visit Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Information</div>
+        <ul class="footer-list">
+          <li><a href="#">Wholesale</a></li>
+          <li><a href="#">Catering</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <ul class="footer-list">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 La Belle Boulangerie. All rights reserved.</div>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="Instagram">IG</a>
+        <a href="#" class="footer-social" aria-label="Facebook">FB</a>
+        <a href="#" class="footer-social" aria-label="Pinterest">PN</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 60) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Menu tab interaction
+    document.querySelectorAll('.menu-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    // Smooth hover effect on product cards
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 8;
+        card.style.transform = `translateY(-8px) rotateX(${-y}deg) rotateY(${x}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // Update "today" dynamically
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const today = days[new Date().getDay()];
+    const todayCells = document.querySelectorAll('.hours-today');
+    if (todayCells.length) {
+      const hours = {
+        'Monday': '6:30 AM – 7:00 PM',
+        'Tuesday': '6:30 AM – 7:00 PM',
+        'Wednesday': '6:30 AM – 7:00 PM',
+        'Thursday': '6:30 AM – 7:00 PM',
+        'Friday': '6:30 AM – 7:00 PM',
+        'Saturday': '7:00 AM – 6:00 PM',
+        'Sunday': '7:00 AM – 2:00 PM'
+      };
+      todayCells[0].textContent = `Today (${today})`;
+      todayCells[1].textContent = `Open until ${hours[today].split('–')[1].trim()}`;
+    }
+  </script>
+</body>
+</html>

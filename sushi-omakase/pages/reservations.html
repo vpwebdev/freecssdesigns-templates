@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reserve your seat at Sushi Omakase. Twelve-seat counter dining with two seatings nightly, Tuesday through Saturday.">
+  <title>Reservations — Sushi Omakase</title>
+
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍣</text></svg>">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">鮨</span>
+        <div>
+          <span class="logo-text">Omakase</span>
+          <span class="logo-sub">Sushi &middot; Est. 2019</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="menu.html" class="nav-link">Menu</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="reservations.html" class="nav-link active">Reservations</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <a href="reservations.html" class="nav-cta">Reserve a Seat</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-overlay" id="mobile-overlay">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="menu.html" class="nav-link">Menu</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="reservations.html" class="nav-link active">Reservations</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="reservations.html" class="nav-cta">Reserve a Seat</a>
+  </div>
+
+
+  <main>
+    <!-- ========== PAGE HERO ========== -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-content">
+          <span class="section-label reveal">Reservations</span>
+          <h1 class="reveal reveal-d1">Secure Your Evening</h1>
+          <p class="reveal reveal-d2">We seat twelve guests per service, twice nightly. To preserve the intimacy of the experience, we ask that reservations be made in advance.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== RESERVATION FORM ========== -->
+    <section class="section">
+      <div class="container">
+        <div class="reservation-grid">
+
+          <!-- Form -->
+          <div class="reservation-form reveal">
+            <h3>Request a Reservation</h3>
+
+            <div class="form-message" id="form-message"></div>
+
+            <form id="reservation-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="res-first-name">First Name</label>
+                  <input class="form-input" type="text" id="res-first-name" name="firstName" placeholder="Your first name" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="res-last-name">Last Name</label>
+                  <input class="form-input" type="text" id="res-last-name" name="lastName" placeholder="Your last name" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="res-email">Email</label>
+                  <input class="form-input" type="email" id="res-email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="res-phone">Phone</label>
+                  <input class="form-input" type="tel" id="res-phone" name="phone" placeholder="(212) 555-0000" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="res-date">Preferred Date</label>
+                  <input class="form-input" type="date" id="res-date" name="date" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="res-seating">Seating</label>
+                  <select class="form-select" id="res-seating" name="seating" required>
+                    <option value="" disabled selected>Select a seating</option>
+                    <option value="first">First Seating — 6:00 PM</option>
+                    <option value="second">Second Seating — 8:30 PM</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="res-guests">Number of Guests</label>
+                  <select class="form-select" id="res-guests" name="guests" required>
+                    <option value="" disabled selected>Select party size</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests (requires approval)</option>
+                    <option value="6">6 Guests (requires approval)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="res-experience">Experience</label>
+                  <select class="form-select" id="res-experience" name="experience" required>
+                    <option value="" disabled selected>Select course</option>
+                    <option value="sakura">Sakura — 8 Courses ($95)</option>
+                    <option value="kaiseki">Kaiseki — 14 Courses ($185)</option>
+                    <option value="shokunin">Shokunin — 18+ Courses ($280)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="res-requests">Special Requests</label>
+                <textarea class="form-textarea" id="res-requests" name="requests" placeholder="Allergies, dietary restrictions, celebrations, or seating preferences..."></textarea>
+                <span class="form-hint">Please note any allergies — our kitchen uses shellfish, nuts, soy, and gluten.</span>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">Submit Reservation Request</button>
+            </form>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="reservation-sidebar">
+            <div class="reveal">
+              <h3>Before You Book</h3>
+              <p>Our counter seats twelve. We offer two seatings each evening, Tuesday through Saturday. Reservations are confirmed by email within 24 hours.</p>
+            </div>
+
+            <div class="reveal reveal-d1">
+              <h4 style="font-family: var(--font-heading); font-size: var(--fs-lg); margin-bottom: var(--space-md); margin-top: var(--space-xl);">Policies</h4>
+              <div class="policy-list">
+                <div class="policy-item">
+                  <span class="policy-icon">&#9679;</span>
+                  <span class="policy-text">A credit card is required to hold your reservation. No charge is made at booking.</span>
+                </div>
+                <div class="policy-item">
+                  <span class="policy-icon">&#9679;</span>
+                  <span class="policy-text">Cancellations must be made at least 48 hours in advance. Late cancellations are subject to a $100 per person fee.</span>
+                </div>
+                <div class="policy-item">
+                  <span class="policy-icon">&#9679;</span>
+                  <span class="policy-text">Guests are asked to arrive 5 minutes before their seating time. Late arrivals may forfeit their reservation.</span>
+                </div>
+                <div class="policy-item">
+                  <span class="policy-icon">&#9679;</span>
+                  <span class="policy-text">We are unable to accommodate outside food or beverages. Corkage is not available.</span>
+                </div>
+                <div class="policy-item">
+                  <span class="policy-icon">&#9679;</span>
+                  <span class="policy-text">Children under 10 are not permitted at the counter. We apologize for the inconvenience.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal reveal-d2">
+              <h4 style="font-family: var(--font-heading); font-size: var(--fs-lg); margin-bottom: var(--space-md); margin-top: var(--space-xl);">Private Dining</h4>
+              <p>For parties of 8–12, we offer exclusive private seatings on select evenings. Please contact us directly at <a href="mailto:private@sushiomakase.com" style="color: var(--text-accent);">private@sushiomakase.com</a> to arrange a private omakase experience.</p>
+            </div>
+
+            <div class="reveal reveal-d3" style="margin-top: var(--space-xl); padding: var(--space-xl); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: var(--bg-surface);">
+              <h4 style="font-family: var(--font-heading); font-size: var(--fs-lg); margin-bottom: var(--space-md);">Hours</h4>
+              <div class="info-row">
+                <span class="info-label">Tuesday — Saturday</span>
+                <span class="info-value">Open</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">First Seating</span>
+                <span class="info-value">6:00 PM</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Second Seating</span>
+                <span class="info-value">8:30 PM</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Sunday — Monday</span>
+                <span class="info-value">Closed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== WHAT TO EXPECT ========== -->
+    <section class="section section--elevated">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <span class="section-label reveal">Your Evening</span>
+          <h2 class="section-title reveal reveal-d1">What to Expect</h2>
+        </div>
+
+        <div class="grid grid--3 reveal reveal-d2">
+          <div class="feature-block" style="flex-direction: column; text-align: center;">
+            <span class="feature-number" style="min-width: auto;">01</span>
+            <div class="feature-content">
+              <h4>Arrival</h4>
+              <p>Arrive 5 minutes early. You'll be greeted and seated at the hinoki counter directly before the chef.</p>
+            </div>
+          </div>
+          <div class="feature-block" style="flex-direction: column; text-align: center;">
+            <span class="feature-number" style="min-width: auto;">02</span>
+            <div class="feature-content">
+              <h4>The Omakase</h4>
+              <p>Your meal unfolds course by course. Chef Yamamoto prepares each piece in front of you, explaining the origin and technique.</p>
+            </div>
+          </div>
+          <div class="feature-block" style="flex-direction: column; text-align: center;">
+            <span class="feature-number" style="min-width: auto;">03</span>
+            <div class="feature-content">
+              <h4>Departure</h4>
+              <p>The experience lasts approximately 90 minutes for Sakura, 2 hours for Kaiseki, and 2.5 hours for Shokunin.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">
+            <span class="logo-mark">鮨</span>
+            <div>
+              <span class="logo-text">Omakase</span>
+              <span class="logo-sub">Sushi &middot; Est. 2019</span>
+            </div>
+          </a>
+          <p>An intimate counter-dining experience dedicated to the art of Edomae sushi. Twelve seats. One chef. No compromises.</p>
+        </div>
+        <div>
+          <h4 class="footer-heading">Navigate</h4>
+          <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About</a>
+            <a href="reservations.html">Reservations</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Hours</h4>
+          <div class="footer-links">
+            <span>Tuesday — Saturday</span>
+            <span>First Seating: 6:00 PM</span>
+            <span>Second Seating: 8:30 PM</span>
+            <span style="margin-top: var(--space-sm); color: var(--color-stone);">Sunday — Monday: Closed</span>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Contact</h4>
+          <div class="footer-links">
+            <a href="tel:+12125551234">(212) 555-1234</a>
+            <a href="mailto:reservations@sushiomakase.com">reservations@sushiomakase.com</a>
+            <span>142 West 10th Street</span>
+            <span>New York, NY 10014</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 Sushi Omakase. All rights reserved.</span>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="Yelp">Yelp</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

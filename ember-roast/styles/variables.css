@@ -1,0 +1,125 @@
+/* ============================================
+   EMBER & ROAST — Design Tokens
+   ============================================ */
+
+:root {
+  /* ---- Color Palette ---- */
+  --color-void:         #0A0A08;
+  --color-charcoal:     #131210;
+  --color-night:        #1A1916;
+  --color-dark:         #22201C;
+  --color-espresso:     #2A2722;
+  --color-coffee:       #3B3530;
+  --color-mocha:        #5C524A;
+  --color-driftwood:    #7A6E63;
+  --color-stone:        #9A8E82;
+  --color-sand:         #B8AA9C;
+  --color-wheat:        #D4C5B0;
+  --color-cream:        #EDE4D6;
+  --color-linen:        #F5F0E8;
+  --color-parchment:    #FAF7F2;
+  --color-white:        #FEFDFB;
+
+  --color-ember:        #C46A2E;
+  --color-amber:        #D4883A;
+  --color-copper:       #B87333;
+  --color-rust:         #A0522D;
+  --color-gold:         #C9A84C;
+  --color-gold-light:   #DAB96E;
+  --color-burnt-orange: #CC5500;
+
+  --color-success:      #5A7247;
+  --color-error:        #A63D2F;
+
+  /* ---- Semantic Aliases ---- */
+  --bg-primary:         var(--color-charcoal);
+  --bg-secondary:       var(--color-night);
+  --bg-elevated:        var(--color-dark);
+  --bg-surface:         var(--color-espresso);
+  --bg-light:           var(--color-parchment);
+  --bg-light-alt:       var(--color-linen);
+
+  --text-primary:       var(--color-cream);
+  --text-secondary:     var(--color-sand);
+  --text-muted:         var(--color-stone);
+  --text-accent:        var(--color-amber);
+  --text-dark:          var(--color-night);
+  --text-dark-muted:    var(--color-mocha);
+
+  --border-subtle:      rgba(212, 197, 176, 0.08);
+  --border-light:       rgba(212, 197, 176, 0.12);
+  --border-medium:      rgba(212, 197, 176, 0.20);
+  --border-on-light:    rgba(42, 39, 34, 0.10);
+
+  --shadow-sm:          0 2px 8px rgba(0,0,0,0.2);
+  --shadow-md:          0 8px 30px rgba(0,0,0,0.25);
+  --shadow-lg:          0 20px 60px rgba(0,0,0,0.35);
+  --shadow-glow:        0 0 40px rgba(196, 106, 46, 0.08);
+
+  /* ---- Typography ---- */
+  --font-display:       'Libre Caslon Display', 'Playfair Display', Georgia, serif;
+  --font-heading:       'Libre Caslon Text', Georgia, serif;
+  --font-body:          'Outfit', 'DM Sans', sans-serif;
+  --font-accent:        'Cormorant', Georgia, serif;
+  --font-mono:          'JetBrains Mono', monospace;
+
+  --fs-xs:    0.75rem;
+  --fs-sm:    0.85rem;
+  --fs-base:  0.95rem;
+  --fs-md:    1.05rem;
+  --fs-lg:    1.25rem;
+  --fs-xl:    1.6rem;
+  --fs-2xl:   2.2rem;
+  --fs-3xl:   3rem;
+  --fs-4xl:   4rem;
+  --fs-5xl:   5.5rem;
+
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  --lh-tight:    1.1;
+  --lh-snug:     1.3;
+  --lh-normal:   1.6;
+  --lh-relaxed:  1.85;
+
+  --ls-tight:   -0.03em;
+  --ls-normal:   0;
+  --ls-wide:     0.08em;
+  --ls-wider:    0.15em;
+  --ls-widest:   0.25em;
+
+  /* ---- Spacing ---- */
+  --space-xs:   0.25rem;
+  --space-sm:   0.5rem;
+  --space-md:   1rem;
+  --space-lg:   1.5rem;
+  --space-xl:   2.5rem;
+  --space-2xl:  4rem;
+  --space-3xl:  6rem;
+  --space-4xl:  8rem;
+  --space-5xl:  12rem;
+
+  /* ---- Layout ---- */
+  --container-max:   1280px;
+  --container-narrow: 800px;
+  --gutter:          2rem;
+
+  /* ---- Motion ---- */
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out:     cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast:   0.2s;
+  --duration-normal: 0.4s;
+  --duration-slow:   0.7s;
+  --duration-slower: 1s;
+
+  /* ---- Borders ---- */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 999px;
+}

@@ -1,0 +1,705 @@
+/* ================================================================
+   PAGES — Page-specific and Section-specific Styles
+   ================================================================ */
+
+/* ---- Hero (Home) ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--header-height);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 50%, rgba(194, 149, 90, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(122, 154, 92, 0.03) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(11, 11, 10, 0.3) 0%, var(--color-charcoal) 100%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 580px;
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-widest);
+  color: var(--text-accent);
+  margin-bottom: var(--space-lg);
+}
+
+.hero-label::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--color-hinoki);
+}
+
+.hero h1 {
+  margin-bottom: var(--space-lg);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--text-accent);
+}
+
+.hero-text {
+  font-family: var(--font-accent);
+  font-size: var(--fs-lg);
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-xl);
+  max-width: 42ch;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-visual-frame {
+  width: 420px;
+  height: 520px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  background:
+    linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-secondary) 100%);
+}
+
+.hero-visual-frame::before {
+  content: '鮨';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12rem;
+  color: var(--color-hinoki);
+  opacity: 0.04;
+  font-weight: 300;
+}
+
+.hero-visual-accent {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  top: -30px;
+  right: -40px;
+  opacity: 0.3;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--color-hinoki), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50%      { opacity: 1; transform: scaleY(1); }
+}
+
+/* ---- Philosophy Section ---- */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.philosophy-image {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.philosophy-image::before {
+  content: '職人';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  color: var(--color-hinoki);
+  opacity: 0.04;
+}
+
+.philosophy-text h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-md);
+}
+
+.philosophy-text p {
+  margin-bottom: var(--space-lg);
+  line-height: var(--lh-relaxed);
+}
+
+/* ---- Omakase Experience Section ---- */
+.omakase-intro {
+  max-width: 700px;
+  margin: 0 auto var(--space-2xl);
+  text-align: center;
+}
+
+.omakase-intro p {
+  font-family: var(--font-accent);
+  font-size: var(--fs-lg);
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 0 auto;
+}
+
+.course-timeline {
+  position: relative;
+  padding-left: var(--space-2xl);
+}
+
+.course-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--color-hinoki), var(--border-subtle), transparent);
+}
+
+.course-item {
+  position: relative;
+  padding: var(--space-lg) 0;
+  padding-left: var(--space-xl);
+}
+
+.course-item::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-2xl));
+  top: calc(var(--space-lg) + 8px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-hinoki);
+  box-shadow: 0 0 12px rgba(194, 149, 90, 0.3);
+}
+
+.course-number {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  color: var(--color-hinoki);
+  letter-spacing: var(--ls-wider);
+  margin-bottom: var(--space-xs);
+}
+
+.course-name {
+  font-family: var(--font-heading);
+  font-size: var(--fs-xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.course-jp {
+  font-size: var(--fs-xs);
+  color: var(--color-stone);
+  margin-bottom: var(--space-sm);
+}
+
+.course-desc {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+  max-width: 50ch;
+}
+
+/* ---- Chef Section ---- */
+.chef-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.chef-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.chef-image {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.chef-image::before {
+  content: '匠';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10rem;
+  color: var(--color-hinoki);
+  opacity: 0.04;
+}
+
+.chef-info h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-sm);
+}
+
+.chef-title {
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wider);
+  color: var(--text-accent);
+  margin-bottom: var(--space-lg);
+}
+
+.chef-bio {
+  margin-bottom: var(--space-lg);
+}
+
+.chef-bio p {
+  margin-bottom: var(--space-md);
+  line-height: var(--lh-relaxed);
+}
+
+/* ---- CTA Section ---- */
+.cta-section {
+  text-align: center;
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(194, 149, 90, 0.04) 0%, transparent 70%);
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-jp {
+  font-size: var(--fs-3xl);
+  color: var(--color-hinoki);
+  opacity: 0.1;
+  margin-bottom: var(--space-md);
+  line-height: 1;
+}
+
+.cta-content h2 {
+  font-family: var(--font-display);
+  margin-bottom: var(--space-md);
+}
+
+.cta-content p {
+  font-family: var(--font-accent);
+  font-size: var(--fs-lg);
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 0 auto var(--space-xl);
+}
+
+/* ---- Page Hero (Interior Pages) ---- */
+.page-hero {
+  padding: calc(var(--header-height) + var(--space-3xl)) 0 var(--space-2xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(194, 149, 90, 0.03) 0%, transparent 60%);
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.page-hero .section-label {
+  margin-bottom: var(--space-md);
+}
+
+.page-hero h1 {
+  font-size: clamp(2.2rem, 5vw, var(--fs-4xl));
+  margin-bottom: var(--space-md);
+}
+
+.page-hero p {
+  font-family: var(--font-accent);
+  font-size: var(--fs-lg);
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+/* ---- About Page ---- */
+.story-section {
+  position: relative;
+}
+
+.story-content {
+  max-width: 720px;
+}
+
+.story-content p {
+  margin-bottom: var(--space-lg);
+  line-height: var(--lh-relaxed);
+  font-size: var(--fs-md);
+}
+
+.story-pullquote {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-style: italic;
+  color: var(--text-accent);
+  line-height: var(--lh-snug);
+  padding: var(--space-xl) 0;
+  border-left: 2px solid var(--color-hinoki);
+  padding-left: var(--space-xl);
+  margin: var(--space-xl) 0;
+  max-width: none;
+  opacity: 0.85;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.value-item {
+  padding: var(--space-xl);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  transition: border-color var(--duration-normal) var(--ease-smooth);
+}
+
+.value-item:hover {
+  border-color: var(--border-light);
+}
+
+.value-icon {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-md);
+  opacity: 0.7;
+}
+
+.value-item h4 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.value-item p {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+/* ---- Sourcing Section ---- */
+.sourcing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.sourcing-item {
+  padding: var(--space-xl);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.sourcing-item h4 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.sourcing-origin {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wider);
+  color: var(--text-accent);
+  margin-bottom: var(--space-md);
+}
+
+.sourcing-item p {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+/* ---- Reservation Page ---- */
+.reservation-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.reservation-form {
+  padding: var(--space-2xl);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+
+.reservation-form h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.reservation-sidebar h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-lg);
+}
+
+.reservation-sidebar p {
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-lg);
+  line-height: var(--lh-relaxed);
+}
+
+.policy-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.policy-item {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.policy-icon {
+  color: var(--text-accent);
+  font-size: var(--fs-md);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.policy-text {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+/* ---- Contact Page ---- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.contact-block h4 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.contact-block p,
+.contact-block a {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+.contact-block a:hover {
+  color: var(--text-accent);
+}
+
+.contact-map {
+  width: 100%;
+  height: 280px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  margin-top: var(--space-xl);
+}
+
+.contact-form-wrapper {
+  padding: var(--space-2xl);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+
+.contact-form-wrapper h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-xl);
+}
+
+/* ---- Form Messages ---- */
+.form-message {
+  display: none;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.form-message--success {
+  display: block;
+  background: rgba(122, 154, 92, 0.1);
+  border: 1px solid rgba(122, 154, 92, 0.25);
+  color: var(--color-matcha);
+}
+
+.form-message--error {
+  display: block;
+  background: rgba(201, 107, 90, 0.1);
+  border: 1px solid rgba(201, 107, 90, 0.25);
+  color: var(--color-salmon);
+}
+
+/* ---- Page Responsive ---- */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .hero-visual {
+    display: none;
+  }
+
+  .philosophy-grid,
+  .chef-grid,
+  .sourcing-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: calc(var(--header-height) + var(--space-2xl)) 0 var(--space-2xl);
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reservation-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .course-timeline {
+    padding-left: var(--space-lg);
+  }
+
+  .course-item {
+    padding-left: var(--space-md);
+  }
+}

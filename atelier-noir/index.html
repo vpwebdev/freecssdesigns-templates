@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Noir — Interior Design Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════
+           CSS CUSTOM PROPERTIES
+           ═══════════════════════════════════════════════════ */
+        :root {
+            --charcoal: #1a1a1a;
+            --charcoal-deep: #0e0e0e;
+            --charcoal-soft: #2a2a2a;
+            --brass: #c9a96e;
+            --brass-light: #d4ba8a;
+            --brass-glow: #e8d5a8;
+            --cream: #f5f0e8;
+            --cream-dark: #e8e0d0;
+            --alabaster: #faf8f4;
+            --warm-gray: #8a8278;
+            --warm-gray-light: #b5ada3;
+            --mocha: #3d3428;
+            --sage: #7a8672;
+
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Outfit', system-ui, sans-serif;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--brass) var(--charcoal);
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 300;
+            color: var(--cream);
+            background-color: var(--charcoal-deep);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: var(--brass);
+            color: var(--charcoal-deep);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           CUSTOM CURSOR RING
+           ═══════════════════════════════════════════════════ */
+        .cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--brass);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s var(--ease-out-expo),
+                        height 0.3s var(--ease-out-expo),
+                        border-color 0.3s ease,
+                        background 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-ring.hovering {
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 169, 110, 0.1);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           NOISE TEXTURE OVERLAY
+           ═══════════════════════════════════════════════════ */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           PRELOADER
+           ═══════════════════════════════════════════════════ */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--charcoal-deep);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--brass);
+            overflow: hidden;
+        }
+
+        .preloader-text span {
+            display: inline-block;
+            animation: preloaderReveal 0.6s var(--ease-out-expo) forwards;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        @keyframes preloaderReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .preloader-line {
+            width: 120px;
+            height: 1px;
+            background: var(--charcoal-soft);
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preloader-line::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: var(--brass);
+            animation: preloaderLine 2s var(--ease-in-out) forwards;
+        }
+
+        @keyframes preloaderLine {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* ═══════════════════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.4s ease, padding 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(14, 14, 14, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 3rem;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .nav-logo em {
+            font-style: italic;
+            color: var(--brass);
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--warm-gray-light);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--brass);
+            transition: width 0.4s var(--ease-out-expo);
+        }
+
+        .nav-links a:hover {
+            color: var(--cream);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.7rem 1.8rem;
+            border: 1px solid var(--brass);
+            color: var(--brass);
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .nav-cta:hover {
+            background: var(--brass);
+            color: var(--charcoal-deep);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .nav-hamburger span {
+            width: 28px;
+            height: 1px;
+            background: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           MOBILE NAV OVERLAY
+           ═══════════════════════════════════════════════════ */
+        .mobile-nav {
+            position: fixed;
+            inset: 0;
+            background: var(--charcoal-deep);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .mobile-nav.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav a {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: var(--cream);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--brass);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           HERO SECTION
+           ═══════════════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 3rem 6rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(14,14,14,0.7) 0%, rgba(14,14,14,0.3) 40%, rgba(14,14,14,0.6) 100%),
+                url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1920&q=80') center/cover no-repeat;
+            transform: scale(1.1);
+            animation: heroZoom 15s var(--ease-out-expo) forwards;
+        }
+
+        @keyframes heroZoom {
+            to { transform: scale(1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .hero-eyebrow span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: slideUp 0.8s var(--ease-out-expo) 2.2s forwards;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 9vw, 8.5rem);
+            font-weight: 300;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(110%);
+            animation: slideUp 1s var(--ease-out-expo) forwards;
+        }
+
+        .hero-title .line:nth-child(1) span { animation-delay: 2.4s; }
+        .hero-title .line:nth-child(2) span { animation-delay: 2.55s; }
+        .hero-title .line:nth-child(3) span { animation-delay: 2.7s; }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--brass);
+        }
+
+        .hero-divider {
+            width: 80px;
+            height: 1px;
+            background: var(--brass);
+            margin-bottom: 2rem;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: scaleIn 0.8s var(--ease-out-expo) 3s forwards;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 200;
+            line-height: 1.8;
+            color: var(--warm-gray-light);
+            max-width: 480px;
+            opacity: 0;
+            animation: fadeIn 1s ease 3.2s forwards;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            right: 3rem;
+            bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 3.5s forwards;
+        }
+
+        .hero-scroll span {
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            writing-mode: vertical-lr;
+            color: var(--warm-gray);
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 60px;
+            background: var(--charcoal-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--brass);
+            animation: scrollLine 2s ease infinite;
+        }
+
+        @keyframes scrollLine {
+            0% { top: -100%; }
+            50% { top: 100%; }
+            50.01% { top: -100%; }
+            100% { top: 100%; }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            to { transform: scaleX(1); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ═══════════════════════════════════════════════════
+           MARQUEE
+           ═══════════════════════════════════════════════════ */
+        .marquee-section {
+            padding: 2rem 0;
+            border-top: 1px solid rgba(201, 169, 110, 0.15);
+            border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+            overflow: hidden;
+            background: var(--charcoal-deep);
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 0.15em;
+            color: var(--warm-gray);
+            white-space: nowrap;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .marquee-item .dot {
+            width: 4px;
+            height: 4px;
+            background: var(--brass);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @keyframes marquee {
+            to { transform: translateX(-50%); }
+        }
+
+        /* ═══════════════════════════════════════════════════
+           REVEAL ANIMATIONS (scroll-triggered)
+           ═══════════════════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.9s var(--ease-out-expo),
+                        transform 0.9s var(--ease-out-expo);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ═══════════════════════════════════════════════════
+           SECTION HEADERS (reusable)
+           ═══════════════════════════════════════════════════ */
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .section-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--brass);
+        }
+
+        .section-desc {
+            font-size: 0.9rem;
+            font-weight: 200;
+            line-height: 1.7;
+            color: var(--warm-gray-light);
+            max-width: 400px;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           ABOUT SECTION
+           ═══════════════════════════════════════════════════ */
+        .about {
+            padding: 8rem 3rem;
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(1.05);
+        }
+
+        .about-image-frame {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            bottom: 20px;
+            left: 20px;
+            border: 1px solid var(--brass);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .about-stats {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            background: var(--charcoal-deep);
+            padding: 2rem;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: var(--brass);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-top: 0.3rem;
+        }
+
+        .about-text h3 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 2rem;
+        }
+
+        .about-text h3 em {
+            font-style: italic;
+            color: var(--brass);
+        }
+
+        .about-text p {
+            font-size: 0.95rem;
+            font-weight: 200;
+            line-height: 1.9;
+            color: var(--warm-gray-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-signature {
+            margin-top: 2.5rem;
+        }
+
+        .about-signature-name {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--brass);
+        }
+
+        .about-signature-title {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-top: 0.3rem;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           PORTFOLIO / PROJECTS
+           ═══════════════════════════════════════════════════ */
+        .portfolio {
+            padding: 8rem 3rem;
+            background: var(--charcoal-deep);
+        }
+
+        .portfolio-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            group: true;
+        }
+
+        .portfolio-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 1;
+            transition: transform 0.8s var(--ease-out-expo),
+                        filter 0.6s ease;
+            filter: grayscale(15%) brightness(0.9);
+        }
+
+        .portfolio-item:nth-child(1) img {
+            aspect-ratio: auto;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.07);
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(14,14,14,0.9) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h4 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 0.3rem;
+        }
+
+        .portfolio-overlay span {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--brass);
+        }
+
+        .portfolio-overlay .arrow {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--brass);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-10px, 10px);
+            opacity: 0;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .portfolio-item:hover .portfolio-overlay .arrow {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           SERVICES SECTION
+           ═══════════════════════════════════════════════════ */
+        .services {
+            padding: 8rem 3rem;
+            background: var(--charcoal);
+        }
+
+        .services-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .service-card {
+            padding: 3.5rem 2.5rem;
+            border: 1px solid rgba(201, 169, 110, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(201,169,110,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        .service-number {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: rgba(201, 169, 110, 0.15);
+            line-height: 1;
+            margin-bottom: 2rem;
+            transition: color 0.5s ease;
+        }
+
+        .service-card:hover .service-number {
+            color: rgba(201, 169, 110, 0.35);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1.5rem;
+            stroke: var(--brass);
+            stroke-width: 1;
+            fill: none;
+        }
+
+        .service-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            font-weight: 200;
+            line-height: 1.8;
+            color: var(--warm-gray-light);
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--brass);
+            transition: gap 0.3s var(--ease-out-expo);
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           TESTIMONIALS
+           ═══════════════════════════════════════════════════ */
+        .testimonials {
+            padding: 8rem 3rem;
+            background: var(--charcoal-deep);
+            position: relative;
+        }
+
+        .testimonials-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonial-main {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+            align-items: center;
+            margin-top: 4rem;
+        }
+
+        .testimonial-image-col {
+            position: relative;
+        }
+
+        .testimonial-image-col img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            filter: grayscale(30%);
+        }
+
+        .testimonial-quote-mark {
+            font-family: var(--font-display);
+            font-size: 12rem;
+            font-weight: 300;
+            color: rgba(201, 169, 110, 0.1);
+            line-height: 0.8;
+            position: absolute;
+            top: -2rem;
+            left: -1rem;
+        }
+
+        .testimonial-content {
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--cream);
+            margin-bottom: 2.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author-line {
+            width: 40px;
+            height: 1px;
+            background: var(--brass);
+        }
+
+        .testimonial-author-name {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .testimonial-author-role {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-top: 0.2rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-nav button {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            background: transparent;
+            color: var(--brass);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .testimonial-nav button:hover {
+            background: var(--brass);
+            color: var(--charcoal-deep);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           FEATURED BANNER
+           ═══════════════════════════════════════════════════ */
+        .featured-banner {
+            position: relative;
+            padding: 10rem 3rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .featured-banner-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(14,14,14,0.6), rgba(14,14,14,0.8)),
+                url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80') center/cover no-repeat;
+            background-attachment: fixed;
+        }
+
+        .featured-banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-banner h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .featured-banner h2 em {
+            font-style: italic;
+            color: var(--brass);
+        }
+
+        .featured-banner p {
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--warm-gray-light);
+            max-width: 500px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            padding: 1.1rem 3rem;
+            background: var(--brass);
+            color: var(--charcoal-deep);
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--brass-light);
+            transform: translateY(100%);
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateY(0);
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            padding: 1.1rem 3rem;
+            border: 1px solid var(--brass);
+            color: var(--brass);
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--brass);
+            color: var(--charcoal-deep);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           CONTACT SECTION
+           ═══════════════════════════════════════════════════ */
+        .contact {
+            padding: 8rem 3rem;
+            background: var(--charcoal);
+        }
+
+        .contact-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 6rem;
+            margin-top: 4rem;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info h3 em {
+            font-style: italic;
+            color: var(--brass);
+        }
+
+        .contact-info p {
+            font-size: 0.9rem;
+            font-weight: 200;
+            line-height: 1.8;
+            color: var(--warm-gray-light);
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-detail {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-detail-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-detail-value {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--cream);
+        }
+
+        .contact-detail-value a {
+            transition: color 0.3s ease;
+        }
+
+        .contact-detail-value a:hover {
+            color: var(--brass);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-bottom: 0.6rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem 0;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 200;
+            color: var(--cream);
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+            outline: none;
+            transition: border-color 0.3s ease;
+            appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-bottom-color: var(--brass);
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        .form-group select option {
+            background: var(--charcoal);
+            color: var(--cream);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--warm-gray);
+        }
+
+        .contact-form .btn-primary {
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════ */
+        .footer {
+            padding: 4rem 3rem 2rem;
+            background: var(--charcoal-deep);
+            border-top: 1px solid rgba(201, 169, 110, 0.1);
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+        }
+
+        .footer-brand .nav-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            font-weight: 200;
+            line-height: 1.7;
+            color: var(--warm-gray);
+            max-width: 300px;
+        }
+
+        .footer-col h5 {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-col a {
+            font-size: 0.85rem;
+            font-weight: 200;
+            color: var(--warm-gray);
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--cream);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            font-weight: 200;
+            color: var(--warm-gray);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-socials a {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            transition: color 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            color: var(--brass);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .portfolio-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-main {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta {
+                display: none;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+            .hero {
+                padding: 0 1.5rem 4rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .about-stats {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin-top: 1rem;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .portfolio-item:nth-child(1) {
+                grid-column: span 1;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .featured-banner-bg {
+                background-attachment: scroll;
+            }
+            .cursor-ring { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-ring"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-text">
+            <span style="animation-delay:0.1s">A</span><span style="animation-delay:0.15s">t</span><span style="animation-delay:0.2s">e</span><span style="animation-delay:0.25s">l</span><span style="animation-delay:0.3s">i</span><span style="animation-delay:0.35s">e</span><span style="animation-delay:0.4s">r</span><span style="animation-delay:0.55s">&nbsp;</span><span style="animation-delay:0.6s">N</span><span style="animation-delay:0.65s">o</span><span style="animation-delay:0.7s">i</span><span style="animation-delay:0.75s">r</span>
+        </div>
+        <div class="preloader-line"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">Atelier <em>Noir</em></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonials">Press</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Book Consultation</a>
+        <div class="nav-hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#about" onclick="closeMobileNav()">About</a>
+        <a href="#portfolio" onclick="closeMobileNav()">Portfolio</a>
+        <a href="#services" onclick="closeMobileNav()">Services</a>
+        <a href="#testimonials" onclick="closeMobileNav()">Testimonials</a>
+        <a href="#contact" onclick="closeMobileNav()">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span>Interior Design Studio — Est. 2016</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="line"><span>Where Bold</span></span>
+                <span class="line"><span>Vision Meets</span></span>
+                <span class="line"><span><em>Timeless</em> Craft</span></span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-subtitle">
+                We create immersive spaces that tell your story — curating every texture, tone, and detail to transform interiors into living works of art.
+            </p>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <span class="marquee-item">Residential Design <span class="dot"></span></span>
+            <span class="marquee-item">Commercial Spaces <span class="dot"></span></span>
+            <span class="marquee-item">Bespoke Furniture <span class="dot"></span></span>
+            <span class="marquee-item">Architectural Consultation <span class="dot"></span></span>
+            <span class="marquee-item">Art Curation <span class="dot"></span></span>
+            <span class="marquee-item">Luxury Staging <span class="dot"></span></span>
+            <span class="marquee-item">Residential Design <span class="dot"></span></span>
+            <span class="marquee-item">Commercial Spaces <span class="dot"></span></span>
+            <span class="marquee-item">Bespoke Furniture <span class="dot"></span></span>
+            <span class="marquee-item">Architectural Consultation <span class="dot"></span></span>
+            <span class="marquee-item">Art Curation <span class="dot"></span></span>
+            <span class="marquee-item">Luxury Staging <span class="dot"></span></span>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-image-wrapper reveal">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80" alt="Interior designer at work" class="about-image">
+                <div class="about-image-frame"></div>
+                <div class="about-stats">
+                    <div>
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Projects Delivered</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Design Awards</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Years of Craft</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text reveal reveal-delay-2">
+                <div class="section-eyebrow">The Studio</div>
+                <h3>Designing spaces that feel like <em>home</em>, yet nothing like ordinary</h3>
+                <p>
+                    Founded on the belief that extraordinary design arises from deep listening, Atelier Noir brings an editorial eye and artisan sensibility to every project. We don't follow trends — we craft environments that transcend them.
+                </p>
+                <p>
+                    From grand residences overlooking the coast to intimate urban retreats, our work is defined by a fearless palette, unexpected material pairings, and an unwavering commitment to the beauty of imperfection.
+                </p>
+                <div class="about-signature">
+                    <div class="about-signature-name">Camille Durand</div>
+                    <div class="about-signature-title">Founder & Creative Director</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-inner">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-eyebrow">Selected Work</div>
+                    <h2 class="section-title">Curated <em>Projects</em></h2>
+                </div>
+                <p class="section-desc">
+                    A glimpse into our world — where materiality, light, and emotion converge to shape unforgettable interiors.
+                </p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" alt="Modern living room with brass accents">
+                    <div class="portfolio-overlay">
+                        <div class="arrow">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 12L12 4M12 4H6M12 4V10"/>
+                            </svg>
+                        </div>
+                        <h4>The Gilded Residence</h4>
+                        <span>Residential — Tribeca, NY</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Minimalist bedroom design">
+                    <div class="portfolio-overlay">
+                        <div class="arrow">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 12L12 4M12 4H6M12 4V10"/>
+                            </svg>
+                        </div>
+                        <h4>Casa Serena</h4>
+                        <span>Residential — Malibu, CA</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-2">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80" alt="Contemporary dining space">
+                    <div class="portfolio-overlay">
+                        <div class="arrow">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 12L12 4M12 4H6M12 4V10"/>
+                            </svg>
+                        </div>
+                        <h4>Ember & Oak</h4>
+                        <span>Restaurant — Chicago, IL</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80" alt="Luxury bathroom">
+                    <div class="portfolio-overlay">
+                        <div class="arrow">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 12L12 4M12 4H6M12 4V10"/>
+                            </svg>
+                        </div>
+                        <h4>The Stone Suite</h4>
+                        <span>Hospitality — Aspen, CO</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-2">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80" alt="Eclectic office space">
+                    <div class="portfolio-overlay">
+                        <div class="arrow">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 12L12 4M12 4H6M12 4V10"/>
+                            </svg>
+                        </div>
+                        <h4>Verve Studios</h4>
+                        <span>Commercial — Brooklyn, NY</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="services-inner">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-eyebrow">What We Do</div>
+                    <h2 class="section-title">Our <em>Services</em></h2>
+                </div>
+                <p class="section-desc">
+                    From concept to completion, every detail is orchestrated with purpose and precision.
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-number">01</div>
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect x="6" y="6" width="36" height="36" rx="2"/>
+                        <line x1="6" y1="18" x2="42" y2="18"/>
+                        <line x1="18" y1="18" x2="18" y2="42"/>
+                    </svg>
+                    <h4>Full Interior Design</h4>
+                    <p>End-to-end design encompassing space planning, material selection, custom furnishings, and art placement — a completely realized vision from blank canvas to final reveal.</p>
+                    <a href="#contact" class="service-link">Learn More &rarr;</a>
+                </div>
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-number">02</div>
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <circle cx="24" cy="24" r="18"/>
+                        <path d="M24 12v12l8 8"/>
+                    </svg>
+                    <h4>Design Consultation</h4>
+                    <p>Focused sessions to refine your vision, establish direction, and provide expert guidance on materials, palettes, and layouts tailored to your lifestyle and space.</p>
+                    <a href="#contact" class="service-link">Learn More &rarr;</a>
+                </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-number">03</div>
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <path d="M8 40L24 8L40 40"/>
+                        <line x1="14" y1="28" x2="34" y2="28"/>
+                    </svg>
+                    <h4>Bespoke Furniture</h4>
+                    <p>Original pieces designed and crafted in collaboration with master artisans — furniture that becomes the centerpiece of your space, built to endure generations.</p>
+                    <a href="#contact" class="service-link">Learn More &rarr;</a>
+                </div>
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-number">04</div>
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <path d="M6 24C6 14 14 6 24 6"/>
+                        <path d="M42 24C42 34 34 42 24 42"/>
+                        <circle cx="24" cy="24" r="6"/>
+                    </svg>
+                    <h4>Art Curation</h4>
+                    <p>Thoughtfully sourced artworks and sculptural installations selected to complement your interior narrative, working with galleries and emerging artists worldwide.</p>
+                    <a href="#contact" class="service-link">Learn More &rarr;</a>
+                </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-number">05</div>
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect x="10" y="22" width="28" height="20" rx="1"/>
+                        <path d="M16 22V14a8 8 0 0116 0v8"/>
+                    </svg>
+                    <h4>Luxury Staging</h4>
+                    <p>Strategic styling for high-end properties that transforms listings into aspirational living experiences, commanding premium positioning in competitive markets.</p>
+                    <a href="#contact" class="service-link">Learn More &rarr;</a>
+                </div>
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-number">06</div>
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <polygon points="24,4 30,18 44,20 34,30 36,44 24,38 12,44 14,30 4,20 18,18"/>
+                    </svg>
+                    <h4>Architectural Liaison</h4>
+                    <p>Seamless collaboration with architects and builders to ensure design intent translates flawlessly into built reality — bridging vision and structure with precision.</p>
+                    <a href="#contact" class="service-link">Learn More &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-inner">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-eyebrow">Client Voices</div>
+                    <h2 class="section-title">Words of <em>Trust</em></h2>
+                </div>
+            </div>
+            <div class="testimonial-main">
+                <div class="testimonial-image-col reveal">
+                    <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80" alt="Beautifully designed interior" id="testimonialImage">
+                </div>
+                <div class="testimonial-content reveal reveal-delay-2">
+                    <div class="testimonial-quote-mark">&ldquo;</div>
+                    <blockquote class="testimonial-quote" id="testimonialQuote">
+                        Atelier Noir didn't just design our home — they understood how we wanted to <em>feel</em> in it. Every room is a conversation between light and material that still surprises us daily.
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-line"></div>
+                        <div>
+                            <div class="testimonial-author-name" id="testimonialName">Jonathan & Claire Whitmore</div>
+                            <div class="testimonial-author-role" id="testimonialRole">The Gilded Residence — Tribeca, NY</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-nav">
+                        <button id="prevTestimonial">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 3L6 9L12 15"/>
+                            </svg>
+                        </button>
+                        <button id="nextTestimonial">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M6 3L12 9L6 15"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Banner -->
+    <section class="featured-banner">
+        <div class="featured-banner-bg"></div>
+        <div class="featured-banner-content reveal">
+            <div class="section-eyebrow" style="text-align:center; margin-bottom:1.5rem;">Begin Your Transformation</div>
+            <h2>Let's Create Something <em>Extraordinary</em></h2>
+            <p>Your space deserves more than decoration. It deserves a narrative — one shaped by intention, artistry, and an understanding of who you truly are.</p>
+            <a href="#contact" class="btn-primary"><span>Start a Conversation</span></a>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-eyebrow">Get In Touch</div>
+                    <h2 class="section-title">Let's <em>Talk</em></h2>
+                </div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Ready to reimagine your <em>space</em>?</h3>
+                    <p>We begin every project with a conversation. Share your vision, and we'll craft a path to bring it to life — on your terms, at your pace.</p>
+                    <div class="contact-detail">
+                        <div class="contact-detail-label">Studio</div>
+                        <div class="contact-detail-value">47 Mercer Street, Suite 4B<br>New York, NY 10013</div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-label">Email</div>
+                        <div class="contact-detail-value"><a href="mailto:hello@ateliernoir.studio">hello@ateliernoir.studio</a></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-label">Phone</div>
+                        <div class="contact-detail-value"><a href="tel:+12125551234">+1 (212) 555-1234</a></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-label">Hours</div>
+                        <div class="contact-detail-value">Mon — Fri, 9am — 6pm EST</div>
+                    </div>
+                </div>
+                <form class="contact-form reveal reveal-delay-2" onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="Your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Your last name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" placeholder="+1 (___) ___-____">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Interest</label>
+                        <select id="service">
+                            <option value="" disabled selected>Select a service</option>
+                            <option>Full Interior Design</option>
+                            <option>Design Consultation</option>
+                            <option>Bespoke Furniture</option>
+                            <option>Art Curation</option>
+                            <option>Luxury Staging</option>
+                            <option>Architectural Liaison</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell Us About Your Project</label>
+                        <textarea id="message" placeholder="Share your vision, timeline, and any details that inspire you..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary"><span>Send Inquiry</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="nav-logo">Atelier <em>Noir</em></div>
+                    <p>Where bold vision meets timeless craft. Creating immersive, meaningful spaces since 2016.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Studio</h5>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="#">Journal</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Houzz</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">&copy; 2026 Atelier Noir. All rights reserved.</div>
+                <div class="footer-socials">
+                    <a href="#">IG</a>
+                    <a href="#">PI</a>
+                    <a href="#">LI</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════
+         JAVASCRIPT
+         ═══════════════════════════════════════════════════ -->
+    <script>
+        // ── Preloader ──
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 2200);
+        });
+
+        // ── Custom Cursor ──
+        const cursor = document.querySelector('.cursor-ring');
+        let cursorX = 0, cursorY = 0;
+        let currentX = 0, currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+        });
+
+        function animateCursor() {
+            currentX += (cursorX - currentX) * 0.12;
+            currentY += (cursorY - currentY) * 0.12;
+            cursor.style.left = currentX + 'px';
+            cursor.style.top = currentY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover effect for interactive elements
+        document.querySelectorAll('a, button, .portfolio-item, .service-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+
+        // ── Nav Scroll Effect ──
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // ── Mobile Nav Toggle ──
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        let mobileNavOpen = false;
+
+        hamburger.addEventListener('click', () => {
+            mobileNavOpen = !mobileNavOpen;
+            mobileNav.classList.toggle('open', mobileNavOpen);
+            hamburger.querySelectorAll('span').forEach((s, i) => {
+                if (mobileNavOpen) {
+                    if (i === 0) { s.style.transform = 'translateY(7px) rotate(45deg)'; }
+                    if (i === 1) { s.style.opacity = '0'; }
+                    if (i === 2) { s.style.transform = 'translateY(-7px) rotate(-45deg)'; }
+                } else {
+                    s.style.transform = 'none';
+                    s.style.opacity = '1';
+                }
+            });
+        });
+
+        function closeMobileNav() {
+            mobileNavOpen = false;
+            mobileNav.classList.remove('open');
+            hamburger.querySelectorAll('span').forEach(s => {
+                s.style.transform = 'none';
+                s.style.opacity = '1';
+            });
+        }
+
+        // ── Scroll Reveal ──
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ── Testimonials Carousel ──
+        const testimonials = [
+            {
+                quote: 'Atelier Noir didn\'t just design our home — they understood how we wanted to <em>feel</em> in it. Every room is a conversation between light and material that still surprises us daily.',
+                name: 'Jonathan & Claire Whitmore',
+                role: 'The Gilded Residence — Tribeca, NY',
+                image: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80'
+            },
+            {
+                quote: 'Their ability to translate abstract emotion into tangible space is remarkable. Our restaurant became an experience before the first plate was even served.',
+                name: 'Marcus Chen',
+                role: 'Ember & Oak — Chicago, IL',
+                image: 'https://images.unsplash.com/photo-1616137466211-f73a3cfdb2ef?w=800&q=80'
+            },
+            {
+                quote: 'Working with Camille felt like having a conversation with someone who already understood the language of our home. The result was beyond anything we imagined.',
+                name: 'Sophia & David Laurent',
+                role: 'Casa Serena — Malibu, CA',
+                image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80'
+            }
+        ];
+
+        let currentTestimonial = 0;
+        const quoteEl = document.getElementById('testimonialQuote');
+        const nameEl = document.getElementById('testimonialName');
+        const roleEl = document.getElementById('testimonialRole');
+        const imageEl = document.getElementById('testimonialImage');
+
+        function showTestimonial(index) {
+            const t = testimonials[index];
+            quoteEl.style.opacity = '0';
+            quoteEl.style.transform = 'translateY(20px)';
+            nameEl.style.opacity = '0';
+            roleEl.style.opacity = '0';
+
+            setTimeout(() => {
+                quoteEl.innerHTML = t.quote;
+                nameEl.textContent = t.name;
+                roleEl.textContent = t.role;
+                imageEl.src = t.image;
+                quoteEl.style.opacity = '1';
+                quoteEl.style.transform = 'translateY(0)';
+                nameEl.style.opacity = '1';
+                roleEl.style.opacity = '1';
+            }, 400);
+        }
+
+        // Add transitions for testimonial elements
+        [quoteEl, nameEl, roleEl].forEach(el => {
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        document.getElementById('nextTestimonial').addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+
+        document.getElementById('prevTestimonial').addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+
+        // ── Counter Animation ──
+        function animateCounters() {
+            document.querySelectorAll('.stat-number').forEach(el => {
+                const text = el.textContent;
+                const num = parseInt(text);
+                const suffix = text.replace(/[0-9]/g, '');
+                let current = 0;
+                const increment = Math.ceil(num / 60);
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= num) {
+                        current = num;
+                        clearInterval(timer);
+                    }
+                    el.textContent = current + suffix;
+                }, 30);
+            });
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsEl = document.querySelector('.about-stats');
+        if (statsEl) statsObserver.observe(statsEl);
+
+        // ── Form Submission ──
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-primary span');
+            btn.textContent = 'Message Sent';
+            btn.closest('.btn-primary').style.background = 'var(--sage)';
+            setTimeout(() => {
+                btn.textContent = 'Send Inquiry';
+                btn.closest('.btn-primary').style.background = '';
+                e.target.reset();
+            }, 3000);
+        }
+
+        // ── Smooth Scroll for Nav Links ──
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

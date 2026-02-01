@@ -1,0 +1,130 @@
+/* ================================================================
+   DESIGN TOKENS — Sushi Omakase
+   Japanese-inspired palette: ink, stone, warm wood, fresh wasabi
+   ================================================================ */
+
+:root {
+  /* ---- Color Palette ---- */
+  --color-ink:        #0B0B0A;
+  --color-charcoal:   #141413;
+  --color-graphite:   #1E1E1C;
+  --color-slate:      #2A2A27;
+  --color-stone:      #6B6560;
+  --color-ash:        #8A8480;
+  --color-sand:       #C4B9A8;
+  --color-parchment:  #E8DFD0;
+  --color-cream:      #F5F0E8;
+  --color-white:      #FDFCFA;
+
+  /* Accent — warm cypress / hinoki wood */
+  --color-hinoki:     #C2955A;
+  --color-amber:      #D4A054;
+  --color-gold:       #CBB070;
+
+  /* Accent — wasabi green */
+  --color-wasabi:     #7A9A5C;
+  --color-matcha:     #8FAD6E;
+
+  /* Accent — soy / nori */
+  --color-soy:        #4A3728;
+  --color-nori:       #2D3A2E;
+
+  /* Accent — fish / coral */
+  --color-salmon:     #D4826A;
+  --color-toro:       #C96B5A;
+
+  /* ---- Semantic Aliases ---- */
+  --bg-primary:       var(--color-charcoal);
+  --bg-secondary:     var(--color-graphite);
+  --bg-elevated:      var(--color-slate);
+  --bg-surface:       rgba(255, 255, 255, 0.03);
+
+  --text-primary:     var(--color-cream);
+  --text-secondary:   var(--color-sand);
+  --text-muted:       var(--color-ash);
+  --text-accent:      var(--color-hinoki);
+
+  --border-subtle:    rgba(196, 185, 168, 0.06);
+  --border-light:     rgba(196, 185, 168, 0.10);
+  --border-medium:    rgba(196, 185, 168, 0.18);
+  --border-accent:    rgba(194, 149, 90, 0.30);
+
+  /* ---- Typography ---- */
+  --font-display:     'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-heading:     'Cormorant', Georgia, serif;
+  --font-body:        'DM Sans', 'Inter', -apple-system, sans-serif;
+  --font-accent:      'Cormorant Garamond', Georgia, serif;
+  --font-mono:        'JetBrains Mono', 'Fira Code', monospace;
+
+  --fs-xs:    0.7rem;
+  --fs-sm:    0.825rem;
+  --fs-base:  0.95rem;
+  --fs-md:    1.05rem;
+  --fs-lg:    1.25rem;
+  --fs-xl:    1.6rem;
+  --fs-2xl:   2rem;
+  --fs-3xl:   2.8rem;
+  --fs-4xl:   3.8rem;
+  --fs-5xl:   5rem;
+  --fs-hero:  clamp(3rem, 7vw, 6.5rem);
+
+  --fw-light:     300;
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+
+  --lh-tight:    1.05;
+  --lh-snug:     1.25;
+  --lh-normal:   1.6;
+  --lh-relaxed:  1.8;
+
+  --ls-tight:    -0.03em;
+  --ls-normal:   0;
+  --ls-wide:     0.08em;
+  --ls-wider:    0.15em;
+  --ls-widest:   0.25em;
+
+  /* ---- Spacing ---- */
+  --space-2xs:  0.125rem;
+  --space-xs:   0.25rem;
+  --space-sm:   0.5rem;
+  --space-md:   1rem;
+  --space-lg:   1.5rem;
+  --space-xl:   2.5rem;
+  --space-2xl:  4rem;
+  --space-3xl:  6rem;
+  --space-4xl:  8rem;
+  --space-5xl:  12rem;
+
+  /* ---- Borders & Radius ---- */
+  --radius-sm:    3px;
+  --radius-md:    6px;
+  --radius-lg:    12px;
+  --radius-xl:    20px;
+  --radius-full:  999px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.20);
+  --shadow-md:    0 8px 30px rgba(0, 0, 0, 0.25);
+  --shadow-lg:    0 20px 60px rgba(0, 0, 0, 0.30);
+  --shadow-glow:  0 0 50px rgba(194, 149, 90, 0.06);
+  --shadow-inner: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  /* ---- Motion ---- */
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-smooth:    cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  --duration-fast:    0.2s;
+  --duration-normal:  0.4s;
+  --duration-slow:    0.7s;
+  --duration-slower:  1s;
+
+  /* ---- Layout ---- */
+  --container-max:   1280px;
+  --container-narrow: 900px;
+  --gutter:          clamp(1.25rem, 4vw, 3rem);
+  --header-height:   72px;
+}

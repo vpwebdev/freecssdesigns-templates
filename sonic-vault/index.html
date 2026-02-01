@@ -1,0 +1,2973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONIC VAULT — Premium Audio Equipment Rental</title>
+    <meta name="description" content="Premium audio equipment rental for events, studios, and productions. Professional-grade speakers, mixers, microphones, and DJ gear.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Overpass+Mono:wght@300..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           SONIC VAULT — CSS Architecture
+           Dark cinematic / studio-grade aesthetic
+           ============================================ */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Core palette — charcoal studio with amber accents */
+            --black: #08080a;
+            --bg-deep: #0c0c10;
+            --bg-primary: #111116;
+            --bg-elevated: #18181f;
+            --bg-card: #1c1c24;
+            --bg-card-hover: #222230;
+            --border: #2a2a36;
+            --border-light: #35354a;
+            --text-primary: #eae8e3;
+            --text-secondary: #9d9baf;
+            --text-muted: #6b6980;
+            --accent: #e8a046;
+            --accent-light: #f0be74;
+            --accent-dim: #c4813a;
+            --accent-glow: rgba(232, 160, 70, 0.15);
+            --accent-glow-strong: rgba(232, 160, 70, 0.3);
+            --red: #e05555;
+            --green: #5cb87a;
+
+            /* Typography scale */
+            --font-display: 'Instrument Serif', Georgia, serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-mono: 'Overpass Mono', 'Courier New', monospace;
+
+            /* Spacing */
+            --section-pad: clamp(80px, 10vw, 140px);
+            --container: 1280px;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+        /* Selection */
+        ::selection {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        /* ============================================
+           UTILITY
+           ============================================ */
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 clamp(20px, 4vw, 48px);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
+        /* ============================================
+           GLOBAL GRAIN OVERLAY
+           ============================================ */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideRight {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes waveform {
+            0%, 100% { height: 12px; }
+            50% { height: 28px; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ============================================
+           NAV
+           ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 clamp(20px, 4vw, 48px);
+            transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+        }
+
+        .nav.scrolled {
+            background: rgba(12, 12, 16, 0.85);
+            backdrop-filter: blur(20px) saturate(1.2);
+            -webkit-backdrop-filter: blur(20px) saturate(1.2);
+            box-shadow: 0 1px 0 var(--border);
+        }
+
+        .nav-inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border: 2.5px solid var(--black);
+            border-radius: 50%;
+        }
+
+        .nav-logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--black);
+            border-radius: 50%;
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--accent);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: var(--black) !important;
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 600 !important;
+            letter-spacing: 0.5px;
+            transition: background 0.3s, transform 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light) !important;
+            transform: translateY(-1px);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* Mobile nav toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 5px 0;
+            transition: transform 0.3s, opacity 0.3s;
+            border-radius: 1px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 72px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        /* Cinematic gradient backdrop */
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 40%, rgba(232, 160, 70, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 20% 80%, rgba(100, 80, 160, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 50% at 50% 0%, rgba(232, 160, 70, 0.04) 0%, transparent 40%);
+        }
+
+        /* Abstract waveform graphic */
+        .hero-waveform {
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 55%;
+            height: 60%;
+            opacity: 0.06;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .hero-waveform span {
+            flex: 1;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: waveform 1.5s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 40px;
+            height: 1.5px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(52px, 8vw, 110px);
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 32px;
+            max-width: 800px;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(16px, 1.8vw, 19px);
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+            font-weight: 300;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(232, 160, 70, 0.3);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-light);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 72px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+        }
+
+        .hero-stat-number {
+            font-family: var(--font-display);
+            font-size: 42px;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .hero-stat-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ============================================
+           MARQUEE BANNER
+           ============================================ */
+        .marquee-section {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            overflow: hidden;
+            background: var(--bg-primary);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 0 40px;
+            white-space: nowrap;
+        }
+
+        .marquee-item span {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .marquee-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           EQUIPMENT CATALOG
+           ============================================ */
+        .equipment {
+            padding: var(--section-pad) 0;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 64px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .section-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            max-width: 400px;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Category filter tabs */
+        .eq-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .eq-filter {
+            padding: 10px 22px;
+            border-radius: 100px;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .eq-filter:hover {
+            border-color: var(--border-light);
+            color: var(--text-primary);
+        }
+
+        .eq-filter.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--black);
+        }
+
+        /* Equipment grid */
+        .eq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .eq-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .eq-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .eq-card:hover .eq-card-img {
+            transform: scale(1.05);
+        }
+
+        .eq-card-visual {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: var(--bg-elevated);
+        }
+
+        .eq-card-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* SVG-based equipment illustrations */
+        .eq-icon-wrap {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .eq-icon-wrap svg {
+            width: 80px;
+            height: 80px;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+            fill: none;
+            opacity: 0.7;
+        }
+
+        .eq-card-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            padding: 5px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge-popular {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .badge-new {
+            background: rgba(92, 184, 122, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(92, 184, 122, 0.3);
+        }
+
+        .eq-card-body {
+            padding: 24px;
+        }
+
+        .eq-card-category {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .eq-card-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .eq-card-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .eq-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .eq-card-price {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .eq-card-price small {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .eq-card-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+
+        .eq-card-action:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--black);
+        }
+
+        /* ============================================
+           PRICING TIERS
+           ============================================ */
+        .pricing {
+            padding: var(--section-pad) 0;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px 36px;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .price-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-4px);
+        }
+
+        .price-card.featured {
+            border-color: var(--accent-dim);
+            background: linear-gradient(180deg, rgba(232, 160, 70, 0.06) 0%, var(--bg-card) 40%);
+        }
+
+        .price-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 18px;
+            background: var(--accent);
+            color: var(--black);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
+        .price-tier {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .price-amount {
+            font-family: var(--font-display);
+            font-size: 56px;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .price-card.featured .price-amount {
+            color: var(--accent);
+        }
+
+        .price-period {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 36px;
+        }
+
+        .price-features li {
+            padding: 10px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(42, 42, 54, 0.5);
+        }
+
+        .price-features li:last-child {
+            border-bottom: none;
+        }
+
+        .price-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(92, 184, 122, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .price-check svg {
+            width: 10px;
+            height: 10px;
+            stroke: var(--green);
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .price-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .price-btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--border-light);
+            color: var(--text-primary);
+        }
+
+        .price-btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .price-btn-fill {
+            background: var(--accent);
+            border: 1.5px solid var(--accent);
+            color: var(--black);
+        }
+
+        .price-btn-fill:hover {
+            background: var(--accent-light);
+            border-color: var(--accent-light);
+            box-shadow: 0 8px 30px rgba(232, 160, 70, 0.25);
+        }
+
+        /* ============================================
+           HOW IT WORKS / BOOKING FLOW
+           ============================================ */
+        .process {
+            padding: var(--section-pad) 0;
+            position: relative;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 64px;
+            position: relative;
+        }
+
+        /* Connecting line */
+        .process-grid::before {
+            content: '';
+            position: absolute;
+            top: 44px;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), var(--accent-dim), var(--accent), var(--accent-dim), var(--border));
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-num {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 28px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 32px;
+            color: var(--accent);
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .process-step:hover .process-num {
+            border-color: var(--accent);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .process-num::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .process-step:hover .process-num::after {
+            opacity: 1;
+        }
+
+        .process-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .process-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 220px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           FEATURED / SHOWCASE
+           ============================================ */
+        .showcase {
+            padding: var(--section-pad) 0;
+            background: var(--bg-primary);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 32px;
+            margin-top: 64px;
+        }
+
+        .showcase-main {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 48px;
+            transition: all 0.4s;
+        }
+
+        .showcase-main:hover {
+            border-color: var(--accent-dim);
+        }
+
+        .showcase-main-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 70% 30%, rgba(232, 160, 70, 0.07) 0%, transparent 60%),
+                linear-gradient(180deg, transparent 40%, rgba(28, 28, 36, 0.95) 75%);
+        }
+
+        .showcase-main-icon {
+            position: absolute;
+            top: 50%;
+            left: 55%;
+            transform: translate(-50%, -60%);
+            opacity: 0.07;
+        }
+
+        .showcase-main-icon svg {
+            width: 280px;
+            height: 280px;
+            stroke: var(--accent);
+            stroke-width: 0.8;
+            fill: none;
+        }
+
+        .showcase-main-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .showcase-main-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .showcase-main-title {
+            font-family: var(--font-display);
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .showcase-main-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 420px;
+            margin-bottom: 24px;
+        }
+
+        .showcase-side {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .showcase-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .showcase-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+        }
+
+        .showcase-card-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            opacity: 0.06;
+        }
+
+        .showcase-card-icon svg {
+            width: 120px;
+            height: 120px;
+            stroke: var(--accent);
+            stroke-width: 1;
+            fill: none;
+        }
+
+        .showcase-card-tag {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .showcase-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .showcase-card-price {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           TESTIMONIALS
+           ============================================ */
+        .testimonials {
+            padding: var(--section-pad) 0;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+        }
+
+        .test-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            transition: all 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .test-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-3px);
+        }
+
+        .test-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 20px;
+        }
+
+        .test-star {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .test-quote {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            flex: 1;
+            margin-bottom: 28px;
+            font-style: italic;
+        }
+
+        .test-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .test-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-elevated);
+            border: 1.5px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .test-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .test-role {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           ABOUT / BRAND STORY
+           ============================================ */
+        .about {
+            padding: var(--section-pad) 0;
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-title {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 4vw, 52px);
+            line-height: 1.15;
+            margin-bottom: 28px;
+        }
+
+        .about-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .about-stat {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .about-stat:hover {
+            border-color: var(--accent-dim);
+            transform: translateY(-2px);
+        }
+
+        .about-stat-val {
+            font-family: var(--font-display);
+            font-size: 44px;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .about-stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           BRANDS / PARTNERS SECTION
+           ============================================ */
+        .brands {
+            padding: 64px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brands-label {
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .brands-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(32px, 6vw, 80px);
+            flex-wrap: wrap;
+        }
+
+        .brand-logo {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .brand-logo:hover {
+            opacity: 0.9;
+        }
+
+        /* ============================================
+           CTA / BOOKING SECTION
+           ============================================ */
+        .cta {
+            padding: var(--section-pad) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: clamp(48px, 6vw, 80px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 50% 80% at 50% 0%, rgba(232, 160, 70, 0.08) 0%, transparent 60%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 60px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .cta-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .cta-desc {
+            color: var(--text-secondary);
+            font-size: 17px;
+            max-width: 550px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact {
+            padding: var(--section-pad) 0;
+            background: var(--bg-primary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 64px;
+            margin-top: 64px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 36px;
+        }
+
+        .contact-info-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            background: var(--accent-glow);
+            border: 1px solid rgba(232, 160, 70, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-info-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .contact-info-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .contact-info-val {
+            font-size: 15px;
+            color: var(--text-primary);
+        }
+
+        .contact-info-val a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info-val a:hover {
+            color: var(--accent);
+        }
+
+        .contact-hours {
+            margin-top: 40px;
+            padding: 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+
+        .contact-hours-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .contact-hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(42, 42, 54, 0.4);
+        }
+
+        .contact-hours-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Contact form */
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-elevated);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6980' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .form-select option {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 64px 0 32px;
+            background: var(--bg-deep);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+
+        .footer-brand-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-top: 16px;
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-social:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .footer-social svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* ============================================
+           BOOKING MODAL
+           ============================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 10, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            max-width: 560px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.open .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        /* Booking steps */
+        .booking-steps {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .booking-step-indicator {
+            flex: 1;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--border);
+            transition: background 0.3s;
+        }
+
+        .booking-step-indicator.active {
+            background: var(--accent);
+        }
+
+        .booking-step-indicator.completed {
+            background: var(--green);
+        }
+
+        .booking-step {
+            display: none;
+        }
+
+        .booking-step.active {
+            display: block;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .booking-nav {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .booking-nav .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 440px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .process-grid::before {
+                display: none;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .test-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--bg-card);
+                border-left: 1px solid var(--border);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 32px 32px;
+                gap: 24px;
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero-stats {
+                gap: 32px;
+                flex-wrap: wrap;
+            }
+
+            .hero-stat-number {
+                font-size: 32px;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .eq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAV ==================== -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon"></div>
+                <span class="nav-logo-text">Sonic Vault</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#equipment">Gear</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#process">How It Works</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#booking" class="nav-cta" data-book>Book Now</a></li>
+            </ul>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-waveform" aria-hidden="true">
+                <!-- Waveform bars generated by JS -->
+            </div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-label">Premium Audio Rental</div>
+            <h1 class="hero-title">Sound that <em>moves</em> the room.</h1>
+            <p class="hero-subtitle">Professional-grade audio equipment for events, studios, and productions. From intimate sets to arena-scale systems — delivered, set up, and sound-checked.</p>
+            <div class="hero-actions">
+                <a href="#booking" class="btn btn-primary" data-book>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    Reserve Equipment
+                </a>
+                <a href="#equipment" class="btn btn-ghost">Browse Catalog</a>
+            </div>
+            <div class="hero-stats">
+                <div>
+                    <div class="hero-stat-number">2,400+</div>
+                    <div class="hero-stat-label">Events powered</div>
+                </div>
+                <div>
+                    <div class="hero-stat-number">350+</div>
+                    <div class="hero-stat-label">Pieces of gear</div>
+                </div>
+                <div>
+                    <div class="hero-stat-number">99.8%</div>
+                    <div class="hero-stat-label">Uptime record</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MARQUEE ==================== -->
+    <div class="marquee-section" aria-hidden="true">
+        <div class="marquee-track">
+            <div class="marquee-item"><span>Line Arrays</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Digital Mixers</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Condenser Mics</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>DJ Controllers</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Subwoofers</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Stage Monitors</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Wireless Systems</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>In-Ear Monitors</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>PA Systems</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Audio Interfaces</span><div class="marquee-dot"></div></div>
+            <!-- Duplicate for seamless loop -->
+            <div class="marquee-item"><span>Line Arrays</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Digital Mixers</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Condenser Mics</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>DJ Controllers</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Subwoofers</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Stage Monitors</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Wireless Systems</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>In-Ear Monitors</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>PA Systems</span><div class="marquee-dot"></div></div>
+            <div class="marquee-item"><span>Audio Interfaces</span><div class="marquee-dot"></div></div>
+        </div>
+    </div>
+
+    <!-- ==================== EQUIPMENT CATALOG ==================== -->
+    <section class="equipment" id="equipment">
+        <div class="container">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-tag">Our Catalog</div>
+                    <h2 class="section-title">Premium gear,<br>ready to rent.</h2>
+                </div>
+                <p class="section-desc">Every piece meticulously maintained and tested before each rental. Industry-standard brands you trust.</p>
+            </div>
+
+            <div class="eq-filters reveal reveal-delay-1">
+                <button class="eq-filter active" data-filter="all">All Gear</button>
+                <button class="eq-filter" data-filter="speakers">Speakers</button>
+                <button class="eq-filter" data-filter="mixers">Mixers</button>
+                <button class="eq-filter" data-filter="microphones">Microphones</button>
+                <button class="eq-filter" data-filter="dj">DJ Equipment</button>
+                <button class="eq-filter" data-filter="monitoring">Monitoring</button>
+            </div>
+
+            <div class="eq-grid" id="eqGrid">
+
+                <!-- Card: JBL VTX Line Array -->
+                <div class="eq-card reveal reveal-delay-1" data-category="speakers">
+                    <div class="eq-card-visual">
+                        <div class="eq-card-img">
+                            <div class="eq-icon-wrap">
+                                <svg viewBox="0 0 80 80"><rect x="12" y="8" width="56" height="64" rx="4"/><circle cx="40" cy="32" r="12"/><circle cx="40" cy="32" r="4"/><rect x="28" y="54" width="24" height="8" rx="2"/></svg>
+                            </div>
+                        </div>
+                        <span class="eq-card-badge badge-popular">Popular</span>
+                    </div>
+                    <div class="eq-card-body">
+                        <div class="eq-card-category">Speakers / Line Array</div>
+                        <h3 class="eq-card-name">JBL VTX A12 Line Array</h3>
+                        <p class="eq-card-desc">Full-size line array with next-gen driver technology. Perfect for concerts and large events.</p>
+                        <div class="eq-card-footer">
+                            <div class="eq-card-price">$450 <small>/ day</small></div>
+                            <button class="eq-card-action" data-book aria-label="Book this item">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Yamaha CL5 Mixer -->
+                <div class="eq-card reveal reveal-delay-2" data-category="mixers">
+                    <div class="eq-card-visual">
+                        <div class="eq-card-img">
+                            <div class="eq-icon-wrap">
+                                <svg viewBox="0 0 80 80"><rect x="6" y="16" width="68" height="48" rx="4"/><line x1="20" y1="28" x2="20" y2="48"/><circle cx="20" cy="34" r="3"/><line x1="32" y1="28" x2="32" y2="48"/><circle cx="32" cy="40" r="3"/><line x1="44" y1="28" x2="44" y2="48"/><circle cx="44" cy="36" r="3"/><line x1="56" y1="28" x2="56" y2="48"/><circle cx="56" cy="42" r="3"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="eq-card-body">
+                        <div class="eq-card-category">Mixers / Digital</div>
+                        <h3 class="eq-card-name">Yamaha CL5 Digital Console</h3>
+                        <p class="eq-card-desc">72-channel digital mixer with Centralogic interface. Touring-grade reliability.</p>
+                        <div class="eq-card-footer">
+                            <div class="eq-card-price">$380 <small>/ day</small></div>
+                            <button class="eq-card-action" data-book aria-label="Book this item">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Neumann U87 -->
+                <div class="eq-card reveal reveal-delay-3" data-category="microphones">
+                    <div class="eq-card-visual">
+                        <div class="eq-card-img">
+                            <div class="eq-icon-wrap">
+                                <svg viewBox="0 0 80 80"><rect x="30" y="6" width="20" height="36" rx="10"/><path d="M24 30c0 10 7 18 16 18s16-8 16-18"/><line x1="40" y1="48" x2="40" y2="62"/><line x1="28" y1="62" x2="52" y2="62"/></svg>
+                            </div>
+                        </div>
+                        <span class="eq-card-badge badge-new">Studio</span>
+                    </div>
+                    <div class="eq-card-body">
+                        <div class="eq-card-category">Microphones / Condenser</div>
+                        <h3 class="eq-card-name">Neumann U87 Ai</h3>
+                        <p class="eq-card-desc">The industry-standard large-diaphragm condenser. Three polar patterns, legendary clarity.</p>
+                        <div class="eq-card-footer">
+                            <div class="eq-card-price">$120 <small>/ day</small></div>
+                            <button class="eq-card-action" data-book aria-label="Book this item">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Pioneer DJ CDJ-3000 -->
+                <div class="eq-card reveal reveal-delay-1" data-category="dj">
+                    <div class="eq-card-visual">
+                        <div class="eq-card-img">
+                            <div class="eq-icon-wrap">
+                                <svg viewBox="0 0 80 80"><rect x="8" y="12" width="64" height="56" rx="4"/><circle cx="40" cy="40" r="18"/><circle cx="40" cy="40" r="6"/><circle cx="40" cy="40" r="2"/><rect x="56" y="18" width="10" height="6" rx="1"/></svg>
+                            </div>
+                        </div>
+                        <span class="eq-card-badge badge-popular">Popular</span>
+                    </div>
+                    <div class="eq-card-body">
+                        <div class="eq-card-category">DJ / Media Player</div>
+                        <h3 class="eq-card-name">Pioneer CDJ-3000 Pair</h3>
+                        <p class="eq-card-desc">Professional DJ multi-player pair with 9-inch touchscreen and MPE technology.</p>
+                        <div class="eq-card-footer">
+                            <div class="eq-card-price">$280 <small>/ day</small></div>
+                            <button class="eq-card-action" data-book aria-label="Book this item">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Shure PSM 1000 -->
+                <div class="eq-card reveal reveal-delay-2" data-category="monitoring">
+                    <div class="eq-card-visual">
+                        <div class="eq-card-img">
+                            <div class="eq-icon-wrap">
+                                <svg viewBox="0 0 80 80"><rect x="16" y="20" width="48" height="40" rx="4"/><circle cx="40" cy="36" r="3"/><path d="M28 48h24"/><rect x="30" y="12" width="20" height="8" rx="2"/><path d="M40 8v4"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="eq-card-body">
+                        <div class="eq-card-category">Monitoring / In-Ear</div>
+                        <h3 class="eq-card-name">Shure PSM 1000 System</h3>
+                        <p class="eq-card-desc">Premium wireless in-ear monitoring with diversity receivers. Crystal-clear signal.</p>
+                        <div class="eq-card-footer">
+                            <div class="eq-card-price">$195 <small>/ day</small></div>
+                            <button class="eq-card-action" data-book aria-label="Book this item">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: QSC KLA Series -->
+                <div class="eq-card reveal reveal-delay-3" data-category="speakers">
+                    <div class="eq-card-visual">
+                        <div class="eq-card-img">
+                            <div class="eq-icon-wrap">
+                                <svg viewBox="0 0 80 80"><rect x="18" y="4" width="44" height="72" rx="4"/><circle cx="40" cy="28" r="10"/><circle cx="40" cy="28" r="3"/><circle cx="40" cy="54" r="10"/><circle cx="40" cy="54" r="3"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="eq-card-body">
+                        <div class="eq-card-category">Speakers / Active</div>
+                        <h3 class="eq-card-name">QSC KLA12 Active System</h3>
+                        <p class="eq-card-desc">Compact powered line array with DEEP DSP processing. Scalable for any venue size.</p>
+                        <div class="eq-card-footer">
+                            <div class="eq-card-price">$220 <small>/ day</small></div>
+                            <button class="eq-card-action" data-book aria-label="Book this item">+</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURED SHOWCASE ==================== -->
+    <section class="showcase" id="showcase">
+        <div class="container">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-tag">Featured Systems</div>
+                    <h2 class="section-title">Complete packages,<br>one booking.</h2>
+                </div>
+            </div>
+
+            <div class="showcase-grid">
+                <div class="showcase-main reveal reveal-delay-1">
+                    <div class="showcase-main-bg"></div>
+                    <div class="showcase-main-icon" aria-hidden="true">
+                        <svg viewBox="0 0 200 200"><rect x="20" y="10" width="160" height="180" rx="8"/><circle cx="100" cy="70" r="36"/><circle cx="100" cy="70" r="12"/><rect x="52" y="130" width="96" height="28" rx="4"/><line x1="70" y1="140" x2="70" y2="152"/><line x1="88" y1="136" x2="88" y2="152"/><line x1="106" y1="138" x2="106" y2="152"/><line x1="124" y1="134" x2="124" y2="152"/></svg>
+                    </div>
+                    <div class="showcase-main-content">
+                        <div class="showcase-main-tag">Complete PA Package</div>
+                        <h3 class="showcase-main-title">Festival-Ready System</h3>
+                        <p class="showcase-main-desc">Full JBL VTX line array rig, subs, monitors, digital console, and all cabling. Sound engineer available on request. Covers 5,000+ capacity venues.</p>
+                        <a href="#booking" class="btn btn-primary" data-book>
+                            Request Quote
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="showcase-side">
+                    <div class="showcase-card reveal reveal-delay-2">
+                        <div class="showcase-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="35"/><circle cx="50" cy="50" r="12"/><circle cx="50" cy="50" r="4"/><rect x="65" y="20" width="16" height="10" rx="2"/></svg>
+                        </div>
+                        <div class="showcase-card-tag">DJ Package</div>
+                        <h3 class="showcase-card-title">Club Night Setup</h3>
+                        <p class="eq-card-desc" style="margin-bottom:12px">CDJ-3000s, DJM-A9, booth monitors & PA. Plug and play for any venue.</p>
+                        <div class="showcase-card-price">From $650 <small style="color:var(--text-muted);font-size:11px">/ night</small></div>
+                    </div>
+                    <div class="showcase-card reveal reveal-delay-3">
+                        <div class="showcase-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="40" rx="4"/><circle cx="50" cy="46" r="3"/><line x1="34" y1="58" x2="34" y2="48"/><line x1="42" y1="58" x2="42" y2="44"/><line x1="50" y1="58" x2="50" y2="46"/><line x1="58" y1="58" x2="58" y2="42"/><line x1="66" y1="58" x2="66" y2="50"/></svg>
+                        </div>
+                        <div class="showcase-card-tag">Studio Package</div>
+                        <h3 class="showcase-card-title">Recording Session Kit</h3>
+                        <p class="eq-card-desc" style="margin-bottom:12px">Neumann mics, preamps, interface, headphones & stands. Studio-grade capture.</p>
+                        <div class="showcase-card-price">From $320 <small style="color:var(--text-muted);font-size:11px">/ day</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header reveal" style="justify-content:center;text-align:center">
+                <div>
+                    <div class="section-tag" style="justify-content:center">How It Works</div>
+                    <h2 class="section-title">Four steps to<br>perfect sound.</h2>
+                </div>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step reveal reveal-delay-1">
+                    <div class="process-num">1</div>
+                    <h3 class="process-title">Browse & Select</h3>
+                    <p class="process-desc">Explore our catalog and choose the gear or packages that fit your event.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-2">
+                    <div class="process-num">2</div>
+                    <h3 class="process-title">Reserve & Confirm</h3>
+                    <p class="process-desc">Pick your dates, submit a booking request, and receive confirmation within 2 hours.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-3">
+                    <div class="process-num">3</div>
+                    <h3 class="process-title">Delivery & Setup</h3>
+                    <p class="process-desc">Our crew delivers, sets up, and sound-checks everything at your venue.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-4">
+                    <div class="process-num">4</div>
+                    <h3 class="process-title">Perform & Return</h3>
+                    <p class="process-desc">Run your event worry-free. We'll pick everything up when you're done.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PRICING ==================== -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header reveal" style="justify-content:center;text-align:center">
+                <div>
+                    <div class="section-tag" style="justify-content:center">Pricing</div>
+                    <h2 class="section-title">Transparent rates,<br>no surprises.</h2>
+                    <p class="section-desc" style="max-width:500px;margin:16px auto 0">All packages include delivery, setup, and technical support. Multi-day discounts available.</p>
+                </div>
+            </div>
+
+            <div class="pricing-grid">
+
+                <!-- Basic -->
+                <div class="price-card reveal reveal-delay-1">
+                    <div class="price-tier">Essentials</div>
+                    <div class="price-amount">$199</div>
+                    <div class="price-period">per day — small events up to 100 guests</div>
+                    <ul class="price-features">
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Powered speakers (pair)</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Basic mixer (8 channel)</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>2 wireless microphones</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>All cabling & stands</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Local delivery & pickup</li>
+                    </ul>
+                    <a href="#booking" class="price-btn price-btn-outline" data-book>Get Started</a>
+                </div>
+
+                <!-- Pro (featured) -->
+                <div class="price-card featured reveal reveal-delay-2">
+                    <div class="price-tier">Professional</div>
+                    <div class="price-amount">$549</div>
+                    <div class="price-period">per day — medium events up to 500 guests</div>
+                    <ul class="price-features">
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Full PA system with subs</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>32-channel digital mixer</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>6 wireless microphone channels</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Stage monitors & cabling</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>On-site setup & sound check</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Phone support during event</li>
+                    </ul>
+                    <a href="#booking" class="price-btn price-btn-fill" data-book>Book This Package</a>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="price-card reveal reveal-delay-3">
+                    <div class="price-tier">Production</div>
+                    <div class="price-amount">Custom</div>
+                    <div class="price-period">festivals, tours & large-scale productions</div>
+                    <ul class="price-features">
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Line array systems (any scale)</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Touring-grade consoles</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Full RF coordination</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated sound engineer</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Multi-day & tour discounts</li>
+                        <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>24/7 on-call tech support</li>
+                    </ul>
+                    <a href="#contact" class="price-btn price-btn-outline">Contact Us</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header reveal" style="justify-content:center;text-align:center">
+                <div>
+                    <div class="section-tag" style="justify-content:center">Testimonials</div>
+                    <h2 class="section-title">Trusted by crews<br>who demand the best.</h2>
+                </div>
+            </div>
+
+            <div class="test-grid">
+                <div class="test-card reveal reveal-delay-1">
+                    <div class="test-stars">
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                    </div>
+                    <p class="test-quote">"We've used Sonic Vault for three consecutive festival seasons. The gear arrives flawless, the setup crew is efficient, and the sound quality is consistently immaculate. They're our only call now."</p>
+                    <div class="test-author">
+                        <div class="test-avatar">RM</div>
+                        <div>
+                            <div class="test-name">Rachel Moreno</div>
+                            <div class="test-role">Production Manager, Sundown Festival</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-card reveal reveal-delay-2">
+                    <div class="test-stars">
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                    </div>
+                    <p class="test-quote">"Booked a full DJ setup for our venue's opening night on 48-hour notice. Sonic Vault delivered, set up, and sound-checked everything — the system sounded incredible. Absolute professionals."</p>
+                    <div class="test-author">
+                        <div class="test-avatar">JK</div>
+                        <div>
+                            <div class="test-name">James Kowalski</div>
+                            <div class="test-role">Owner, Noir Nightclub</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-card reveal reveal-delay-3">
+                    <div class="test-stars">
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                        <span class="test-star">&#9733;</span>
+                    </div>
+                    <p class="test-quote">"As a touring artist, I need reliable gear in every city. Sonic Vault's Neumann and Shure inventory is pristine, and their IEM systems are the best I've used on the road. Can't recommend enough."</p>
+                    <div class="test-author">
+                        <div class="test-avatar">AV</div>
+                        <div>
+                            <div class="test-name">Aisha Vaughn</div>
+                            <div class="test-role">Singer-Songwriter / Touring Artist</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BRANDS ==================== -->
+    <div class="brands">
+        <div class="container">
+            <div class="brands-label reveal">Trusted Brands in Our Inventory</div>
+            <div class="brands-row reveal reveal-delay-1">
+                <span class="brand-logo">JBL Pro</span>
+                <span class="brand-logo">Yamaha</span>
+                <span class="brand-logo">Shure</span>
+                <span class="brand-logo">Neumann</span>
+                <span class="brand-logo">Pioneer DJ</span>
+                <span class="brand-logo">QSC</span>
+                <span class="brand-logo">Sennheiser</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal">
+                    <div class="section-tag">About Sonic Vault</div>
+                    <h2 class="about-title">Built by audio engineers,<br>for <em>your</em> stage.</h2>
+                    <p class="about-text">Sonic Vault was founded in 2016 by a collective of touring sound engineers who were tired of inconsistent rental experiences. We built the inventory we wished we'd always had access to — meticulously maintained, rigorously tested, and ready to perform.</p>
+                    <p class="about-text">Every piece in our warehouse is cleaned, firmware-updated, and function-tested between rentals. We don't just rent gear — we deliver reliable sound with white-glove service, from a team that has mixed on the stages you're building.</p>
+                    <a href="#contact" class="btn btn-ghost" style="margin-top:20px">Get in Touch</a>
+                </div>
+                <div class="about-visual reveal reveal-delay-2">
+                    <div class="about-stats-grid">
+                        <div class="about-stat">
+                            <div class="about-stat-val">9</div>
+                            <div class="about-stat-label">Years in operation</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-val">350+</div>
+                            <div class="about-stat-label">Pieces of gear</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-val">24/7</div>
+                            <div class="about-stat-label">Tech support</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-val">98%</div>
+                            <div class="about-stat-label">Client retention</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <div class="cta-content">
+                    <div class="section-tag" style="justify-content:center;margin-bottom:20px">Ready to Book?</div>
+                    <h2 class="cta-title">Your next event<br>deserves <em>great sound.</em></h2>
+                    <p class="cta-desc">Tell us about your event and we'll put together a custom package. Fast turnaround, transparent pricing, zero compromises.</p>
+                    <div class="cta-actions">
+                        <a href="#booking" class="btn btn-primary" data-book>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            Start a Booking
+                        </a>
+                        <a href="tel:+15551234567" class="btn btn-ghost">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                            Call Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-tag">Contact</div>
+                    <h2 class="section-title">Let's talk<br>about your event.</h2>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="reveal reveal-delay-1">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-info-label">Warehouse & Office</div>
+                            <div class="contact-info-val">1247 Industrial Blvd, Suite 200<br>Los Angeles, CA 90021</div>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-info-label">Phone</div>
+                            <div class="contact-info-val"><a href="tel:+15551234567">(555) 123-4567</a></div>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-info-label">Email</div>
+                            <div class="contact-info-val"><a href="mailto:bookings@sonicvault.com">bookings@sonicvault.com</a></div>
+                        </div>
+                    </div>
+
+                    <div class="contact-hours">
+                        <div class="contact-hours-title">Business Hours</div>
+                        <div class="contact-hours-row"><span>Monday — Friday</span><span>8:00 AM — 7:00 PM</span></div>
+                        <div class="contact-hours-row"><span>Saturday</span><span>9:00 AM — 5:00 PM</span></div>
+                        <div class="contact-hours-row"><span>Sunday</span><span>Emergency only</span></div>
+                    </div>
+                </div>
+
+                <div class="reveal reveal-delay-2">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div>
+                                <label class="form-label" for="cfName">Full Name</label>
+                                <input class="form-input" type="text" id="cfName" placeholder="Jane Smith" required>
+                            </div>
+                            <div>
+                                <label class="form-label" for="cfEmail">Email</label>
+                                <input class="form-input" type="email" id="cfEmail" placeholder="jane@company.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label class="form-label" for="cfPhone">Phone</label>
+                                <input class="form-input" type="tel" id="cfPhone" placeholder="(555) 000-0000">
+                            </div>
+                            <div>
+                                <label class="form-label" for="cfType">Event Type</label>
+                                <select class="form-select" id="cfType">
+                                    <option value="" disabled selected>Select type...</option>
+                                    <option>Corporate Event</option>
+                                    <option>Wedding</option>
+                                    <option>Concert / Festival</option>
+                                    <option>DJ Night / Club</option>
+                                    <option>Recording Session</option>
+                                    <option>Conference / Seminar</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cfDate">Event Date</label>
+                            <input class="form-input" type="date" id="cfDate">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cfMsg">Tell us about your event</label>
+                            <textarea class="form-textarea" id="cfMsg" placeholder="Venue details, expected attendance, specific gear needs..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary form-submit">Send Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <a href="#" class="nav-logo">
+                        <div class="nav-logo-icon"></div>
+                        <span class="nav-logo-text">Sonic Vault</span>
+                    </a>
+                    <p class="footer-brand-desc">Professional audio equipment rental for events, studios, and productions. Los Angeles based, available nationwide.</p>
+                </div>
+                <div>
+                    <div class="footer-heading">Equipment</div>
+                    <ul class="footer-links">
+                        <li><a href="#equipment">Speakers & PA</a></li>
+                        <li><a href="#equipment">Mixers & Consoles</a></li>
+                        <li><a href="#equipment">Microphones</a></li>
+                        <li><a href="#equipment">DJ Equipment</a></li>
+                        <li><a href="#equipment">Monitoring</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-heading">Company</div>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#process">How It Works</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-heading">Support</div>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Rental Terms</a></li>
+                        <li><a href="#">Insurance Info</a></li>
+                        <li><a href="#">Delivery Zones</a></li>
+                        <li><a href="#">Emergency Line</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">&copy; 2026 Sonic Vault Audio Rentals. All rights reserved.</div>
+                <div class="footer-socials">
+                    <a href="#" class="footer-social" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" class="footer-social" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.6C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 001.94-2A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" class="footer-social" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BOOKING MODAL ==================== -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal" role="dialog" aria-modal="true" aria-label="Book Equipment">
+            <div class="booking-steps">
+                <div class="booking-step-indicator active" data-step-ind="1"></div>
+                <div class="booking-step-indicator" data-step-ind="2"></div>
+                <div class="booking-step-indicator" data-step-ind="3"></div>
+            </div>
+
+            <!-- Step 1: Event Details -->
+            <div class="booking-step active" data-step="1">
+                <h3 class="modal-title">Event Details</h3>
+                <p class="modal-subtitle">Tell us about your event so we can recommend the right gear.</p>
+                <div class="form-group">
+                    <label class="form-label" for="bkName">Your Name</label>
+                    <input class="form-input" type="text" id="bkName" placeholder="Full name">
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label class="form-label" for="bkEmail">Email</label>
+                        <input class="form-input" type="email" id="bkEmail" placeholder="you@email.com">
+                    </div>
+                    <div>
+                        <label class="form-label" for="bkPhone">Phone</label>
+                        <input class="form-input" type="tel" id="bkPhone" placeholder="(555) 000-0000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="bkEventType">Event Type</label>
+                    <select class="form-select" id="bkEventType">
+                        <option value="" disabled selected>Choose event type</option>
+                        <option>Corporate Event</option>
+                        <option>Wedding / Private Party</option>
+                        <option>Concert / Festival</option>
+                        <option>DJ Night / Club Event</option>
+                        <option>Recording / Studio Session</option>
+                        <option>Conference / Seminar</option>
+                        <option>House of Worship</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="booking-nav">
+                    <button class="btn btn-ghost" onclick="closeBooking()">Cancel</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Equipment & Dates -->
+            <div class="booking-step" data-step="2">
+                <h3 class="modal-title">Gear & Dates</h3>
+                <p class="modal-subtitle">Select what you need and when you need it.</p>
+                <div class="form-group">
+                    <label class="form-label" for="bkPackage">Package</label>
+                    <select class="form-select" id="bkPackage">
+                        <option value="" disabled selected>Choose a package</option>
+                        <option>Essentials — $199/day</option>
+                        <option>Professional — $549/day</option>
+                        <option>Custom / Production — Get Quote</option>
+                        <option>DJ Package — $650/night</option>
+                        <option>Studio Kit — $320/day</option>
+                        <option>Individual Items (specify below)</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label class="form-label" for="bkStart">Start Date</label>
+                        <input class="form-input" type="date" id="bkStart">
+                    </div>
+                    <div>
+                        <label class="form-label" for="bkEnd">End Date</label>
+                        <input class="form-input" type="date" id="bkEnd">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="bkVenue">Venue / Location</label>
+                    <input class="form-input" type="text" id="bkVenue" placeholder="Venue name and address">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="bkGuests">Expected Attendance</label>
+                    <select class="form-select" id="bkGuests">
+                        <option value="" disabled selected>Approximate size</option>
+                        <option>Under 50</option>
+                        <option>50 — 100</option>
+                        <option>100 — 300</option>
+                        <option>300 — 500</option>
+                        <option>500 — 1,000</option>
+                        <option>1,000+</option>
+                    </select>
+                </div>
+                <div class="booking-nav">
+                    <button class="btn btn-ghost" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Confirm -->
+            <div class="booking-step" data-step="3">
+                <h3 class="modal-title">Confirm Request</h3>
+                <p class="modal-subtitle">Review and submit your booking request. We'll respond within 2 hours.</p>
+                <div class="form-group">
+                    <label class="form-label" for="bkNotes">Additional Notes</label>
+                    <textarea class="form-textarea" id="bkNotes" placeholder="Special requirements, extra gear, sound engineer needed..."></textarea>
+                </div>
+                <div style="background:var(--accent-glow);border:1px solid rgba(232,160,70,0.15);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px">
+                    <p style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+                        <strong style="color:var(--accent)">What happens next:</strong> Our team reviews your request and sends a detailed quote via email. No payment is required until you confirm. Free cancellation up to 72 hours before the event.
+                    </p>
+                </div>
+                <div class="booking-nav">
+                    <button class="btn btn-ghost" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="submitBooking()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Submit Request
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ─── NAV SCROLL ───
+        const nav = document.getElementById('nav');
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ─── HERO WAVEFORM GENERATION ───
+        const waveformContainer = document.querySelector('.hero-waveform');
+        if (waveformContainer) {
+            for (let i = 0; i < 60; i++) {
+                const bar = document.createElement('span');
+                const delay = (Math.random() * 2).toFixed(2);
+                const duration = (1 + Math.random() * 1.5).toFixed(2);
+                const maxH = 10 + Math.random() * 50;
+                bar.style.cssText = `animation: waveform ${duration}s ease-in-out ${delay}s infinite; max-height: ${maxH}px; min-height: 6px;`;
+                waveformContainer.appendChild(bar);
+            }
+        }
+
+        // ─── SCROLL REVEAL ───
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ─── EQUIPMENT FILTER ───
+        const filterBtns = document.querySelectorAll('.eq-filter');
+        const eqCards = document.querySelectorAll('.eq-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                eqCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = '';
+                        requestAnimationFrame(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        });
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(16px)';
+                        setTimeout(() => { card.style.display = 'none'; }, 300);
+                    }
+                });
+            });
+        });
+
+        // ─── BOOKING MODAL ───
+        let currentStep = 1;
+        const modal = document.getElementById('bookingModal');
+
+        function openBooking() {
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            currentStep = 1;
+            updateSteps();
+        }
+
+        function closeBooking() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function nextStep() {
+            if (currentStep < 3) {
+                currentStep++;
+                updateSteps();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateSteps();
+            }
+        }
+
+        function updateSteps() {
+            document.querySelectorAll('.booking-step').forEach(step => {
+                step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
+            });
+            document.querySelectorAll('.booking-step-indicator').forEach(ind => {
+                const step = parseInt(ind.dataset.stepInd);
+                ind.classList.remove('active', 'completed');
+                if (step === currentStep) ind.classList.add('active');
+                if (step < currentStep) ind.classList.add('completed');
+            });
+        }
+
+        function submitBooking() {
+            // Simulate submission
+            const step3 = document.querySelector('[data-step="3"]');
+            step3.innerHTML = `
+                <div style="text-align:center;padding:40px 0">
+                    <div style="width:64px;height:64px;margin:0 auto 20px;border-radius:50%;background:rgba(92,184,122,0.12);border:2px solid rgba(92,184,122,0.3);display:flex;align-items:center;justify-content:center">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5cb87a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <h3 class="modal-title" style="margin-bottom:8px">Request Submitted!</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:28px;line-height:1.7">We've received your booking request.<br>You'll hear from our team within 2 hours.</p>
+                    <button class="btn btn-primary" onclick="closeBooking()">Done</button>
+                </div>
+            `;
+            // Update indicators
+            document.querySelectorAll('.booking-step-indicator').forEach(ind => {
+                ind.classList.remove('active');
+                ind.classList.add('completed');
+            });
+        }
+
+        // Open modal via data-book attribute
+        document.querySelectorAll('[data-book]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                openBooking();
+            });
+        });
+
+        // Close on overlay click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeBooking();
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeBooking();
+        });
+
+        // ─── CONTACT FORM ───
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.form-submit');
+            const originalText = btn.textContent;
+            btn.textContent = 'Sent!';
+            btn.style.background = 'var(--green)';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+                this.reset();
+            }, 3000);
+        });
+
+        // ─── SMOOTH SCROLL ───
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.hasAttribute('data-book')) return;
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ─── COUNTER ANIMATION ───
+        function animateCounters() {
+            document.querySelectorAll('.hero-stat-number, .about-stat-val').forEach(el => {
+                const text = el.textContent;
+                const match = text.match(/^([\d,]+)/);
+                if (!match) return;
+
+                const target = parseInt(match[1].replace(/,/g, ''));
+                const suffix = text.replace(match[1], '');
+                const duration = 1500;
+                const start = performance.now();
+
+                function update(now) {
+                    const elapsed = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(target * eased);
+                    el.textContent = current.toLocaleString() + suffix;
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+
+                const obs = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        requestAnimationFrame(update);
+                        obs.unobserve(el);
+                    }
+                }, { threshold: 0.5 });
+                obs.observe(el);
+            });
+        }
+
+        animateCounters();
+    </script>
+
+</body>
+</html>

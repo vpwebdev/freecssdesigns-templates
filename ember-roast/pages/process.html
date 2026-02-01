@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Process — Ember & Roast</title>
+  <meta name="description" content="From green bean sourcing to final cup: how we roast, profile, and brew our specialty coffee.">
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <a href="../index.html" class="site-logo">Ember <span class="logo-accent">&</span> Roast</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../index.html">Home</a>
+        <a href="about.html">Our Story</a>
+        <a href="menu.html">Menu</a>
+        <a href="process.html" class="active">Process</a>
+        <a href="contact.html">Visit</a>
+      </nav>
+      <a href="menu.html" class="nav-cta">View Menu</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== PAGE HERO ========== -->
+    <section class="page-hero section">
+      <img class="page-hero-bg" src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?auto=format&fit=crop&w=1600&q=80" alt="Coffee roasting process" loading="eager">
+      <div class="container">
+        <div class="section-label reveal">The Process</div>
+        <h1 class="page-hero-title reveal reveal-d1">From seed <em>to cup</em></h1>
+        <p class="page-hero-subtitle reveal reveal-d2">Every step is intentional. Here's how we turn raw potential into something extraordinary.</p>
+      </div>
+    </section>
+
+    <!-- ========== PROCESS STEPS ========== -->
+    <section class="section section--dark">
+      <div class="container">
+        <div class="grid grid--asymm" style="gap: var(--space-3xl); align-items: start;">
+          <div class="process-steps">
+            <div class="process-step reveal">
+              <div class="process-step-number">01</div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Sourcing at Origin</h3>
+                <p class="process-step-text">
+                  Our green buyer Lin travels to farms across Ethiopia, Colombia, Guatemala, Kenya, Brazil, and Indonesia. She tastes hundreds of lots at origin, evaluates the farming practices, and builds long-term relationships. We buy on quality alone &mdash; never on price. Every lot is scored above 84 on the SCA scale before we commit.
+                </p>
+              </div>
+            </div>
+
+            <div class="process-step reveal reveal-d1">
+              <div class="process-step-number">02</div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Sample Roasting</h3>
+                <p class="process-step-text">
+                  Green beans arrive at our roastery and go through rigorous sample roasting on our Ikawa Pro. We roast to light, medium, and dark profiles to understand the bean's full potential. The team cups each sample blind, scoring for aroma, acidity, body, sweetness, and aftertaste.
+                </p>
+              </div>
+            </div>
+
+            <div class="process-step reveal reveal-d2">
+              <div class="process-step-number">03</div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Profile Development</h3>
+                <p class="process-step-text">
+                  Using Cropster roast analytics, Mara develops a specific roast profile for each lot &mdash; adjusting charge temperature, rate of rise, and development time to highlight the bean's unique character. An Ethiopian natural gets a lighter touch; a Brazilian pulped natural might get a longer development to bring out its chocolate notes.
+                </p>
+              </div>
+            </div>
+
+            <div class="process-step reveal reveal-d3">
+              <div class="process-step-number">04</div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Production Roasting</h3>
+                <p class="process-step-text">
+                  We roast twice weekly on our Loring S35 Kestrel &mdash; the cleanest roasting technology available, using recirculated hot air instead of open flame. Every batch follows the profile precisely, and we log every variable. Beans rest for 7-14 days post-roast to degas before serving.
+                </p>
+              </div>
+            </div>
+
+            <div class="process-step reveal reveal-d4">
+              <div class="process-step-number">05</div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Quality Control</h3>
+                <p class="process-step-text">
+                  Every production batch is cupped the next morning and compared against the reference roast. If it doesn't meet our standard, it doesn't get served. We check TDS (total dissolved solids) and extraction percentage on every brew method, recalibrating our grinders daily.
+                </p>
+              </div>
+            </div>
+
+            <div class="process-step reveal reveal-d5">
+              <div class="process-step-number">06</div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">The Cup</h3>
+                <p class="process-step-text">
+                  Our baristas are trained to treat every drink as a craft moment. Water is filtered through a custom BWT system. Espresso is dialed in every hour. Pour-overs follow a precise recipe &mdash; grams, temperature, timing. The goal isn't consistency for its own sake &mdash; it's making sure the farmer's work shows up in the cup.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="position: sticky; top: 8rem;">
+            <div class="reveal">
+              <img src="https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?auto=format&fit=crop&w=700&q=80" alt="Coffee roasting machine" loading="lazy" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border: 4px solid var(--color-dark); box-shadow: var(--shadow-lg);">
+            </div>
+            <div class="mt-xl reveal reveal-d1" style="padding: var(--space-lg); border: 1px solid var(--border-subtle);">
+              <div style="font-family: var(--font-body); font-size: var(--fs-xs); letter-spacing: var(--ls-widest); text-transform: uppercase; color: var(--color-amber); margin-bottom: var(--space-sm);">Our Roaster</div>
+              <div style="font-family: var(--font-heading); font-size: var(--fs-xl); color: var(--color-cream);">Loring S35 Kestrel</div>
+              <p style="font-family: var(--font-accent); font-size: var(--fs-base); color: var(--color-stone); line-height: var(--lh-relaxed); margin-top: var(--space-sm);">
+                Smokeless, flameless technology. 80% less emissions than conventional drum roasters. Cleaner roast, purer flavor.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BREWING PHILOSOPHY ========== -->
+    <section class="section section--light">
+      <div class="container container--narrow text-center">
+        <div class="section-label section-label--center section-label--on-light reveal">Philosophy</div>
+        <h2 class="section-title section-title--on-light reveal reveal-d1">Coffee is a <em>conversation</em></h2>
+        <div class="divider divider--center divider--light mt-lg reveal reveal-d2"></div>
+        <p class="reveal reveal-d2" style="font-family: var(--font-accent); font-size: var(--fs-lg); color: var(--text-dark-muted); line-height: var(--lh-relaxed); margin-top: var(--space-xl); font-weight: 300;">
+          Between the farmer who nurtures the cherry, the sun that ripens it, the hands that pick it, the water that washes it, the heat that transforms it, and the person who drinks it. Our job is simple: don't interrupt that conversation. Get out of the way and let the coffee speak.
+        </p>
+        <a href="menu.html" class="btn btn--dark mt-xl reveal reveal-d3">See Our Menu</a>
+      </div>
+    </section>
+
+    <!-- ========== EQUIPMENT ========== -->
+    <section class="section section--dark">
+      <div class="container">
+        <div class="text-center mb-xl reveal">
+          <div class="section-label section-label--center">Our Tools</div>
+          <h2 class="section-title">The <em>Equipment</em></h2>
+        </div>
+        <div class="grid grid--3 mt-xl">
+          <div class="card reveal reveal-d1">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=80" alt="Espresso machine" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">La Marzocco Strada</h3>
+              <p class="card-text">Pressure profiling for every shot. Saturated group heads for thermal stability. The gold standard in specialty espresso.</p>
+            </div>
+          </div>
+          <div class="card reveal reveal-d2">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1518057111178-44a106bad636?auto=format&fit=crop&w=600&q=80" alt="Coffee grinder" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Mahlk&ouml;nig EK43s</h3>
+              <p class="card-text">The most precise grinder in specialty coffee. Uniform particle distribution means even extraction and maximum clarity of flavor.</p>
+            </div>
+          </div>
+          <div class="card reveal reveal-d3">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80" alt="Pour over setup" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Hario V60 & Chemex</h3>
+              <p class="card-text">Classic pour-over vessels chosen for their distinct brewing characteristics. Clean, nuanced cups that let single-origins shine.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Ember <span class="logo-accent">&</span> Roast</div>
+          <p class="footer-desc">Specialty coffee roasters committed to sourcing, roasting, and serving exceptional coffee since 2012.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Explore</div>
+          <ul class="footer-list">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="process.html">Process</a></li>
+            <li><a href="contact.html">Visit Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Info</div>
+          <ul class="footer-list">
+            <li><a href="#">Wholesale</a></li>
+            <li><a href="#">Subscriptions</a></li>
+            <li><a href="#">Gift Cards</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Newsletter</div>
+          <p class="footer-newsletter-text">First access to new roasts, brewing guides, and limited drops.</p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault();">
+            <input type="email" placeholder="Email address" required>
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Ember & Roast Coffee Co. All rights reserved.</span>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Instagram">IG</a>
+          <a href="#" class="footer-social" aria-label="Twitter">TW</a>
+          <a href="#" class="footer-social" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

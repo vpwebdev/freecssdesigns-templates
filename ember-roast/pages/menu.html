@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu — Ember & Roast</title>
+  <meta name="description" content="Our full coffee menu: espresso drinks, pour-overs, cold brews, pastries, and retail beans.">
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <a href="../index.html" class="site-logo">Ember <span class="logo-accent">&</span> Roast</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../index.html">Home</a>
+        <a href="about.html">Our Story</a>
+        <a href="menu.html" class="active">Menu</a>
+        <a href="process.html">Process</a>
+        <a href="contact.html">Visit</a>
+      </nav>
+      <a href="contact.html" class="nav-cta">Visit Us</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== PAGE HERO ========== -->
+    <section class="page-hero section">
+      <img class="page-hero-bg" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=1600&q=80" alt="Coffee bar counter" loading="eager">
+      <div class="container">
+        <div class="section-label reveal">The Menu</div>
+        <h1 class="page-hero-title reveal reveal-d1">Everything we <em>brew & bake</em></h1>
+        <p class="page-hero-subtitle reveal reveal-d2">From precision espresso to slow pour-overs and house-made pastries.</p>
+      </div>
+    </section>
+
+    <!-- ========== MENU CONTENT ========== -->
+    <section class="section section--light">
+      <div class="container">
+
+        <!-- Tabs -->
+        <div class="menu-tabs-wrap reveal">
+          <div class="tabs">
+            <button class="tab tab--light active" data-tab="all">All</button>
+            <button class="tab tab--light" data-tab="espresso">Espresso</button>
+            <button class="tab tab--light" data-tab="brewed">Brewed</button>
+            <button class="tab tab--light" data-tab="cold">Cold</button>
+            <button class="tab tab--light" data-tab="food">Food</button>
+            <button class="tab tab--light" data-tab="retail">Retail Beans</button>
+          </div>
+        </div>
+
+        <!-- Espresso -->
+        <div class="mt-2xl" data-category="espresso">
+          <h3 class="menu-section-title reveal">Espresso</h3>
+          <div class="menu-item menu-item--light reveal">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Espresso</div>
+              <div class="menu-item-desc">Double shot, rotating single-origin</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$4.00</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Cortado</div>
+              <div class="menu-item-desc">Equal parts espresso and steamed milk</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$5.00</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Flat White</div>
+              <div class="menu-item-desc">Ristretto with velvety microfoam</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d2">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Caf&eacute; Latte</div>
+              <div class="menu-item-desc">Espresso with steamed milk, light foam</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d2">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Cappuccino</div>
+              <div class="menu-item-desc">Traditional Italian ratio, dry foam</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d3">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Americano</div>
+              <div class="menu-item-desc">Double espresso over hot water</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$4.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d3">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Mocha</div>
+              <div class="menu-item-desc">Espresso, house chocolate, steamed milk</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+        </div>
+
+        <!-- Brewed -->
+        <div class="mt-2xl" data-category="brewed">
+          <h3 class="menu-section-title reveal">Brewed Coffee</h3>
+          <div class="menu-item menu-item--light reveal">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Pour Over (V60)</div>
+              <div class="menu-item-desc">Single cup, choice of single-origin</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Chemex</div>
+              <div class="menu-item-desc">Clean, bright, serves two</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$10.00</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">AeroPress</div>
+              <div class="menu-item-desc">Full-bodied, concentrated, inverted method</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d2">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Batch Brew</div>
+              <div class="menu-item-desc">Today's rotating blend, always fresh</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$3.50</div>
+          </div>
+        </div>
+
+        <!-- Cold -->
+        <div class="mt-2xl" data-category="cold">
+          <h3 class="menu-section-title reveal">Cold Drinks</h3>
+          <div class="menu-item menu-item--light reveal">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Cold Brew</div>
+              <div class="menu-item-desc">18-hour steep, smooth chocolate notes</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Iced Latte</div>
+              <div class="menu-item-desc">Espresso shaken over ice, cold milk</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Espresso Tonic</div>
+              <div class="menu-item-desc">Double shot over Fever-Tree tonic, citrus</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$6.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d2">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Nitro Cold Brew</div>
+              <div class="menu-item-desc">Nitrogen-infused, creamy without dairy</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$6.50</div>
+          </div>
+        </div>
+
+        <!-- Food -->
+        <div class="mt-2xl" data-category="food">
+          <h3 class="menu-section-title reveal">Food & Pastry</h3>
+          <div class="menu-item menu-item--light reveal">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Almond Croissant</div>
+              <div class="menu-item-desc">Frangipane, toasted almonds, house-baked</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Banana Bread</div>
+              <div class="menu-item-desc">Brown butter, walnut, served warm</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$4.50</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Avocado Toast</div>
+              <div class="menu-item-desc">Sourdough, chili flake, poached egg (+$2)</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$9.00</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d2">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Granola Bowl</div>
+              <div class="menu-item-desc">House granola, Greek yogurt, seasonal fruit</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$8.00</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d2">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Grilled Cheese</div>
+              <div class="menu-item-desc">Aged cheddar, gruy&egrave;re, sourdough</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$8.50</div>
+          </div>
+        </div>
+
+        <!-- Retail Beans -->
+        <div class="mt-2xl" data-category="retail">
+          <h3 class="menu-section-title reveal">Retail Beans</h3>
+          <div class="menu-item menu-item--light reveal">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Ethiopian Sidamo</div>
+              <div class="menu-item-desc">Blueberry, dark chocolate, jasmine &mdash; Light roast</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$22 / 250g</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Colombian Huila</div>
+              <div class="menu-item-desc">Caramel, red apple, almond &mdash; Medium roast</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$19 / 250g</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d1">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Guatemala Antigua</div>
+              <div class="menu-item-desc">Cocoa, brown sugar, orange &mdash; Medium roast</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$20 / 250g</div>
+          </div>
+          <div class="menu-item menu-item--light reveal reveal-d2">
+            <div class="menu-item-info">
+              <div class="menu-item-name">House Blend</div>
+              <div class="menu-item-desc">Balanced, nutty, smooth &mdash; Medium-dark roast</div>
+            </div>
+            <div class="menu-item-dots"></div>
+            <div class="menu-item-price">$16 / 250g</div>
+          </div>
+        </div>
+
+        <p class="text-center mt-2xl reveal" style="font-family: var(--font-accent); font-size: var(--fs-sm); color: var(--text-dark-muted); font-style: italic;">
+          Oat, almond, and coconut milk available &mdash; no upcharge. All prices include tax.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Ember <span class="logo-accent">&</span> Roast</div>
+          <p class="footer-desc">Specialty coffee roasters committed to sourcing, roasting, and serving exceptional coffee since 2012.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Explore</div>
+          <ul class="footer-list">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="process.html">Process</a></li>
+            <li><a href="contact.html">Visit Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Info</div>
+          <ul class="footer-list">
+            <li><a href="#">Wholesale</a></li>
+            <li><a href="#">Subscriptions</a></li>
+            <li><a href="#">Gift Cards</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Newsletter</div>
+          <p class="footer-newsletter-text">First access to new roasts, brewing guides, and limited drops.</p>
+          <form class="footer-newsletter-form" onsubmit="event.preventDefault();">
+            <input type="email" placeholder="Email address" required>
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Ember & Roast Coffee Co. All rights reserved.</span>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Instagram">IG</a>
+          <a href="#" class="footer-social" aria-label="Twitter">TW</a>
+          <a href="#" class="footer-social" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

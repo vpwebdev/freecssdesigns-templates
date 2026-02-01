@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashford &amp; Sterling | Attorneys at Law</title>
+<meta name="description" content="Ashford & Sterling — Distinguished legal counsel. Personal Injury, Criminal Defense, Family Law, Business Litigation, Estate Planning, and Employment Law.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Hanken+Grotesk:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --midnight:#0c1117;
+  --dark:#171d26;
+  --gunmetal:#242d3a;
+  --slate:#3a4556;
+  --steel:#5d6b7d;
+  --pewter:#8592a3;
+  --silver:#a8b3c2;
+  --ash:#c8d0da;
+  --mist:#e2e7ed;
+  --fog:#eef1f5;
+  --cloud:#f5f7f9;
+  --white:#fafbfc;
+  --pure:#ffffff;
+
+  --teal:#1a6b6a;
+  --teal-deep:#145554;
+  --teal-light:#228786;
+  --teal-muted:#1a6b6a20;
+  --teal-wash:#1a6b6a08;
+
+  --font-serif:'Libre Baskerville',Georgia,serif;
+  --font-sans:'Hanken Grotesk',system-ui,sans-serif;
+
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased;}
+body{font-family:var(--font-sans);background:var(--white);color:var(--slate);overflow-x:hidden;line-height:1.7;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+ul{list-style:none;}
+
+.container{width:100%;max-width:1240px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);}
+.section-pad{padding:clamp(5rem,10vh,8rem) 0;}
+
+/* Linen texture */
+.linen{
+  position:relative;
+}
+.linen::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23000000' fill-opacity='0.015'/%3E%3C/svg%3E");
+}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .8s var(--ease);}
+.rv.vis{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.3s}.d6{transition-delay:.36s}
+
+/* Labels */
+.stag{
+  font-family:var(--font-sans);font-size:.68rem;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--teal);
+  margin-bottom:.6rem;
+}
+
+.sh{
+  font-family:var(--font-serif);font-weight:700;
+  font-size:clamp(1.8rem,3.8vw,2.8rem);
+  color:var(--midnight);line-height:1.2;margin-bottom:.6rem;
+}
+.sh em{font-style:italic;color:var(--teal);}
+
+.sp{font-size:.92rem;font-weight:300;color:var(--steel);line-height:1.85;max-width:520px;}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-sans);font-size:.75rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.8rem 2rem;transition:all .3s var(--ease);
+}
+.btn svg{width:14px;height:14px;transition:transform .25s var(--ease);}
+.btn:hover svg{transform:translateX(2px);}
+
+.btn-teal{background:var(--teal);color:var(--pure);border:1px solid var(--teal);}
+.btn-teal:hover{background:var(--teal-deep);box-shadow:0 4px 16px rgba(26,107,106,.2);}
+
+.btn-dark{background:var(--midnight);color:var(--pure);border:1px solid var(--midnight);}
+.btn-dark:hover{background:var(--dark);}
+
+.btn-outline{background:transparent;color:var(--midnight);border:1px solid var(--ash);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+
+.btn-white{background:var(--pure);color:var(--midnight);border:1px solid var(--pure);}
+.btn-white:hover{background:var(--fog);}
+
+/* Thin rule */
+.rule{width:48px;height:2px;background:var(--teal);margin:1rem 0;}
+.rule-c{margin:1rem auto;}
+
+/* ============================================
+   TOP BAR
+   ============================================ */
+.topbar{
+  background:var(--midnight);color:var(--silver);padding:.55rem 0;
+  font-size:.7rem;font-weight:400;letter-spacing:.02em;
+  border-bottom:1px solid rgba(26,107,106,.15);
+}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.topbar a{transition:color .2s ease;}
+.topbar a:hover{color:var(--teal-light);}
+.topbar-right{display:flex;gap:1.5rem;align-items:center;}
+.topbar-right svg{width:13px;height:13px;stroke:var(--pewter);fill:none;stroke-width:1.8;vertical-align:middle;margin-right:.3rem;}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav{
+  position:sticky;top:0;z-index:1000;background:var(--pure);
+  border-bottom:1px solid var(--mist);
+  transition:box-shadow .3s ease;
+}
+.nav.scrolled{box-shadow:0 1px 12px rgba(0,0,0,.06);}
+.nav .container{display:flex;align-items:center;justify-content:space-between;height:72px;}
+
+.nav-logo{display:flex;align-items:center;gap:.6rem;}
+.nav-logo-mark{
+  width:3px;height:32px;background:var(--teal);
+}
+.nav-logo-text{
+  font-family:var(--font-serif);font-size:1.05rem;font-weight:700;
+  color:var(--midnight);letter-spacing:.01em;line-height:1.2;
+}
+.nav-logo-sub{
+  font-family:var(--font-sans);font-size:.55rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--pewter);
+}
+
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{
+  font-size:.76rem;font-weight:500;color:var(--slate);
+  letter-spacing:.04em;transition:color .2s ease;
+}
+.nav-links a:hover{color:var(--teal);}
+.nav-links .btn::after{display:none!important;}
+
+.nav-toggle{display:none;flex-direction:column;gap:5px;width:24px;z-index:1001;}
+.nav-toggle span{width:100%;height:1.5px;background:var(--midnight);transition:all .3s var(--ease);transform-origin:center;}
+.nav-toggle.active span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);}
+.nav-toggle.active span:nth-child(2){opacity:0;}
+.nav-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
+
+@media(max-width:960px){
+  .nav-toggle{display:flex;}
+  .nav-links{
+    position:fixed;inset:0;background:var(--pure);flex-direction:column;
+    justify-content:center;gap:1.8rem;opacity:0;visibility:hidden;transition:all .35s var(--ease);
+  }
+  .nav-links.open{opacity:1;visibility:visible;}
+  .nav-links a{font-size:1rem;}
+  .topbar{display:none;}
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;min-height:85vh;
+  background:var(--pure);overflow:hidden;
+}
+.hero-content{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(3rem,6vw,6rem) clamp(1.5rem,5vw,5rem);
+  position:relative;z-index:1;
+}
+.hero-label{
+  font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--teal);display:flex;align-items:center;gap:.7rem;
+  margin-bottom:1.5rem;
+  opacity:0;animation:fi .7s .2s var(--ease) forwards;
+}
+.hero-label::before{content:'';width:32px;height:2px;background:var(--teal);}
+
+.hero h1{
+  font-family:var(--font-serif);font-size:clamp(2.2rem,4.5vw,3.8rem);
+  font-weight:700;color:var(--midnight);line-height:1.15;
+  margin-bottom:1.5rem;
+  opacity:0;animation:fi .8s .35s var(--ease) forwards;
+}
+.hero h1 em{font-style:italic;color:var(--teal);}
+
+.hero-desc{
+  font-size:1rem;font-weight:300;color:var(--steel);
+  line-height:1.85;max-width:480px;margin-bottom:2rem;
+  opacity:0;animation:fi .8s .5s var(--ease) forwards;
+}
+
+.hero-actions{
+  display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.5rem;
+  opacity:0;animation:fi .8s .65s var(--ease) forwards;
+}
+
+.hero-badges{
+  display:flex;gap:2rem;
+  opacity:0;animation:fi .8s .8s var(--ease) forwards;
+}
+.hero-badge{display:flex;align-items:center;gap:.5rem;}
+.hero-badge svg{width:18px;height:18px;stroke:var(--teal);fill:none;stroke-width:1.8;}
+.hero-badge span{font-size:.72rem;font-weight:500;color:var(--steel);}
+
+@keyframes fi{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* Hero image */
+.hero-image{position:relative;overflow:hidden;}
+.hero-image img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.95) contrast(1.02);
+  opacity:0;animation:fi 1s .3s var(--ease) forwards;
+}
+.hero-image::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(12,17,23,.03) 100%);
+}
+/* Teal accent strip */
+.hero-accent{
+  position:absolute;top:0;left:0;bottom:0;width:6px;background:var(--teal);z-index:2;
+}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-image{height:50vh;order:-1;}
+}
+
+/* ============================================
+   TRUST BAR
+   ============================================ */
+.trust{
+  background:var(--midnight);padding:2.5rem 0;
+  border-bottom:2px solid var(--teal);
+}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.trust-item{text-align:center;border-right:1px solid rgba(255,255,255,.06);}
+.trust-item:last-child{border-right:none;}
+.trust-num{
+  font-family:var(--font-serif);font-size:2.2rem;font-weight:700;
+  color:var(--pure);line-height:1;margin-bottom:.25rem;
+}
+.trust-label{font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--pewter);}
+
+@media(max-width:600px){.trust-grid{grid-template-columns:repeat(2,1fr);gap:1.5rem;}.trust-item{border-right:none;}}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+.about{position:relative;}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(3rem,6vw,6rem);align-items:center;
+}
+.about-image{position:relative;}
+.about-image img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;
+  filter:brightness(.92) contrast(1.03) saturate(.95);
+}
+.about-image-bar{position:absolute;top:0;right:0;bottom:0;width:4px;background:var(--teal);}
+
+.about-text p{font-size:.9rem;font-weight:300;color:var(--steel);line-height:1.9;margin-bottom:1rem;}
+
+.about-values{
+  display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:2rem;
+}
+.about-val{
+  padding:1.2rem;background:var(--cloud);border-left:2px solid var(--teal);
+  transition:background .3s ease;
+}
+.about-val:hover{background:var(--fog);}
+.about-val h4{font-family:var(--font-serif);font-size:.85rem;font-weight:700;color:var(--midnight);margin-bottom:.15rem;}
+.about-val p{font-size:.72rem;font-weight:400;color:var(--pewter);line-height:1.5;margin:0;}
+
+@media(max-width:768px){
+  .about-grid{grid-template-columns:1fr;}
+  .about-values{grid-template-columns:1fr;}
+}
+
+/* ============================================
+   PRACTICE AREAS
+   ============================================ */
+.practice{background:var(--cloud);position:relative;}
+.practice .linen::before{opacity:.5;}
+.practice-header{text-align:center;max-width:560px;margin:0 auto 3.5rem;position:relative;z-index:1;}
+.practice-header .sp{margin:0 auto;}
+
+.practice-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--mist);position:relative;z-index:1;
+}
+
+.pa-card{
+  background:var(--pure);padding:clamp(1.8rem,2.5vw,2.8rem);
+  position:relative;overflow:hidden;transition:all .35s var(--ease);
+}
+.pa-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--teal);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease);
+}
+.pa-card:hover::after{transform:scaleX(1);}
+.pa-card:hover{background:var(--cloud);}
+
+.pa-icon{
+  width:48px;height:48px;margin-bottom:1.5rem;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--mist);transition:all .3s ease;
+}
+.pa-card:hover .pa-icon{border-color:var(--teal);background:var(--teal-muted);}
+.pa-icon svg{width:22px;height:22px;stroke:var(--teal);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+
+.pa-card h3{font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--midnight);margin-bottom:.4rem;}
+.pa-card p{font-size:.8rem;font-weight:300;color:var(--steel);line-height:1.75;margin-bottom:1rem;}
+.pa-link{
+  font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal);display:inline-flex;align-items:center;gap:.3rem;transition:gap .25s var(--ease);
+}
+.pa-link:hover{gap:.6rem;}
+.pa-link svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;}
+
+@media(max-width:900px){.practice-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:500px){.practice-grid{grid-template-columns:1fr;}}
+
+/* ============================================
+   ATTORNEYS
+   ============================================ */
+.attorneys{position:relative;}
+.attorneys-header{text-align:center;max-width:560px;margin:0 auto 3.5rem;}
+.attorneys-header .sp{margin:0 auto;}
+
+.att-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+
+.att-card{background:var(--cloud);overflow:hidden;transition:all .35s var(--ease);}
+.att-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateY(-3px);}
+.att-img{position:relative;aspect-ratio:3/4;overflow:hidden;}
+.att-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.95);transition:all .5s var(--ease);}
+.att-card:hover .att-img img{filter:saturate(1) brightness(1);transform:scale(1.02);}
+.att-img-bar{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--teal);}
+.att-info{padding:1.5rem;}
+.att-info h3{font-family:var(--font-serif);font-size:1.15rem;font-weight:700;color:var(--midnight);margin-bottom:.1rem;}
+.att-info .role{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem;}
+.att-info p{font-size:.78rem;font-weight:300;color:var(--steel);line-height:1.7;margin-bottom:.6rem;}
+.att-bar{font-size:.65rem;font-weight:500;color:var(--pewter);font-style:italic;}
+
+@media(max-width:768px){.att-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto;}}
+
+/* ============================================
+   CASE RESULTS
+   ============================================ */
+.results{background:var(--midnight);color:var(--pure);position:relative;overflow:hidden;}
+.results .linen::before{opacity:.15;filter:invert(1);}
+.results-header{text-align:center;max-width:560px;margin:0 auto 3.5rem;position:relative;z-index:1;}
+.results-header .sh{color:var(--pure);}
+.results-header .sp{color:var(--pewter);margin:0 auto;}
+.results-header .stag{color:var(--teal-light);}
+.results-header .rule-c{background:var(--teal-light);}
+
+.results-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(255,255,255,.05);position:relative;z-index:1;
+}
+.result-item{
+  background:var(--midnight);padding:2.5rem 1.5rem;text-align:center;
+  border-bottom:2px solid transparent;transition:all .35s ease;
+}
+.result-item:hover{background:var(--dark);border-bottom-color:var(--teal);}
+.result-amount{
+  font-family:var(--font-serif);font-size:clamp(1.8rem,3vw,2.5rem);
+  font-weight:700;color:var(--pure);line-height:1;margin-bottom:.4rem;
+}
+.result-type{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-light);margin-bottom:.3rem;}
+.result-desc{font-size:.75rem;font-weight:300;color:var(--pewter);line-height:1.5;}
+
+@media(max-width:768px){.results-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.results-grid{grid-template-columns:1fr;}}
+
+/* ============================================
+   TESTIMONIALS
+   ============================================ */
+.testimonials{background:var(--cloud);position:relative;}
+.test-header{text-align:center;max-width:560px;margin:0 auto 3rem;}
+.test-header .sp{margin:0 auto;}
+
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+
+.test-card{
+  background:var(--pure);border:1px solid var(--mist);padding:2rem;
+  position:relative;transition:all .35s ease;
+}
+.test-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.04);border-color:var(--ash);}
+.test-card::before{
+  content:'';position:absolute;top:0;left:0;width:2px;height:0;
+  background:var(--teal);transition:height .4s var(--ease);
+}
+.test-card:hover::before{height:100%;}
+.test-stars{display:flex;gap:2px;margin-bottom:1rem;}
+.test-stars svg{width:14px;height:14px;fill:var(--teal);}
+.test-card blockquote{
+  font-family:var(--font-serif);font-size:.88rem;font-weight:400;
+  font-style:italic;color:var(--gunmetal);line-height:1.75;margin-bottom:1.5rem;
+}
+.test-author strong{display:block;font-size:.8rem;font-weight:600;color:var(--midnight);}
+.test-author span{font-size:.68rem;font-weight:400;color:var(--pewter);}
+
+@media(max-width:900px){.test-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto;}}
+
+/* ============================================
+   WHY CHOOSE US
+   ============================================ */
+.why{position:relative;}
+.why-grid{
+  display:grid;grid-template-columns:1fr 1.2fr;
+  gap:clamp(3rem,6vw,6rem);align-items:center;
+}
+.why-list{display:flex;flex-direction:column;gap:1.2rem;}
+.why-item{
+  display:flex;gap:1rem;padding:1.2rem;
+  background:var(--cloud);border-left:2px solid var(--mist);
+  transition:all .3s ease;
+}
+.why-item:hover{border-left-color:var(--teal);background:var(--fog);}
+.why-item-icon{
+  width:40px;height:40px;min-width:40px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--teal-muted);
+}
+.why-item-icon svg{width:20px;height:20px;stroke:var(--teal);fill:none;stroke-width:1.8;}
+.why-item h4{font-family:var(--font-serif);font-size:.88rem;font-weight:700;color:var(--midnight);margin-bottom:.15rem;}
+.why-item p{font-size:.78rem;font-weight:300;color:var(--steel);line-height:1.6;}
+
+.why-image{position:relative;}
+.why-image img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:brightness(.92) saturate(.9);}
+.why-image-bar{position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--teal);}
+
+@media(max-width:768px){.why-grid{grid-template-columns:1fr;}.why-image{order:-1;max-height:50vh;overflow:hidden;}}
+
+/* ============================================
+   CTA BANNER
+   ============================================ */
+.cta-banner{
+  background:var(--teal);padding:clamp(3rem,6vw,5rem) 0;
+  position:relative;overflow:hidden;text-align:center;
+}
+.cta-banner::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23ffffff' fill-opacity='0.04'/%3E%3C/svg%3E");
+}
+.cta-banner>*{position:relative;z-index:1;}
+.cta-banner h2{
+  font-family:var(--font-serif);font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:700;color:var(--pure);line-height:1.2;margin-bottom:.6rem;
+}
+.cta-banner p{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.8);max-width:480px;margin:0 auto 2rem;line-height:1.7;}
+.cta-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact{background:var(--cloud);position:relative;}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(3rem,6vw,6rem);}
+
+.contact-info h3{
+  font-family:var(--font-serif);font-size:.95rem;font-weight:700;
+  color:var(--midnight);margin-top:2rem;margin-bottom:.4rem;
+}
+.contact-info h3:first-of-type{margin-top:1.5rem;}
+.contact-info p,.contact-info a{font-size:.82rem;font-weight:300;color:var(--steel);line-height:1.7;transition:color .2s;}
+.contact-info a:hover{color:var(--teal);}
+
+.contact-map{
+  margin-top:2rem;height:180px;background:var(--mist);
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--ash);
+}
+.contact-map span{font-size:.75rem;color:var(--pewter);display:flex;align-items:center;gap:.4rem;}
+.contact-map svg{width:16px;height:16px;stroke:var(--pewter);fill:none;stroke-width:1.8;}
+
+/* Form */
+.contact-form{
+  background:var(--pure);border:1px solid var(--mist);padding:clamp(1.5rem,3vw,2.5rem);
+  border-top:2px solid var(--teal);
+}
+.contact-form h3{font-family:var(--font-serif);font-size:1.15rem;font-weight:700;color:var(--midnight);margin-bottom:.2rem;}
+.contact-form>p{font-size:.8rem;font-weight:300;color:var(--pewter);margin-bottom:1.5rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.8rem;}
+.form-group label{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);}
+.form-group input,.form-group select,.form-group textarea{
+  background:var(--cloud);border:1px solid var(--mist);color:var(--midnight);
+  font-family:var(--font-sans);font-size:.82rem;font-weight:400;
+  padding:.7rem .9rem;outline:none;transition:all .25s ease;-webkit-appearance:none;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-muted);
+}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--ash);}
+.form-group select{
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238592a3' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.2rem;
+}
+.form-group select option{background:var(--pure);}
+.form-group textarea{resize:vertical;min-height:100px;}
+
+.form-disclaimer{font-size:.65rem;color:var(--pewter);line-height:1.5;margin-top:.5rem;font-style:italic;}
+
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer{background:var(--midnight);color:var(--pewter);padding:3.5rem 0 1rem;}
+.footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.05);
+}
+.footer-brand p{font-size:.78rem;font-weight:300;line-height:1.8;margin-top:1rem;max-width:280px;}
+.footer-brand .nav-logo-text{color:var(--pure);}
+.footer h4{font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);margin-bottom:1.2rem;}
+.footer ul li{margin-bottom:.45rem;}
+.footer ul li a{font-size:.78rem;font-weight:300;transition:color .2s;}
+.footer ul li a:hover{color:var(--teal-light);}
+
+.footer-bottom{padding-top:1.5rem;}
+.footer-disclaimer{
+  font-size:.65rem;font-weight:300;color:var(--slate);line-height:1.7;
+  max-width:800px;margin-bottom:1rem;font-style:italic;
+}
+.footer-copy{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+  font-size:.65rem;color:var(--slate);
+}
+.footer-copy a{transition:color .2s;}
+.footer-copy a:hover{color:var(--teal-light);}
+
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="container">
+    <span>Ashford &amp; Sterling LLP &mdash; San Francisco, CA</span>
+    <div class="topbar-right">
+      <a href="tel:+14155550234"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.75.34 1.54.57 2.35.7A2 2 0 0 1 22 16.92z"/></svg>(415) 555-0234</a>
+      <a href="mailto:info@ashfordsterling.com"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@ashfordsterling.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark"></div>
+      <div>
+        <div class="nav-logo-text">Ashford &amp; Sterling</div>
+        <div class="nav-logo-sub">Attorneys at Law</div>
+      </div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#practice">Practice Areas</a>
+      <a href="#attorneys">Attorneys</a>
+      <a href="#results">Results</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact" class="btn btn-teal">Free Consultation</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-label">Trusted Legal Counsel Since 1998</div>
+    <h1>Relentless Advocacy.<br><em>Proven Results.</em></h1>
+    <p class="hero-desc">When the stakes are high, you need attorneys who fight with precision and purpose. Ashford &amp; Sterling has recovered over $500 million for our clients across personal injury, criminal defense, and complex litigation.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-teal">
+        Free Consultation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#practice" class="btn btn-outline">Our Practice Areas</a>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Super Lawyers 2024</span>
+      </div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        <span>AV Preeminent Rated</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-accent"></div>
+    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80" alt="Law firm conference room" loading="eager">
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="rv"><div class="trust-num">$500M+</div><div class="trust-label">Recovered</div></div>
+      <div class="rv d1"><div class="trust-num">2,800+</div><div class="trust-label">Cases Won</div></div>
+      <div class="rv d2"><div class="trust-num">25+</div><div class="trust-label">Years Experience</div></div>
+      <div class="rv d3"><div class="trust-num">98%</div><div class="trust-label">Success Rate</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about section-pad linen" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image rv">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Ashford & Sterling office">
+        <div class="about-image-bar"></div>
+      </div>
+      <div>
+        <div class="stag rv">About the Firm</div>
+        <h2 class="sh rv d1">A Legacy of<br><em>Excellence</em></h2>
+        <div class="rule rv d2"></div>
+        <p class="rv d2">Founded in 1998 by partners Victoria Ashford and Robert Sterling, our firm was built on a singular principle: every client deserves counsel that is as thorough as it is tenacious.</p>
+        <p class="rv d3">Today, Ashford &amp; Sterling is a team of 18 attorneys serving clients throughout California. We combine big-firm resources with the personal attention and accessibility of a boutique practice. When you retain our firm, you work directly with senior attorneys &mdash; not junior associates learning on your case.</p>
+        <div class="about-values rv d4">
+          <div class="about-val">
+            <h4>Integrity First</h4>
+            <p>Honest counsel, even when the truth is hard.</p>
+          </div>
+          <div class="about-val">
+            <h4>Client-Centered</h4>
+            <p>Your goals drive every strategy we pursue.</p>
+          </div>
+          <div class="about-val">
+            <h4>Aggressive Advocacy</h4>
+            <p>We prepare every case as if it's going to trial.</p>
+          </div>
+          <div class="about-val">
+            <h4>Proven Track Record</h4>
+            <p>Over $500M recovered for our clients.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Practice Areas -->
+<section class="practice section-pad linen" id="practice">
+  <div class="container">
+    <div class="practice-header">
+      <div class="stag rv">Practice Areas</div>
+      <h2 class="sh rv d1">Comprehensive<br><em>Legal Counsel</em></h2>
+      <div class="rule rule-c rv d2"></div>
+      <p class="sp rv d2">Strategic representation across a wide range of legal matters, from high-stakes litigation to sensitive family law.</p>
+    </div>
+    <div class="practice-grid">
+      <div class="pa-card rv">
+        <div class="pa-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>Personal Injury</h3>
+        <p>Catastrophic injuries, auto accidents, medical malpractice, and wrongful death. We fight for maximum compensation.</p>
+        <a href="#contact" class="pa-link">Schedule Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="pa-card rv d1">
+        <div class="pa-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Criminal Defense</h3>
+        <p>DUI, felonies, white-collar crime, and federal charges. Protecting your rights and your future at every stage.</p>
+        <a href="#contact" class="pa-link">Schedule Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="pa-card rv d2">
+        <div class="pa-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Family Law</h3>
+        <p>Divorce, custody, support, and adoption. Compassionate counsel during life's most challenging transitions.</p>
+        <a href="#contact" class="pa-link">Schedule Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="pa-card rv d1">
+        <div class="pa-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8l-2 4h12z"/></svg></div>
+        <h3>Business Litigation</h3>
+        <p>Contract disputes, partnership conflicts, intellectual property, and commercial fraud. Protecting your enterprise.</p>
+        <a href="#contact" class="pa-link">Schedule Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="pa-card rv d2">
+        <div class="pa-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <h3>Estate Planning</h3>
+        <p>Wills, trusts, probate, and asset protection. Securing your legacy and your family's financial future.</p>
+        <a href="#contact" class="pa-link">Schedule Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="pa-card rv d3">
+        <div class="pa-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h3>Employment Law</h3>
+        <p>Wrongful termination, discrimination, wage disputes, and harassment. Holding employers accountable.</p>
+        <a href="#contact" class="pa-link">Schedule Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Attorneys -->
+<section class="attorneys section-pad" id="attorneys">
+  <div class="container">
+    <div class="attorneys-header">
+      <div class="stag rv">Our Attorneys</div>
+      <h2 class="sh rv d1">Leadership You<br><em>Can Trust</em></h2>
+      <div class="rule rule-c rv d2"></div>
+      <p class="sp rv d2">Our partners bring decades of courtroom experience and a track record that speaks for itself.</p>
+    </div>
+    <div class="att-grid">
+      <div class="att-card rv">
+        <div class="att-img">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="Victoria Ashford">
+          <div class="att-img-bar"></div>
+        </div>
+        <div class="att-info">
+          <h3>Victoria Ashford</h3>
+          <div class="role">Managing Partner</div>
+          <p>Former federal prosecutor. Specializes in personal injury and medical malpractice. Named to Super Lawyers every year since 2010.</p>
+          <div class="att-bar">CA Bar, 9th Circuit Court of Appeals</div>
+        </div>
+      </div>
+      <div class="att-card rv d2">
+        <div class="att-img">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="Robert Sterling">
+          <div class="att-img-bar"></div>
+        </div>
+        <div class="att-info">
+          <h3>Robert Sterling</h3>
+          <div class="role">Senior Partner</div>
+          <p>30+ years in criminal defense and business litigation. Has tried over 200 cases to verdict with a 96% success rate.</p>
+          <div class="att-bar">CA Bar, U.S. Supreme Court</div>
+        </div>
+      </div>
+      <div class="att-card rv d4">
+        <div class="att-img">
+          <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=500&q=80" alt="Diana Reyes">
+          <div class="att-img-bar"></div>
+        </div>
+        <div class="att-info">
+          <h3>Diana Reyes</h3>
+          <div class="role">Partner</div>
+          <p>Award-winning family law attorney. Known for her strategic approach to complex custody and high-net-worth divorce cases.</p>
+          <div class="att-bar">CA Bar, Certified Family Law Specialist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Case Results -->
+<section class="results section-pad linen" id="results">
+  <div class="container">
+    <div class="results-header">
+      <div class="stag rv">Case Results</div>
+      <h2 class="sh rv d1">Results That<br><em>Speak Volumes</em></h2>
+      <div class="rule rule-c rv d2" style="background:var(--teal-light);"></div>
+      <p class="sp rv d2">A selection of notable outcomes achieved for our clients. Past results do not guarantee future outcomes.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-item rv">
+        <div class="result-amount">$47.5M</div>
+        <div class="result-type">Verdict</div>
+        <div class="result-desc">Medical malpractice resulting in permanent brain injury</div>
+      </div>
+      <div class="result-item rv d1">
+        <div class="result-amount">$23.1M</div>
+        <div class="result-type">Settlement</div>
+        <div class="result-desc">Multi-vehicle commercial trucking accident</div>
+      </div>
+      <div class="result-item rv d2">
+        <div class="result-amount">$12.8M</div>
+        <div class="result-type">Verdict</div>
+        <div class="result-desc">Wrongful termination and employment discrimination</div>
+      </div>
+      <div class="result-item rv d3">
+        <div class="result-amount">Not Guilty</div>
+        <div class="result-type">Acquittal</div>
+        <div class="result-desc">Federal fraud charges, 3-week jury trial</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials section-pad" id="testimonials">
+  <div class="container">
+    <div class="test-header">
+      <div class="stag rv">Client Testimonials</div>
+      <h2 class="sh rv d1">Our Clients'<br><em>Experience</em></h2>
+      <div class="rule rule-c rv d2"></div>
+    </div>
+    <div class="test-grid">
+      <div class="test-card rv">
+        <div class="test-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>After my accident, I felt completely overwhelmed. Victoria Ashford took my case and handled everything with such professionalism and care. The settlement they secured changed my family's life.</blockquote>
+        <div class="test-author">
+          <strong>Margaret S.</strong>
+          <span>Personal Injury Client</span>
+        </div>
+      </div>
+      <div class="test-card rv d2">
+        <div class="test-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>Robert Sterling is the attorney you want in your corner when your future is on the line. He dismantled the prosecution's case methodically and secured a complete acquittal. Extraordinary.</blockquote>
+        <div class="test-author">
+          <strong>James T.</strong>
+          <span>Criminal Defense Client</span>
+        </div>
+      </div>
+      <div class="test-card rv d4">
+        <div class="test-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>Going through a divorce was the hardest thing I've ever done. Diana Reyes was not only a brilliant strategist but genuinely empathetic. She protected my interests and my children's wellbeing throughout.</blockquote>
+        <div class="test-author">
+          <strong>Catherine L.</strong>
+          <span>Family Law Client</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why section-pad" id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <div class="stag rv">Why Choose Us</div>
+        <h2 class="sh rv d1">The Ashford &amp; Sterling<br><em>Difference</em></h2>
+        <div class="rule rv d2"></div>
+        <div class="why-list">
+          <div class="why-item rv d2">
+            <div class="why-item-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div>
+              <h4>No Fee Unless You Win</h4>
+              <p>Personal injury cases are handled on contingency. You owe nothing unless we recover for you.</p>
+            </div>
+          </div>
+          <div class="why-item rv d3">
+            <div class="why-item-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <h4>Direct Partner Access</h4>
+              <p>Your case is handled by senior attorneys, not passed off to paralegals or junior staff.</p>
+            </div>
+          </div>
+          <div class="why-item rv d4">
+            <div class="why-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div>
+              <h4>Responsive Communication</h4>
+              <p>We return every call within 4 hours. You will never feel left in the dark about your case.</p>
+            </div>
+          </div>
+          <div class="why-item rv d5">
+            <div class="why-item-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div>
+              <h4>Trial-Ready Preparation</h4>
+              <p>We prepare every case for trial. Insurance companies know it, and that's why they settle for more.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-image rv d2">
+        <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?w=700&q=80" alt="Courthouse columns">
+        <div class="why-image-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner">
+  <div class="container">
+    <h2 class="rv">Your Case Deserves<br>Serious Attention.</h2>
+    <p class="rv d1">Contact us today for a free, confidential consultation. There is no obligation, and no fee unless we win your case.</p>
+    <div class="cta-actions rv d2">
+      <a href="#contact" class="btn btn-white">
+        Request Free Consultation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:+14155550234" class="btn" style="border:1px solid rgba(255,255,255,.4);color:var(--pure);">Call (415) 555-0234</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact section-pad" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="stag rv">Contact Us</div>
+        <h2 class="sh rv d1">Schedule Your<br><em>Consultation</em></h2>
+        <div class="rule rv d2"></div>
+        <p class="sp rv d2">All consultations are free and confidential. We'll review your case and advise you on your legal options with no obligation.</p>
+
+        <h3 class="rv d3">Office</h3>
+        <p class="rv d3">One Market Plaza, Suite 3600<br>San Francisco, CA 94105</p>
+
+        <h3 class="rv d3">Phone &amp; Email</h3>
+        <p class="rv d4">
+          <a href="tel:+14155550234">(415) 555-0234</a><br>
+          <a href="mailto:info@ashfordsterling.com">info@ashfordsterling.com</a>
+        </p>
+
+        <h3 class="rv d4">Office Hours</h3>
+        <p class="rv d4">Mon&ndash;Fri: 8:30am &ndash; 6:00pm<br>Sat: By appointment<br>24/7 for emergencies</p>
+
+        <div class="contact-map rv d5">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>View on Map</span>
+        </div>
+      </div>
+
+      <div class="contact-form rv d2">
+        <h3>Free Case Evaluation</h3>
+        <p>Tell us about your situation. All information is kept strictly confidential.</p>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Full Name</label>
+              <input type="text" id="fname" placeholder="John Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="fphone">Phone</label>
+              <input type="tel" id="fphone" placeholder="(415) 555-1234" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="femail">Email</label>
+              <input type="email" id="femail" placeholder="john@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="fcase">Case Type</label>
+              <select id="fcase">
+                <option value="">Select a practice area</option>
+                <option>Personal Injury</option>
+                <option>Criminal Defense</option>
+                <option>Family Law</option>
+                <option>Business Litigation</option>
+                <option>Estate Planning</option>
+                <option>Employment Law</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fmsg">Describe Your Situation</label>
+            <textarea id="fmsg" placeholder="Please provide a brief description of your legal matter..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-teal" style="width:100%;justify-content:center;">
+            Submit for Free Review
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p class="form-disclaimer">By submitting this form, you agree to our privacy policy. Submission of this form does not create an attorney-client relationship.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="gap:.5rem;">
+          <div class="nav-logo-mark" style="background:var(--teal-light);"></div>
+          <div>
+            <div class="nav-logo-text">Ashford &amp; Sterling</div>
+            <div class="nav-logo-sub" style="color:var(--steel);">Attorneys at Law</div>
+          </div>
+        </div>
+        <p>Distinguished legal counsel serving clients throughout California since 1998. AV Preeminent Rated by Martindale-Hubbell.</p>
+      </div>
+      <div>
+        <h4>Practice Areas</h4>
+        <ul>
+          <li><a href="#practice">Personal Injury</a></li>
+          <li><a href="#practice">Criminal Defense</a></li>
+          <li><a href="#practice">Family Law</a></li>
+          <li><a href="#practice">Business Litigation</a></li>
+          <li><a href="#practice">Estate Planning</a></li>
+          <li><a href="#practice">Employment Law</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#attorneys">Attorneys</a></li>
+          <li><a href="#results">Case Results</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#contact">Free Consultation</a></li>
+          <li><a href="tel:+14155550234">(415) 555-0234</a></li>
+          <li><a href="mailto:info@ashfordsterling.com">Email Us</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Avvo Profile</a></li>
+          <li><a href="#">Martindale-Hubbell</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">DISCLAIMER: The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Past results do not guarantee future outcomes.</p>
+      <div class="footer-copy">
+        <span>&copy; 2026 Ashford &amp; Sterling LLP. All rights reserved.</span>
+        <span><a href="#">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="#">Terms</a> &nbsp;&middot;&nbsp; <a href="#">Disclaimer</a> &nbsp;&middot;&nbsp; <a href="#">Sitemap</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Nav scroll */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>30);});
+
+/* Mobile menu */
+const tog=document.getElementById('navToggle'),lnk=document.getElementById('navLinks');
+tog.addEventListener('click',()=>{tog.classList.toggle('active');lnk.classList.toggle('open');});
+lnk.querySelectorAll('a').forEach(a=>{a.addEventListener('click',()=>{tog.classList.remove('active');lnk.classList.remove('open');});});
+
+/* Scroll reveal */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});
+},{threshold:.06,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* Form */
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.btn-teal');
+  const orig=btn.innerHTML;
+  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;"><path d="M20 6L9 17l-5-5"/></svg> Submitted Successfully';
+  btn.style.background='#1a7a3a';btn.style.borderColor='#1a7a3a';
+  setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';btn.style.borderColor='';e.target.reset();},3000);
+}
+
+/* Smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+</script>
+</body>
+</html>

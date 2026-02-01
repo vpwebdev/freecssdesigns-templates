@@ -1,0 +1,2399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Lumiere — Fine Jewelry Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════
+           CUSTOM PROPERTIES
+           ═══════════════════════════════════════════════════ */
+        :root {
+            --noir: #0a0a0a;
+            --noir-rich: #111111;
+            --noir-soft: #1a1a1a;
+            --champagne: #c8a96e;
+            --champagne-light: #dcc492;
+            --champagne-glow: #f0ddb0;
+            --champagne-muted: rgba(200, 169, 110, 0.12);
+            --platinum: #e8e4de;
+            --platinum-soft: #d4cfc7;
+            --silver-mist: #9a958d;
+            --rose-quartz: #c4a08a;
+            --deep-plum: #2a1f2d;
+            --crystal: rgba(255, 255, 255, 0.06);
+
+            --font-display: 'Playfair Display', 'Georgia', serif;
+            --font-body: 'Jost', 'Helvetica Neue', sans-serif;
+
+            --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --ease-dramatic: cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--champagne) var(--noir);
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 300;
+            color: var(--platinum);
+            background: var(--noir);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--champagne);
+            color: var(--noir);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           GRAIN OVERLAY
+           ═══════════════════════════════════════════════════ */
+        .grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ═══════════════════════════════════════════════════
+           DIAMOND SPARKLE CURSOR
+           ═══════════════════════════════════════════════════ */
+        .cursor-diamond {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--champagne);
+            transform: translate(-50%, -50%) rotate(45deg);
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.4s var(--ease-luxe),
+                        height 0.4s var(--ease-luxe),
+                        opacity 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .cursor-diamond.expand {
+            width: 20px;
+            height: 20px;
+            opacity: 0.4;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(200, 169, 110, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.5s var(--ease-luxe),
+                        height 0.5s var(--ease-luxe),
+                        border-color 0.4s ease;
+        }
+
+        .cursor-ring.expand {
+            width: 64px;
+            height: 64px;
+            border-color: rgba(200, 169, 110, 0.5);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           PRELOADER
+           ═══════════════════════════════════════════════════ */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--noir);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2.5rem;
+            transition: opacity 1s ease 0.3s, visibility 1s ease 0.3s;
+        }
+
+        .preloader.done {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-diamond {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .preloader-diamond::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--champagne);
+            transform: rotate(45deg);
+            animation: diamondPulse 1.8s var(--ease-dramatic) infinite;
+        }
+
+        @keyframes diamondPulse {
+            0%, 100% { transform: rotate(45deg) scale(1); opacity: 1; }
+            50% { transform: rotate(45deg) scale(0.6); opacity: 0.4; }
+        }
+
+        .preloader-brand {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            overflow: hidden;
+        }
+
+        .preloader-brand span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: preloaderLetter 0.5s var(--ease-luxe) forwards;
+        }
+
+        @keyframes preloaderLetter {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .preloader-tagline {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--silver-mist);
+            opacity: 0;
+            animation: fadeIn 0.8s ease 1s forwards;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            padding: 1.8rem 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.5s var(--ease-smooth);
+        }
+
+        .nav.scrolled {
+            padding: 1rem 4rem;
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(200, 169, 110, 0.06);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-brand-diamond {
+            width: 10px;
+            height: 10px;
+            background: var(--champagne);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        .nav-brand-text {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .nav-brand-text em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--champagne);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--silver-mist);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--champagne);
+            transition: all 0.4s var(--ease-luxe);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--platinum);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            padding: 0.75rem 2rem;
+            border: 1px solid rgba(200, 169, 110, 0.4);
+            color: var(--champagne);
+            transition: all 0.4s var(--ease-luxe);
+        }
+
+        .nav-cta:hover {
+            background: var(--champagne);
+            color: var(--noir);
+            border-color: var(--champagne);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 300;
+        }
+
+        .nav-hamburger span {
+            width: 24px;
+            height: 1px;
+            background: var(--champagne);
+            transition: all 0.4s var(--ease-luxe);
+            transform-origin: center;
+        }
+
+        /* Mobile overlay */
+        .mobile-nav {
+            position: fixed;
+            inset: 0;
+            background: var(--noir);
+            z-index: 199;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s var(--ease-luxe);
+        }
+
+        .mobile-nav.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav a {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: var(--platinum);
+            transition: color 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--champagne);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(200, 169, 110, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(42, 31, 45, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(200, 169, 110, 0.03) 0%, transparent 70%);
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, transparent 25%, rgba(200, 169, 110, 0.02) 50%, transparent 75%);
+            animation: heroShimmer 8s linear infinite;
+        }
+
+        @keyframes heroShimmer {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            100% { transform: translateX(100%) rotate(25deg); }
+        }
+
+        /* Art Deco geometric frame */
+        .hero-frame {
+            position: absolute;
+            inset: 2rem;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-frame-corner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+        }
+
+        .hero-frame-corner--tl {
+            top: 0; left: 0;
+            border-top: 1px solid rgba(200, 169, 110, 0.2);
+            border-left: 1px solid rgba(200, 169, 110, 0.2);
+        }
+
+        .hero-frame-corner--tr {
+            top: 0; right: 0;
+            border-top: 1px solid rgba(200, 169, 110, 0.2);
+            border-right: 1px solid rgba(200, 169, 110, 0.2);
+        }
+
+        .hero-frame-corner--bl {
+            bottom: 0; left: 0;
+            border-bottom: 1px solid rgba(200, 169, 110, 0.2);
+            border-left: 1px solid rgba(200, 169, 110, 0.2);
+        }
+
+        .hero-frame-corner--br {
+            bottom: 0; right: 0;
+            border-bottom: 1px solid rgba(200, 169, 110, 0.2);
+            border-right: 1px solid rgba(200, 169, 110, 0.2);
+        }
+
+        .hero-frame-corner::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--champagne);
+            transform: rotate(45deg);
+        }
+
+        .hero-frame-corner--tl::after { top: -3px; left: -3px; }
+        .hero-frame-corner--tr::after { top: -3px; right: -3px; }
+        .hero-frame-corner--bl::after { bottom: -3px; left: -3px; }
+        .hero-frame-corner--br::after { bottom: -3px; right: -3px; }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.6em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            overflow: hidden;
+        }
+
+        .hero-eyebrow span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: slideUp 0.8s var(--ease-luxe) 2.3s forwards;
+        }
+
+        .hero-eyebrow-line {
+            width: 50px;
+            height: 1px;
+            background: rgba(200, 169, 110, 0.4);
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 2.6s forwards;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -0.01em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(110%);
+            animation: slideUp 1.1s var(--ease-luxe) forwards;
+        }
+
+        .hero-title .line:nth-child(1) span { animation-delay: 2.5s; }
+        .hero-title .line:nth-child(2) span { animation-delay: 2.65s; }
+        .hero-title .line:nth-child(3) span { animation-delay: 2.8s; }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--champagne);
+        }
+
+        .hero-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 3.1s forwards;
+        }
+
+        .hero-ornament-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--champagne), transparent);
+        }
+
+        .hero-ornament-diamond {
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--champagne);
+            transform: rotate(45deg);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            font-weight: 200;
+            line-height: 1.9;
+            color: var(--silver-mist);
+            max-width: 520px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 3.3s forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeIn 1s ease 3.5s forwards;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 4s forwards;
+        }
+
+        .hero-scroll-text {
+            font-size: 0.55rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--silver-mist);
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: rgba(200, 169, 110, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--champagne);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0% { top: -100%; }
+            50% { top: 100%; }
+            100% { top: 100%; }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ═══════════════════════════════════════════════════
+           MARQUEE
+           ═══════════════════════════════════════════════════ */
+        .marquee {
+            padding: 1.8rem 0;
+            border-top: 1px solid rgba(200, 169, 110, 0.08);
+            border-bottom: 1px solid rgba(200, 169, 110, 0.08);
+            overflow: hidden;
+            background: var(--noir);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 40s linear infinite;
+        }
+
+        .marquee-item {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.12em;
+            color: var(--silver-mist);
+            white-space: nowrap;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .marquee-diamond {
+            width: 5px;
+            height: 5px;
+            background: var(--champagne);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+            opacity: 0.6;
+        }
+
+        @keyframes marqueeScroll {
+            to { transform: translateX(-50%); }
+        }
+
+        /* ═══════════════════════════════════════════════════
+           SCROLL REVEAL
+           ═══════════════════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s var(--ease-luxe),
+                        transform 1s var(--ease-luxe);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+        .reveal-d3 { transition-delay: 0.3s; }
+        .reveal-d4 { transition-delay: 0.4s; }
+
+        /* ═══════════════════════════════════════════════════
+           SECTION SHARED STYLES
+           ═══════════════════════════════════════════════════ */
+        .section-eyebrow {
+            font-size: 0.6rem;
+            font-weight: 400;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-eyebrow::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: var(--champagne);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--champagne);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           ABOUT / HERITAGE
+           ═══════════════════════════════════════════════════ */
+        .heritage {
+            padding: 8rem 4rem;
+            background: var(--noir-rich);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heritage::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: radial-gradient(ellipse at 80% 50%, rgba(200, 169, 110, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .heritage-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 6rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .heritage-visual {
+            position: relative;
+        }
+
+        .heritage-img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background:
+                linear-gradient(135deg, var(--noir-soft) 0%, var(--deep-plum) 50%, var(--noir-soft) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heritage-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(200, 169, 110, 0.03) 40px,
+                    rgba(200, 169, 110, 0.03) 41px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(200, 169, 110, 0.03) 40px,
+                    rgba(200, 169, 110, 0.03) 41px
+                );
+        }
+
+        .heritage-img-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 8rem;
+            font-weight: 400;
+            color: rgba(200, 169, 110, 0.08);
+            letter-spacing: 0.05em;
+        }
+
+        .heritage-frame {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid rgba(200, 169, 110, 0.15);
+            pointer-events: none;
+        }
+
+        .heritage-year-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background: var(--noir);
+            border: 1px solid rgba(200, 169, 110, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heritage-year-badge span:first-child {
+            font-size: 0.55rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--silver-mist);
+        }
+
+        .heritage-year-badge span:last-child {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--champagne);
+            margin-top: 0.2rem;
+        }
+
+        .heritage-content h3 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .heritage-content h3 em {
+            font-style: italic;
+            color: var(--champagne);
+        }
+
+        .heritage-content p {
+            font-size: 0.95rem;
+            font-weight: 200;
+            line-height: 2;
+            color: var(--silver-mist);
+            margin-bottom: 1.5rem;
+        }
+
+        .heritage-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(200, 169, 110, 0.1);
+        }
+
+        .heritage-value {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .heritage-value-diamond {
+            width: 6px;
+            height: 6px;
+            background: var(--champagne);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+            margin-top: 0.4rem;
+        }
+
+        .heritage-value-text {
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            color: var(--platinum-soft);
+        }
+
+        .heritage-value-detail {
+            font-size: 0.7rem;
+            color: var(--silver-mist);
+            margin-top: 0.2rem;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           COLLECTIONS
+           ═══════════════════════════════════════════════════ */
+        .collections {
+            padding: 8rem 4rem;
+            background: var(--noir);
+            position: relative;
+        }
+
+        .collections-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .collections-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .collections-header-desc {
+            max-width: 380px;
+            font-size: 0.9rem;
+            font-weight: 200;
+            line-height: 1.8;
+            color: var(--silver-mist);
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .collection-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            group: true;
+        }
+
+        .collection-card:first-child {
+            grid-row: span 2;
+        }
+
+        .collection-img {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+            background: var(--noir-soft);
+        }
+
+        .collection-card:first-child .collection-img {
+            min-height: 100%;
+        }
+
+        .collection-img-bg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            transition: transform 0.9s var(--ease-luxe);
+        }
+
+        .collection-card:hover .collection-img-bg {
+            transform: scale(1.06);
+        }
+
+        /* Elegant overlays for each collection */
+        .collection-card:nth-child(1) .collection-img-bg {
+            background: linear-gradient(135deg, #1a1520 0%, #2a1f2d 30%, #1a1a25 70%, #0f0f15 100%);
+        }
+
+        .collection-card:nth-child(2) .collection-img-bg {
+            background: linear-gradient(135deg, #1a1815 0%, #2a2518 40%, #1a1815 100%);
+        }
+
+        .collection-card:nth-child(3) .collection-img-bg {
+            background: linear-gradient(135deg, #151a1a 0%, #1a2525 40%, #151a1a 100%);
+        }
+
+        .collection-card:nth-child(4) .collection-img-bg {
+            background: linear-gradient(135deg, #1a1518 0%, #25181a 40%, #1a1518 100%);
+        }
+
+        .collection-card:nth-child(5) .collection-img-bg {
+            background: linear-gradient(135deg, #18181a 0%, #222228 40%, #18181a 100%);
+        }
+
+        /* Diamond/gem SVG illustrations within each card */
+        .collection-gem {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.08;
+            transition: opacity 0.6s ease;
+        }
+
+        .collection-card:hover .collection-gem {
+            opacity: 0.15;
+        }
+
+        .collection-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 40%, transparent 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            transition: background 0.5s ease;
+        }
+
+        .collection-tag {
+            font-size: 0.55rem;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            margin-bottom: 0.6rem;
+        }
+
+        .collection-name {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-card:first-child .collection-name {
+            font-size: 2.2rem;
+        }
+
+        .collection-desc {
+            font-size: 0.8rem;
+            font-weight: 200;
+            line-height: 1.7;
+            color: var(--silver-mist);
+            max-width: 280px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s var(--ease-luxe);
+        }
+
+        .collection-card:hover .collection-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .collection-arrow {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(200, 169, 110, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translate(-8px, 8px);
+            transition: all 0.5s var(--ease-luxe);
+        }
+
+        .collection-card:hover .collection-arrow {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           SHOWCASE BANNER
+           ═══════════════════════════════════════════════════ */
+        .showcase {
+            position: relative;
+            padding: 10rem 4rem;
+            text-align: center;
+            overflow: hidden;
+            background: var(--noir-rich);
+        }
+
+        .showcase-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background:
+                repeating-linear-gradient(
+                    60deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(200, 169, 110, 0.5) 80px,
+                    rgba(200, 169, 110, 0.5) 81px
+                ),
+                repeating-linear-gradient(
+                    -60deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(200, 169, 110, 0.5) 80px,
+                    rgba(200, 169, 110, 0.5) 81px
+                );
+        }
+
+        .showcase-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .showcase h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .showcase h2 em {
+            font-style: italic;
+            color: var(--champagne);
+        }
+
+        .showcase p {
+            font-size: 1rem;
+            font-weight: 200;
+            line-height: 1.9;
+            color: var(--silver-mist);
+            max-width: 480px;
+            margin: 0 auto 3rem;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           SERVICES / CRAFT
+           ═══════════════════════════════════════════════════ */
+        .craft {
+            padding: 8rem 4rem;
+            background: var(--noir);
+        }
+
+        .craft-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .craft-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .craft-header .section-eyebrow {
+            justify-content: center;
+        }
+
+        .craft-header .section-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .craft-header p {
+            font-size: 0.95rem;
+            font-weight: 200;
+            color: var(--silver-mist);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .craft-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .craft-card {
+            padding: 3rem 2rem;
+            border: 1px solid rgba(200, 169, 110, 0.06);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--ease-luxe);
+            text-align: center;
+        }
+
+        .craft-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--champagne);
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-luxe);
+        }
+
+        .craft-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .craft-card:hover {
+            background: rgba(200, 169, 110, 0.02);
+            border-color: rgba(200, 169, 110, 0.12);
+        }
+
+        .craft-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .craft-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: var(--champagne);
+            stroke-width: 0.8;
+            fill: none;
+        }
+
+        .craft-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .craft-card p {
+            font-size: 0.8rem;
+            font-weight: 200;
+            line-height: 1.8;
+            color: var(--silver-mist);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           TESTIMONIAL
+           ═══════════════════════════════════════════════════ */
+        .testimonial {
+            padding: 8rem 4rem;
+            background: var(--noir-rich);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200, 169, 110, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .testimonial-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial-quote-mark {
+            font-family: var(--font-display);
+            font-size: 10rem;
+            font-weight: 400;
+            color: rgba(200, 169, 110, 0.08);
+            line-height: 0.5;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--platinum);
+            margin-bottom: 3rem;
+        }
+
+        .testimonial-quote em {
+            font-style: normal;
+            color: var(--champagne);
+        }
+
+        .testimonial-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-ornament-line {
+            width: 40px;
+            height: 1px;
+            background: rgba(200, 169, 110, 0.3);
+        }
+
+        .testimonial-ornament-diamond {
+            width: 6px;
+            height: 6px;
+            border: 1px solid var(--champagne);
+            transform: rotate(45deg);
+        }
+
+        .testimonial-author {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--platinum);
+        }
+
+        .testimonial-role {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--silver-mist);
+            margin-top: 0.4rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-dot {
+            width: 8px;
+            height: 8px;
+            border: 1px solid rgba(200, 169, 110, 0.3);
+            transform: rotate(45deg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            padding: 0;
+        }
+
+        .testimonial-dot.active {
+            background: var(--champagne);
+            border-color: var(--champagne);
+        }
+
+        .testimonial-dot:hover {
+            border-color: var(--champagne);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           APPOINTMENT / CTA
+           ═══════════════════════════════════════════════════ */
+        .appointment {
+            padding: 8rem 4rem;
+            background: var(--noir);
+        }
+
+        .appointment-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .appointment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .appointment-info h3 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .appointment-info h3 em {
+            font-style: italic;
+            color: var(--champagne);
+        }
+
+        .appointment-info > p {
+            font-size: 0.95rem;
+            font-weight: 200;
+            line-height: 1.9;
+            color: var(--silver-mist);
+            margin-bottom: 3rem;
+        }
+
+        .appointment-detail {
+            margin-bottom: 1.8rem;
+        }
+
+        .appointment-detail-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            margin-bottom: 0.4rem;
+        }
+
+        .appointment-detail-value {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--platinum);
+        }
+
+        .appointment-detail-value a {
+            transition: color 0.3s;
+        }
+
+        .appointment-detail-value a:hover {
+            color: var(--champagne);
+        }
+
+        /* Form */
+        .appointment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.55rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--silver-mist);
+            margin-bottom: 0.6rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem 0;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 200;
+            color: var(--platinum);
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(200, 169, 110, 0.15);
+            outline: none;
+            transition: border-color 0.4s ease;
+            appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-bottom-color: var(--champagne);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(154, 149, 141, 0.5);
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .form-group select option {
+            background: var(--noir-rich);
+            color: var(--platinum);
+        }
+
+        /* Buttons */
+        .btn-gold {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            padding: 1.1rem 3rem;
+            background: var(--champagne);
+            color: var(--noir);
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-luxe);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--champagne-light);
+            transform: translateX(-101%);
+            transition: transform 0.5s var(--ease-luxe);
+        }
+
+        .btn-gold:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-gold span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-bordered {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            padding: 1.1rem 3rem;
+            border: 1px solid rgba(200, 169, 110, 0.4);
+            color: var(--champagne);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-luxe);
+        }
+
+        .btn-bordered:hover {
+            background: var(--champagne);
+            color: var(--noir);
+            border-color: var(--champagne);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════ */
+        .footer {
+            padding: 5rem 4rem 2rem;
+            background: var(--noir);
+            border-top: 1px solid rgba(200, 169, 110, 0.06);
+        }
+
+        .footer-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(200, 169, 110, 0.06);
+        }
+
+        .footer-brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand-logo .nav-brand-diamond {
+            width: 8px;
+            height: 8px;
+        }
+
+        .footer-brand-logo span {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            font-weight: 200;
+            line-height: 1.8;
+            color: var(--silver-mist);
+            max-width: 280px;
+        }
+
+        .footer-col h5 {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-col a {
+            font-size: 0.85rem;
+            font-weight: 200;
+            color: var(--silver-mist);
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--platinum);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+        }
+
+        .footer-copy {
+            font-size: 0.7rem;
+            font-weight: 200;
+            color: var(--silver-mist);
+            letter-spacing: 0.05em;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-social a {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--silver-mist);
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: var(--champagne);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .collections-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .collection-card:first-child {
+                grid-row: span 1;
+            }
+
+            .craft-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .appointment-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav { padding: 1.2rem 1.5rem; }
+            .nav.scrolled { padding: 0.8rem 1.5rem; }
+            .nav-links, .nav-cta { display: none; }
+            .nav-hamburger { display: flex; }
+
+            .hero { padding: 0 1.5rem; }
+            .hero-frame { inset: 1rem; }
+            .hero-frame-corner { width: 40px; height: 40px; }
+
+            .heritage { padding: 5rem 1.5rem; }
+            .heritage-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .collections { padding: 5rem 1.5rem; }
+            .collections-grid { grid-template-columns: 1fr; }
+            .collections-header { flex-direction: column; align-items: flex-start; }
+
+            .showcase { padding: 6rem 1.5rem; }
+
+            .craft { padding: 5rem 1.5rem; }
+            .craft-grid { grid-template-columns: 1fr; }
+
+            .testimonial { padding: 5rem 1.5rem; }
+
+            .appointment { padding: 5rem 1.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+
+            .footer { padding: 3rem 1.5rem 1.5rem; }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .cursor-diamond, .cursor-ring { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Grain -->
+    <div class="grain"></div>
+
+    <!-- Cursor -->
+    <div class="cursor-diamond" id="cursorDiamond"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-diamond"></div>
+        <div class="preloader-brand">
+            <span style="animation-delay:0.3s">M</span><span style="animation-delay:0.36s">a</span><span style="animation-delay:0.42s">i</span><span style="animation-delay:0.48s">s</span><span style="animation-delay:0.54s">o</span><span style="animation-delay:0.6s">n</span><span style="animation-delay:0.72s">&nbsp;</span><span style="animation-delay:0.78s">L</span><span style="animation-delay:0.84s">u</span><span style="animation-delay:0.9s">m</span><span style="animation-delay:0.96s">i</span><span style="animation-delay:1.02s">e</span><span style="animation-delay:1.08s">r</span><span style="animation-delay:1.14s">e</span>
+        </div>
+        <div class="preloader-tagline">Fine Jewelry Since 1987</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-brand">
+            <div class="nav-brand-diamond"></div>
+            <span class="nav-brand-text">Maison <em>Lumiere</em></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#heritage">Heritage</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#craft">Savoir-Faire</a></li>
+            <li><a href="#testimonials">Clientele</a></li>
+        </ul>
+        <a href="#appointment" class="nav-cta">Book a Viewing</a>
+        <div class="nav-hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#heritage" onclick="closeMobile()">Heritage</a>
+        <a href="#collections" onclick="closeMobile()">Collections</a>
+        <a href="#craft" onclick="closeMobile()">Savoir-Faire</a>
+        <a href="#testimonials" onclick="closeMobile()">Clientele</a>
+        <a href="#appointment" onclick="closeMobile()">Appointment</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-frame">
+            <div class="hero-frame-corner hero-frame-corner--tl"></div>
+            <div class="hero-frame-corner hero-frame-corner--tr"></div>
+            <div class="hero-frame-corner hero-frame-corner--bl"></div>
+            <div class="hero-frame-corner hero-frame-corner--br"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="hero-eyebrow-line"></span>
+                <span>Haute Joaillerie &mdash; Established 1987</span>
+                <span class="hero-eyebrow-line"></span>
+            </div>
+            <h1 class="hero-title">
+                <span class="line"><span>Where Light</span></span>
+                <span class="line"><span>Becomes</span></span>
+                <span class="line"><span><em>Legacy</em></span></span>
+            </h1>
+            <div class="hero-ornament">
+                <div class="hero-ornament-line"></div>
+                <div class="hero-ornament-diamond"></div>
+                <div class="hero-ornament-line"></div>
+            </div>
+            <p class="hero-subtitle">
+                For nearly four decades, Maison Lumiere has transformed the rarest
+                gemstones into heirloom masterpieces&mdash;each cut, setting, and curve
+                a testament to the art of brilliance.
+            </p>
+            <div class="hero-actions">
+                <a href="#collections" class="btn-gold"><span>Explore Collections</span></a>
+                <a href="#appointment" class="btn-bordered">Private Viewing</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span class="hero-scroll-text">Discover</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-track">
+            <span class="marquee-item">Engagement Rings <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Haute Joaillerie <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Bespoke Commissions <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Ethically Sourced <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Heritage Craftsmanship <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Diamond Expertise <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Engagement Rings <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Haute Joaillerie <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Bespoke Commissions <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Ethically Sourced <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Heritage Craftsmanship <span class="marquee-diamond"></span></span>
+            <span class="marquee-item">Diamond Expertise <span class="marquee-diamond"></span></span>
+        </div>
+    </div>
+
+    <!-- Heritage -->
+    <section class="heritage" id="heritage">
+        <div class="heritage-grid">
+            <div class="heritage-visual reveal">
+                <div class="heritage-img">
+                    <div class="heritage-img-inner">
+                        <!-- Art Deco gem illustration -->
+                        <svg width="200" height="240" viewBox="0 0 200 240" fill="none" stroke="rgba(200,169,110,0.15)" stroke-width="0.5">
+                            <polygon points="100,10 180,70 180,170 100,230 20,170 20,70"/>
+                            <polygon points="100,30 165,80 165,160 100,210 35,160 35,80"/>
+                            <line x1="100" y1="10" x2="100" y2="230"/>
+                            <line x1="20" y1="70" x2="180" y2="170"/>
+                            <line x1="180" y1="70" x2="20" y2="170"/>
+                            <polygon points="100,50 150,90 150,150 100,190 50,150 50,90"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="heritage-frame"></div>
+                <div class="heritage-year-badge">
+                    <span>Est.</span>
+                    <span>1987</span>
+                </div>
+            </div>
+            <div class="heritage-content reveal reveal-d2">
+                <div class="section-eyebrow">Our Heritage</div>
+                <h3>Four generations of mastering the art of <em>brilliance</em></h3>
+                <p>
+                    Born in the ateliers of Antwerp and perfected across decades,
+                    Maison Lumiere began with a simple conviction: that every stone
+                    carries a story, and every setting should honor it.
+                </p>
+                <p>
+                    Today, our master jewelers blend centuries-old techniques with
+                    contemporary vision, creating pieces that transcend fashion and
+                    become part of your family's legacy.
+                </p>
+                <div class="heritage-values">
+                    <div class="heritage-value">
+                        <div class="heritage-value-diamond"></div>
+                        <div>
+                            <div class="heritage-value-text">Hand-Set Stones</div>
+                            <div class="heritage-value-detail">Every gem placed by master artisans</div>
+                        </div>
+                    </div>
+                    <div class="heritage-value">
+                        <div class="heritage-value-diamond"></div>
+                        <div>
+                            <div class="heritage-value-text">Ethically Sourced</div>
+                            <div class="heritage-value-detail">Conflict-free certified origins</div>
+                        </div>
+                    </div>
+                    <div class="heritage-value">
+                        <div class="heritage-value-diamond"></div>
+                        <div>
+                            <div class="heritage-value-text">GIA Certified</div>
+                            <div class="heritage-value-detail">Independently verified quality</div>
+                        </div>
+                    </div>
+                    <div class="heritage-value">
+                        <div class="heritage-value-diamond"></div>
+                        <div>
+                            <div class="heritage-value-text">Lifetime Care</div>
+                            <div class="heritage-value-detail">Complimentary maintenance forever</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections -->
+    <section class="collections" id="collections">
+        <div class="collections-inner">
+            <div class="collections-header reveal">
+                <div>
+                    <div class="section-eyebrow">The Collections</div>
+                    <h2 class="section-title">Curated <em>Brilliance</em></h2>
+                </div>
+                <p class="collections-header-desc">
+                    Each collection embodies a distinct chapter of our maison's story&mdash;from ethereal bridal suites to bold statement haute joaillerie.
+                </p>
+            </div>
+            <div class="collections-grid">
+                <!-- Card 1: Featured large -->
+                <div class="collection-card reveal">
+                    <div class="collection-img">
+                        <div class="collection-img-bg"></div>
+                        <svg class="collection-gem" width="160" height="160" viewBox="0 0 160 160" fill="none" stroke="rgba(200,169,110,0.4)" stroke-width="0.5">
+                            <polygon points="80,10 150,50 150,110 80,150 10,110 10,50"/>
+                            <polygon points="80,30 130,60 130,100 80,130 30,100 30,60"/>
+                            <line x1="80" y1="10" x2="80" y2="150"/>
+                            <line x1="10" y1="50" x2="150" y2="110"/>
+                            <line x1="150" y1="50" x2="10" y2="110"/>
+                        </svg>
+                    </div>
+                    <div class="collection-overlay">
+                        <div class="collection-arrow">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--champagne)" stroke-width="1.2"><path d="M3 11L11 3M11 3H5M11 3V9"/></svg>
+                        </div>
+                        <div class="collection-tag">Signature Collection</div>
+                        <div class="collection-name">Eclat Eternel</div>
+                        <div class="collection-desc">Our flagship collection featuring rare D-flawless diamonds in architecturally inspired platinum settings.</div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="collection-card reveal reveal-d1">
+                    <div class="collection-img">
+                        <div class="collection-img-bg"></div>
+                        <svg class="collection-gem" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="rgba(200,169,110,0.4)" stroke-width="0.5">
+                            <circle cx="50" cy="50" r="40"/>
+                            <circle cx="50" cy="50" r="25"/>
+                            <circle cx="50" cy="50" r="12"/>
+                        </svg>
+                    </div>
+                    <div class="collection-overlay">
+                        <div class="collection-arrow">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--champagne)" stroke-width="1.2"><path d="M3 11L11 3M11 3H5M11 3V9"/></svg>
+                        </div>
+                        <div class="collection-tag">Bridal</div>
+                        <div class="collection-name">Promise</div>
+                        <div class="collection-desc">Engagement rings and wedding bands crafted to mark life's most luminous moment.</div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="collection-card reveal reveal-d2">
+                    <div class="collection-img">
+                        <div class="collection-img-bg"></div>
+                        <svg class="collection-gem" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="rgba(200,169,110,0.4)" stroke-width="0.5">
+                            <rect x="15" y="15" width="70" height="70" transform="rotate(45 50 50)"/>
+                            <rect x="25" y="25" width="50" height="50" transform="rotate(45 50 50)"/>
+                        </svg>
+                    </div>
+                    <div class="collection-overlay">
+                        <div class="collection-arrow">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--champagne)" stroke-width="1.2"><path d="M3 11L11 3M11 3H5M11 3V9"/></svg>
+                        </div>
+                        <div class="collection-tag">Colored Gems</div>
+                        <div class="collection-name">Jardin Secret</div>
+                        <div class="collection-desc">Emeralds, sapphires, and rubies in nature-inspired organic silhouettes.</div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="collection-card reveal reveal-d1">
+                    <div class="collection-img">
+                        <div class="collection-img-bg"></div>
+                        <svg class="collection-gem" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="rgba(200,169,110,0.4)" stroke-width="0.5">
+                            <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5"/>
+                            <line x1="50" y1="5" x2="50" y2="95"/>
+                            <line x1="5" y1="27.5" x2="95" y2="72.5"/>
+                            <line x1="95" y1="27.5" x2="5" y2="72.5"/>
+                        </svg>
+                    </div>
+                    <div class="collection-overlay">
+                        <div class="collection-arrow">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--champagne)" stroke-width="1.2"><path d="M3 11L11 3M11 3H5M11 3V9"/></svg>
+                        </div>
+                        <div class="collection-tag">Haute Joaillerie</div>
+                        <div class="collection-name">Celestine</div>
+                        <div class="collection-desc">One-of-a-kind statement pieces for extraordinary occasions.</div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="collection-card reveal reveal-d2">
+                    <div class="collection-img">
+                        <div class="collection-img-bg"></div>
+                        <svg class="collection-gem" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="rgba(200,169,110,0.4)" stroke-width="0.5">
+                            <ellipse cx="50" cy="50" rx="40" ry="25"/>
+                            <ellipse cx="50" cy="50" rx="25" ry="40"/>
+                        </svg>
+                    </div>
+                    <div class="collection-overlay">
+                        <div class="collection-arrow">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--champagne)" stroke-width="1.2"><path d="M3 11L11 3M11 3H5M11 3V9"/></svg>
+                        </div>
+                        <div class="collection-tag">Men's Collection</div>
+                        <div class="collection-name">Noir</div>
+                        <div class="collection-desc">Refined masculine jewelry in blackened gold and raw diamonds.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Banner -->
+    <section class="showcase">
+        <div class="showcase-pattern"></div>
+        <div class="showcase-content reveal">
+            <div class="section-eyebrow" style="justify-content:center; margin-bottom:1.5rem;">Bespoke Service</div>
+            <h2>Commission a Piece<br>as Unique as <em>You</em></h2>
+            <p>
+                From sketching your vision to sourcing the perfect stone, our bespoke atelier
+                brings your dream piece to life with unparalleled artistry and care.
+            </p>
+            <a href="#appointment" class="btn-gold"><span>Begin Your Journey</span></a>
+        </div>
+    </section>
+
+    <!-- Craft / Services -->
+    <section class="craft" id="craft">
+        <div class="craft-inner">
+            <div class="craft-header reveal">
+                <div class="section-eyebrow">Savoir-Faire</div>
+                <h2 class="section-title">The Art of Our <em>Craft</em></h2>
+                <p>From raw stone to radiant jewel, every step is guided by passion, precision, and an uncompromising eye for perfection.</p>
+            </div>
+            <div class="craft-grid">
+                <div class="craft-card reveal">
+                    <div class="craft-icon">
+                        <svg viewBox="0 0 56 56">
+                            <polygon points="28,4 52,18 52,38 28,52 4,38 4,18"/>
+                            <line x1="28" y1="4" x2="28" y2="52"/>
+                            <line x1="4" y1="18" x2="52" y2="38"/>
+                            <line x1="52" y1="18" x2="4" y2="38"/>
+                        </svg>
+                    </div>
+                    <h4>Stone Selection</h4>
+                    <p>We hand-select each gemstone from the world's most trusted sources, evaluating cut, clarity, color, and carat with unyielding precision.</p>
+                </div>
+                <div class="craft-card reveal reveal-d1">
+                    <div class="craft-icon">
+                        <svg viewBox="0 0 56 56">
+                            <circle cx="28" cy="28" r="22"/>
+                            <path d="M28 6C20 14 14 20 14 28C14 36 20 42 28 42"/>
+                            <path d="M28 6C36 14 42 20 42 28C42 36 36 42 28 42"/>
+                            <line x1="6" y1="28" x2="50" y2="28"/>
+                        </svg>
+                    </div>
+                    <h4>Design & CAD</h4>
+                    <p>Our designers merge hand sketches with cutting-edge 3D modeling to perfect every angle before a single tool touches metal.</p>
+                </div>
+                <div class="craft-card reveal reveal-d2">
+                    <div class="craft-icon">
+                        <svg viewBox="0 0 56 56">
+                            <rect x="8" y="14" width="40" height="28" rx="2"/>
+                            <path d="M8 22h40"/>
+                            <circle cx="28" cy="34" r="5"/>
+                            <path d="M20 42L28 50L36 42"/>
+                        </svg>
+                    </div>
+                    <h4>Master Setting</h4>
+                    <p>Each stone is set by hand under 10x magnification, ensuring flawless alignment and maximum light performance.</p>
+                </div>
+                <div class="craft-card reveal reveal-d3">
+                    <div class="craft-icon">
+                        <svg viewBox="0 0 56 56">
+                            <path d="M28 4L4 20V36L28 52L52 36V20Z"/>
+                            <path d="M28 4V52"/>
+                            <path d="M4 20L28 28L52 20"/>
+                            <path d="M28 28V52"/>
+                        </svg>
+                    </div>
+                    <h4>Final Polish</h4>
+                    <p>Every surface is hand-finished to a mirror sheen, with each piece undergoing our rigorous 37-point quality inspection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonial" id="testimonials">
+        <div class="testimonial-inner reveal">
+            <div class="section-eyebrow" style="justify-content:center; margin-bottom:2rem;">Clientele</div>
+            <div class="testimonial-quote-mark">&ldquo;</div>
+            <blockquote class="testimonial-quote" id="quoteText">
+                The ring Maison Lumiere created for our engagement was beyond anything we imagined.
+                It wasn't just a diamond&mdash;it was a <em>crystallized emotion</em>, a piece of art
+                that takes our breath away every single day.
+            </blockquote>
+            <div class="testimonial-ornament">
+                <div class="testimonial-ornament-line"></div>
+                <div class="testimonial-ornament-diamond"></div>
+                <div class="testimonial-ornament-line"></div>
+            </div>
+            <div class="testimonial-author" id="quoteAuthor">Alexandra & David Chen</div>
+            <div class="testimonial-role" id="quoteRole">Bespoke Engagement Ring, 2024</div>
+            <div class="testimonial-nav" id="testimonialNav">
+                <button class="testimonial-dot active" data-index="0"></button>
+                <button class="testimonial-dot" data-index="1"></button>
+                <button class="testimonial-dot" data-index="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment -->
+    <section class="appointment" id="appointment">
+        <div class="appointment-inner">
+            <div class="section-eyebrow reveal">Private Appointment</div>
+            <div class="appointment-grid">
+                <div class="appointment-info reveal">
+                    <h3>Experience the Maison <em>Lumiere</em> difference</h3>
+                    <p>
+                        Visit our salon for a private consultation with our gemologists and designers.
+                        Whether you're choosing an engagement ring or commissioning a bespoke
+                        masterpiece, we're here to guide every facet of the journey.
+                    </p>
+                    <div class="appointment-detail">
+                        <div class="appointment-detail-label">Salon</div>
+                        <div class="appointment-detail-value">712 Fifth Avenue, 3rd Floor<br>New York, NY 10019</div>
+                    </div>
+                    <div class="appointment-detail">
+                        <div class="appointment-detail-label">Email</div>
+                        <div class="appointment-detail-value"><a href="mailto:atelier@maisonlumiere.com">atelier@maisonlumiere.com</a></div>
+                    </div>
+                    <div class="appointment-detail">
+                        <div class="appointment-detail-label">Telephone</div>
+                        <div class="appointment-detail-value"><a href="tel:+12125559876">+1 (212) 555-9876</a></div>
+                    </div>
+                    <div class="appointment-detail">
+                        <div class="appointment-detail-label">Viewing Hours</div>
+                        <div class="appointment-detail-value">By appointment &mdash; Tues through Sat</div>
+                    </div>
+                </div>
+                <form class="appointment-form reveal reveal-d2" onsubmit="handleForm(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="Your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Your last name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telephone</label>
+                            <input type="tel" placeholder="+1 (___) ___-____">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Interest</label>
+                        <select>
+                            <option value="" disabled selected>Select your interest</option>
+                            <option>Engagement Ring</option>
+                            <option>Wedding Bands</option>
+                            <option>Bespoke Commission</option>
+                            <option>Haute Joaillerie</option>
+                            <option>Colored Gemstones</option>
+                            <option>Jewelry Restoration</option>
+                            <option>General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tell Us About Your Vision</label>
+                        <textarea placeholder="Describe what you're looking for, any inspirations, preferred stones or metals..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold"><span>Request Appointment</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-brand-logo">
+                        <div class="nav-brand-diamond"></div>
+                        <span>Maison Lumiere</span>
+                    </div>
+                    <p>Where light becomes legacy. Crafting extraordinary fine jewelry since 1987 from the heart of New York City.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Maison</h5>
+                    <ul>
+                        <li><a href="#heritage">Heritage</a></li>
+                        <li><a href="#collections">Collections</a></li>
+                        <li><a href="#craft">Savoir-Faire</a></li>
+                        <li><a href="#appointment">Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Services</h5>
+                    <ul>
+                        <li><a href="#">Bespoke Design</a></li>
+                        <li><a href="#">Ring Sizing</a></li>
+                        <li><a href="#">Restoration</a></li>
+                        <li><a href="#">Insurance Appraisal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">The Journal</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">&copy; 2026 Maison Lumiere. All rights reserved.</div>
+                <div class="footer-social">
+                    <a href="#">Instagram</a>
+                    <a href="#">Pinterest</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════
+         JAVASCRIPT
+         ═══════════════════════════════════════════════════ -->
+    <script>
+        // ── Preloader ──
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('done');
+            }, 2400);
+        });
+
+        // ── Custom Cursor ──
+        const diamond = document.getElementById('cursorDiamond');
+        const ring = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0;
+        let dX = 0, dY = 0, rX = 0, rY = 0;
+
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            dX += (mouseX - dX) * 0.2;
+            dY += (mouseY - dY) * 0.2;
+            rX += (mouseX - rX) * 0.08;
+            rY += (mouseY - rY) * 0.08;
+
+            diamond.style.left = dX + 'px';
+            diamond.style.top = dY + 'px';
+            ring.style.left = rX + 'px';
+            ring.style.top = rY + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('a, button, .collection-card, .craft-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                diamond.classList.add('expand');
+                ring.classList.add('expand');
+            });
+            el.addEventListener('mouseleave', () => {
+                diamond.classList.remove('expand');
+                ring.classList.remove('expand');
+            });
+        });
+
+        // ── Nav Scroll ──
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // ── Mobile Nav ──
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        let mobileOpen = false;
+
+        hamburger.addEventListener('click', () => {
+            mobileOpen = !mobileOpen;
+            mobileNav.classList.toggle('open', mobileOpen);
+            const bars = hamburger.querySelectorAll('span');
+            if (mobileOpen) {
+                bars[0].style.transform = 'translateY(6px) rotate(45deg)';
+                bars[1].style.opacity = '0';
+                bars[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+            } else {
+                bars.forEach(b => { b.style.transform = ''; b.style.opacity = ''; });
+            }
+        });
+
+        function closeMobile() {
+            mobileOpen = false;
+            mobileNav.classList.remove('open');
+            hamburger.querySelectorAll('span').forEach(b => {
+                b.style.transform = '';
+                b.style.opacity = '';
+            });
+        }
+
+        // ── Scroll Reveal ──
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ── Testimonial Carousel ──
+        const testimonials = [
+            {
+                quote: 'The ring Maison Lumiere created for our engagement was beyond anything we imagined. It wasn\'t just a diamond&mdash;it was a <em>crystallized emotion</em>, a piece of art that takes our breath away every single day.',
+                author: 'Alexandra & David Chen',
+                role: 'Bespoke Engagement Ring, 2024'
+            },
+            {
+                quote: 'I\'ve collected jewelry from maisons across Europe, but nothing compares to the <em>soul</em> that Lumiere puts into each piece. Their Celestine necklace is my most treasured possession.',
+                author: 'Isabelle Fontaine',
+                role: 'Haute Joaillerie Client, 2023'
+            },
+            {
+                quote: 'From the first sketch to the final reveal, the bespoke process was extraordinary. They transformed my grandmother\'s stones into something <em>breathtakingly modern</em> while honoring the past.',
+                author: 'Victoria Ashworth-Reid',
+                role: 'Heritage Redesign, 2025'
+            }
+        ];
+
+        let currentSlide = 0;
+        const quoteText = document.getElementById('quoteText');
+        const quoteAuthor = document.getElementById('quoteAuthor');
+        const quoteRole = document.getElementById('quoteRole');
+        const dots = document.querySelectorAll('.testimonial-dot');
+
+        function showSlide(index) {
+            const t = testimonials[index];
+            quoteText.style.opacity = '0';
+            quoteText.style.transform = 'translateY(15px)';
+            quoteAuthor.style.opacity = '0';
+            quoteRole.style.opacity = '0';
+
+            setTimeout(() => {
+                quoteText.innerHTML = t.quote;
+                quoteAuthor.textContent = t.author;
+                quoteRole.textContent = t.role;
+                quoteText.style.opacity = '1';
+                quoteText.style.transform = 'translateY(0)';
+                quoteAuthor.style.opacity = '1';
+                quoteRole.style.opacity = '1';
+            }, 400);
+
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        }
+
+        [quoteText, quoteAuthor, quoteRole].forEach(el => {
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.dataset.index);
+                showSlide(currentSlide);
+            });
+        });
+
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % testimonials.length;
+            showSlide(currentSlide);
+        }, 7000);
+
+        // ── Form Handler ──
+        function handleForm(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-gold span');
+            btn.textContent = 'Request Received';
+            setTimeout(() => {
+                btn.textContent = 'Request Appointment';
+                e.target.reset();
+            }, 3000);
+        }
+
+        // ── Smooth Scroll ──
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
