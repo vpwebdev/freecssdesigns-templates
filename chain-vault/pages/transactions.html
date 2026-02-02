@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChainVault &mdash; Transactions</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+      <div class="sidebar__header">
+        <div class="sidebar__logo">
+          <span class="sidebar__logo-icon" aria-hidden="true">&#x26D3;</span>
+          <span class="sidebar__logo-text">ChainVault</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="../index.html" class="nav__link">
+              <svg class="nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+              </svg>
+              <span>Portfolio</span>
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="wallet.html" class="nav__link">
+              <svg class="nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="M16 10h4v4h-4a2 2 0 010-4z"></path>
+              </svg>
+              <span>Wallet</span>
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="trade.html" class="nav__link">
+              <svg class="nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                <polyline points="16 7 22 7 22 13"></polyline>
+              </svg>
+              <span>Trade</span>
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="transactions.html" class="nav__link nav__link--active">
+              <svg class="nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path>
+              </svg>
+              <span>Transactions</span>
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="settings.html" class="nav__link">
+              <svg class="nav__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path>
+              </svg>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__network">
+          <span class="network-dot network-dot--active" aria-hidden="true"></span>
+          <span class="sidebar__network-label">Connected</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <nav class="topbar__breadcrumb" aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb__item"><a href="../index.html" class="breadcrumb__link">Portfolio</a></li>
+            <li class="breadcrumb__separator" aria-hidden="true">/</li>
+            <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">Transactions</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__network-badge glass-card">
+          <span class="network-dot network-dot--active" aria-hidden="true"></span>
+          <span>Ethereum Mainnet</span>
+        </div>
+        <button class="topbar__icon-btn" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 01-3.46 0"></path>
+          </svg>
+          <span class="topbar__notification-dot" aria-hidden="true"></span>
+        </button>
+        <div class="topbar__wallet glass-card">
+          <span class="wallet-address" title="0x7a3B4cD9e1F234567890aBcDeF12345678909f2E">0x7a3B...9f2E</span>
+          <button class="btn btn--icon btn--ghost" aria-label="Copy wallet address">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+      <!-- Filter Bar -->
+      <section class="tx-filters glass-card" aria-label="Transaction filters">
+        <div class="tx-filters__group">
+          <div class="form-select-wrapper">
+            <select class="form-select form-select--sm" aria-label="Filter by type">
+              <option selected>All Types</option>
+              <option>Send</option>
+              <option>Receive</option>
+              <option>Swap</option>
+            </select>
+          </div>
+
+          <div class="form-select-wrapper">
+            <select class="form-select form-select--sm" aria-label="Filter by status">
+              <option selected>All Status</option>
+              <option>Confirmed</option>
+              <option>Pending</option>
+              <option>Failed</option>
+            </select>
+          </div>
+
+          <div class="tx-filters__search">
+            <svg class="tx-filters__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="form-input form-input--sm" placeholder="Search by tx hash..." aria-label="Search by transaction hash">
+          </div>
+        </div>
+      </section>
+
+      <!-- Transaction Table -->
+      <section class="tx-table-wrapper glass-card" aria-label="Transaction history">
+        <div class="tx-table-scroll">
+          <table class="tx-table">
+            <thead>
+              <tr>
+                <th scope="col">Tx Hash</th>
+                <th scope="col">Type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">From / To</th>
+                <th scope="col">Status</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr>
+                <td>
+                  <span class="tx-hash wallet-address" title="0x8f3a...2c1d">0x8f3a...2c1d</span>
+                </td>
+                <td>
+                  <span class="tx-type-badge tx-type-badge--send">Send</span>
+                </td>
+                <td>
+                  <span class="tx-amount tx-amount--negative">-2.5 ETH</span>
+                </td>
+                <td>
+                  <span class="tx-party">To: <span class="wallet-address">0x4c1D...8a7B</span></span>
+                </td>
+                <td>
+                  <span class="tx-badge tx-badge--confirmed">Confirmed</span>
+                </td>
+                <td>
+                  <span class="tx-time">2 min ago</span>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr>
+                <td>
+                  <span class="tx-hash wallet-address" title="0x1b7e...9a4f">0x1b7e...9a4f</span>
+                </td>
+                <td>
+                  <span class="tx-type-badge tx-type-badge--receive">Receive</span>
+                </td>
+                <td>
+                  <span class="tx-amount tx-amount--positive">+0.085 BTC</span>
+                </td>
+                <td>
+                  <span class="tx-party">From: <span class="wallet-address">0x9eF2...3c4D</span></span>
+                </td>
+                <td>
+                  <span class="tx-badge tx-badge--confirmed">Confirmed</span>
+                </td>
+                <td>
+                  <span class="tx-time">15 min ago</span>
+                </td>
+              </tr>
+
+              <!-- Row 3 -->
+              <tr>
+                <td>
+                  <span class="tx-hash wallet-address" title="0x3d5c...7e2b">0x3d5c...7e2b</span>
+                </td>
+                <td>
+                  <span class="tx-type-badge tx-type-badge--swap">Swap</span>
+                </td>
+                <td>
+                  <span class="tx-amount">500 USDT &rarr; 0.151 ETH</span>
+                </td>
+                <td>
+                  <span class="tx-party">DEX Router</span>
+                </td>
+                <td>
+                  <span class="tx-badge tx-badge--confirmed">Confirmed</span>
+                </td>
+                <td>
+                  <span class="tx-time">1 hr ago</span>
+                </td>
+              </tr>
+
+              <!-- Row 4 -->
+              <tr>
+                <td>
+                  <span class="tx-hash wallet-address" title="0x6a9f...4d8c">0x6a9f...4d8c</span>
+                </td>
+                <td>
+                  <span class="tx-type-badge tx-type-badge--send">Send</span>
+                </td>
+                <td>
+                  <span class="tx-amount tx-amount--negative">-1,000 USDC</span>
+                </td>
+                <td>
+                  <span class="tx-party">To: <span class="wallet-address">0x2bA3...6f1E</span></span>
+                </td>
+                <td>
+                  <span class="tx-badge tx-badge--pending">Pending</span>
+                </td>
+                <td>
+                  <span class="tx-time">3 hr ago</span>
+                </td>
+              </tr>
+
+              <!-- Row 5 -->
+              <tr>
+                <td>
+                  <span class="tx-hash wallet-address" title="0x2e4b...8f3a">0x2e4b...8f3a</span>
+                </td>
+                <td>
+                  <span class="tx-type-badge tx-type-badge--receive">Receive</span>
+                </td>
+                <td>
+                  <span class="tx-amount tx-amount--positive">+50 SOL</span>
+                </td>
+                <td>
+                  <span class="tx-party">From: <span class="wallet-address">0x8cD1...2a5F</span></span>
+                </td>
+                <td>
+                  <span class="tx-badge tx-badge--confirmed">Confirmed</span>
+                </td>
+                <td>
+                  <span class="tx-time">5 hr ago</span>
+                </td>
+              </tr>
+
+              <!-- Row 6 -->
+              <tr>
+                <td>
+                  <span class="tx-hash wallet-address" title="0xc1d7...3b6e">0xc1d7...3b6e</span>
+                </td>
+                <td>
+                  <span class="tx-type-badge tx-type-badge--swap">Swap</span>
+                </td>
+                <td>
+                  <span class="tx-amount">0.5 ETH &rarr; 1,650 USDT</span>
+                </td>
+                <td>
+                  <span class="tx-party">DEX Router</span>
+                </td>
+                <td>
+                  <span class="tx-badge tx-badge--failed">Failed</span>
+                </td>
+                <td>
+                  <span class="tx-time">8 hr ago</span>
+                </td>
+              </tr>
+
+              <!-- Row 7 -->
+              <tr>
+                <td>
+                  <span class="tx-hash wallet-address" title="0x5f8a...1c9d">0x5f8a...1c9d</span>
+                </td>
+                <td>
+                  <span class="tx-type-badge tx-type-badge--send">Send</span>
+                </td>
+                <td>
+                  <span class="tx-amount tx-amount--negative">-0.25 BTC</span>
+                </td>
+                <td>
+                  <span class="tx-party">To: <span class="wallet-address">0x7eF4...9b2C</span></span>
+                </td>
+                <td>
+                  <span class="tx-badge tx-badge--confirmed">Confirmed</span>
+                </td>
+                <td>
+                  <span class="tx-time">12 hr ago</span>
+                </td>
+              </tr>
+
+              <!-- Row 8 -->
+              <tr>
+                <td>
+                  <span class="tx-hash wallet-address" title="0x9b2c...6e4a">0x9b2c...6e4a</span>
+                </td>
+                <td>
+                  <span class="tx-type-badge tx-type-badge--receive">Receive</span>
+                </td>
+                <td>
+                  <span class="tx-amount tx-amount--positive">+2,500 USDT</span>
+                </td>
+                <td>
+                  <span class="tx-party">From: <span class="wallet-address">0x3aB8...7d1F</span></span>
+                </td>
+                <td>
+                  <span class="tx-badge tx-badge--confirmed">Confirmed</span>
+                </td>
+                <td>
+                  <span class="tx-time">1 day ago</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="pagination" aria-label="Transaction pagination">
+          <button class="pagination__btn pagination__btn--prev" disabled aria-label="Previous page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Previous
+          </button>
+          <div class="pagination__pages">
+            <button class="pagination__page pagination__page--active" aria-current="page">1</button>
+            <button class="pagination__page">2</button>
+            <button class="pagination__page">3</button>
+            <span class="pagination__ellipsis" aria-hidden="true">...</span>
+            <button class="pagination__page">24</button>
+          </div>
+          <button class="pagination__btn pagination__btn--next" aria-label="Next page">
+            Next
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </nav>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="../scripts/main.js"></script>
+  <script src="../../template-banner.js"></script>
+</body>
+</html>
