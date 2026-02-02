@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Sanctum Church - Plan your visit, reach out with questions, or find directions to our location.">
+  <title>Contact | Sanctum Church</title>
+  
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝</text></svg>">
+  
+  <style>
+    .hero-contact { min-height: 50vh; display: grid; grid-template-columns: 1fr; }
+    @media (min-width: 1024px) { .hero-contact { grid-template-columns: 1fr 1fr; min-height: 60vh; } }
+    
+    .hero-contact__left { background: var(--color-black); color: var(--color-white); display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-16); }
+    .hero-contact__label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-gray-500); margin-bottom: var(--space-4); }
+    .hero-contact__title { font-size: var(--text-5xl); color: var(--color-white); margin-bottom: var(--space-6); }
+    .hero-contact__subtitle { font-size: var(--text-lg); color: var(--color-gray-400); max-width: 400px; }
+    
+    .hero-contact__right { background: var(--color-gray-100); display: flex; align-items: center; justify-content: center; padding: var(--space-16); }
+    .hero-contact__map { width: 100%; height: 100%; min-height: 300px; background: var(--color-gray-200); display: flex; align-items: center; justify-content: center; }
+    .hero-contact__map-placeholder { text-align: center; }
+    .hero-contact__map-icon { font-size: var(--text-4xl); margin-bottom: var(--space-4); color: var(--color-gray-400); }
+    .hero-contact__map-text { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gray-500); }
+    
+    .contact-section { padding: var(--space-24) 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-16); }
+    @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+    
+    .contact-info { padding-right: var(--space-12); }
+    .info-block { margin-bottom: var(--space-10); }
+    .info-block__title { font-family: var(--font-accent); font-size: var(--text-base); letter-spacing: 0.15em; margin-bottom: var(--space-4); }
+    .info-block__content { font-size: var(--text-lg); color: var(--color-gray-700); line-height: 1.8; }
+    .info-block__link { color: var(--color-black); border-bottom: 1px solid var(--color-gray-300); transition: border-color var(--transition-fast); }
+    .info-block__link:hover { border-color: var(--color-black); }
+    
+    .contact-form { background: var(--color-gray-100); padding: var(--space-10); }
+    .contact-form__title { font-family: var(--font-display); font-size: var(--text-2xl); margin-bottom: var(--space-2); }
+    .contact-form__subtitle { font-size: var(--text-base); color: var(--color-gray-600); margin-bottom: var(--space-8); }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+    @media (min-width: 768px) { .form-row { grid-template-columns: repeat(2, 1fr); } }
+    
+    .visit-section { background: var(--color-black); color: var(--color-white); padding: var(--space-24) 0; }
+    .visit-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-12); }
+    @media (min-width: 1024px) { .visit-grid { grid-template-columns: 2fr 1fr; align-items: start; } }
+    
+    .visit-content__title { font-size: var(--text-4xl); color: var(--color-white); margin-bottom: var(--space-6); }
+    .visit-content__text { font-size: var(--text-lg); color: var(--color-gray-400); line-height: 1.8; margin-bottom: var(--space-8); }
+    
+    .visit-steps { counter-reset: visit-step; }
+    .visit-step { display: grid; grid-template-columns: 50px 1fr; gap: var(--space-4); margin-bottom: var(--space-6); counter-increment: visit-step; }
+    .visit-step__number { font-family: var(--font-display); font-size: var(--text-3xl); color: var(--color-gray-700); line-height: 1; }
+    .visit-step__number::before { content: counter(visit-step); }
+    .visit-step__title { font-family: var(--font-accent); font-size: var(--text-base); letter-spacing: 0.1em; color: var(--color-white); margin-bottom: var(--space-2); }
+    .visit-step__text { font-size: var(--text-sm); color: var(--color-gray-500); }
+    
+    .visit-sidebar { background: var(--color-gray-900); padding: var(--space-8); }
+    .visit-sidebar__title { font-family: var(--font-accent); font-size: var(--text-lg); letter-spacing: 0.1em; color: var(--color-white); margin-bottom: var(--space-6); }
+    .visit-sidebar__item { padding: var(--space-4) 0; border-bottom: 1px solid var(--color-gray-800); }
+    .visit-sidebar__item:last-child { border-bottom: none; }
+    .visit-sidebar__label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gray-600); margin-bottom: var(--space-1); }
+    .visit-sidebar__value { font-size: var(--text-base); color: var(--color-gray-300); }
+    
+    .faq-section { padding: var(--space-24) 0; }
+    .faq-list { max-width: 800px; margin: var(--space-12) auto 0; }
+    .faq-item { border-bottom: var(--border-thin); padding: var(--space-6) 0; }
+    .faq-item__question { font-family: var(--font-display); font-size: var(--text-lg); }
+    .faq-item__answer { font-size: var(--text-base); color: var(--color-gray-600); line-height: 1.8; padding-top: var(--space-4); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo"><span class="header__logo-cross">✝</span>SANCTUM</a>
+        <nav class="nav">
+          <a href="index.html" class="nav__link">Home</a>
+          <a href="about.html" class="nav__link">About</a>
+          <a href="ministries.html" class="nav__link">Ministries</a>
+          <a href="sermons.html" class="nav__link">Sermons</a>
+          <a href="contact.html" class="nav__link nav__link--active">Contact</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav__link">Home</a>
+    <a href="about.html" class="mobile-nav__link">About</a>
+    <a href="ministries.html" class="mobile-nav__link">Ministries</a>
+    <a href="sermons.html" class="mobile-nav__link">Sermons</a>
+    <a href="contact.html" class="mobile-nav__link">Contact</a>
+  </nav>
+  
+  <main class="page-enter">
+    <section class="hero-contact">
+      <div class="hero-contact__left">
+        <p class="hero-contact__label reveal">Get in Touch</p>
+        <h1 class="hero-contact__title reveal reveal-delay-1">Contact Us</h1>
+        <p class="hero-contact__subtitle reveal reveal-delay-2">We'd love to hear from you. Whether you're planning a visit or have a question, we're here to help.</p>
+      </div>
+      <div class="hero-contact__right">
+        <div class="hero-contact__map">
+          <div class="hero-contact__map-placeholder">
+            <div class="hero-contact__map-icon">📍</div>
+            <p class="hero-contact__map-text">1234 Grace Avenue<br>Austin, TX 78701</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <div class="info-block">
+              <h2 class="info-block__title">Address</h2>
+              <p class="info-block__content">1234 Grace Avenue<br>Austin, TX 78701</p>
+            </div>
+            <div class="info-block">
+              <h2 class="info-block__title">Service Times</h2>
+              <p class="info-block__content">Sunday: 9:00 AM & 11:00 AM<br>Wednesday: 7:00 PM</p>
+            </div>
+            <div class="info-block">
+              <h2 class="info-block__title">Phone</h2>
+              <p class="info-block__content"><a href="tel:+15125551234" class="info-block__link">(512) 555-1234</a></p>
+            </div>
+            <div class="info-block">
+              <h2 class="info-block__title">Email</h2>
+              <p class="info-block__content"><a href="mailto:hello@sanctum.church" class="info-block__link">hello@sanctum.church</a></p>
+            </div>
+            <div class="info-block">
+              <h2 class="info-block__title">Office Hours</h2>
+              <p class="info-block__content">Monday–Friday: 9:00 AM – 5:00 PM</p>
+            </div>
+          </div>
+          
+          <div class="contact-form reveal reveal-delay-1">
+            <h2 class="contact-form__title">Send a Message</h2>
+            <p class="contact-form__subtitle">Fill out the form below and we'll get back to you soon.</p>
+            <form>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="firstName">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="lastName">Last Name *</label>
+                  <input type="text" id="lastName" name="lastName" class="form-input" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address *</label>
+                <input type="email" id="email" name="email" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">Message *</label>
+                <textarea id="message" name="message" class="form-textarea" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn--large" style="width: 100%;">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="visit-section">
+      <div class="container">
+        <div class="visit-grid">
+          <div class="visit-content reveal">
+            <h2 class="visit-content__title">Plan Your Visit</h2>
+            <p class="visit-content__text">We know visiting a new church can feel intimidating. Here's what you can expect.</p>
+            <div class="visit-steps">
+              <div class="visit-step">
+                <div class="visit-step__number"></div>
+                <div>
+                  <h3 class="visit-step__title">Arrive & Park</h3>
+                  <p class="visit-step__text">Look for our greeters in the parking lot.</p>
+                </div>
+              </div>
+              <div class="visit-step">
+                <div class="visit-step__number"></div>
+                <div>
+                  <h3 class="visit-step__title">Check In</h3>
+                  <p class="visit-step__text">Stop by our welcome desk for a visitor packet.</p>
+                </div>
+              </div>
+              <div class="visit-step">
+                <div class="visit-step__number"></div>
+                <div>
+                  <h3 class="visit-step__title">Kids Check-In</h3>
+                  <p class="visit-step__text">Register children for age-appropriate programming.</p>
+                </div>
+              </div>
+              <div class="visit-step">
+                <div class="visit-step__number"></div>
+                <div>
+                  <h3 class="visit-step__title">Find a Seat</h3>
+                  <p class="visit-step__text">Grab a coffee and sit anywhere. Services last about 75 minutes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="visit-sidebar reveal reveal-delay-1">
+            <h3 class="visit-sidebar__title">Quick Info</h3>
+            <div class="visit-sidebar__item">
+              <p class="visit-sidebar__label">What to Wear</p>
+              <p class="visit-sidebar__value">Come as you are—casual to dressy</p>
+            </div>
+            <div class="visit-sidebar__item">
+              <p class="visit-sidebar__label">Service Length</p>
+              <p class="visit-sidebar__value">Approximately 75 minutes</p>
+            </div>
+            <div class="visit-sidebar__item">
+              <p class="visit-sidebar__label">Parking</p>
+              <p class="visit-sidebar__value">Free parking in our main lot</p>
+            </div>
+            <div class="visit-sidebar__item">
+              <p class="visit-sidebar__label">Accessibility</p>
+              <p class="visit-sidebar__value">Wheelchair accessible</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header section-header--center reveal">
+          <p class="section-header__label">Common Questions</p>
+          <h2 class="section-header__title">FAQ</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal">
+            <h3 class="faq-item__question">What denomination is Sanctum Church?</h3>
+            <p class="faq-item__answer">Sanctum is a non-denominational Christian church. We hold to historic Christian beliefs while welcoming people from all backgrounds.</p>
+          </div>
+          <div class="faq-item reveal reveal-delay-1">
+            <h3 class="faq-item__question">Is there childcare available?</h3>
+            <p class="faq-item__answer">Yes! We offer nursery care for infants through age 2, and programming for children ages 3-12 during all Sunday services.</p>
+          </div>
+          <div class="faq-item reveal reveal-delay-2">
+            <h3 class="faq-item__question">Can I watch services online?</h3>
+            <p class="faq-item__answer">Absolutely. All Sunday services are livestreamed and archived on our Sermons page.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">✝ SANCTUM</div>
+          <p class="footer__tagline">"Come to me, all who labor and are heavy laden, and I will give you rest."</p>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Navigate</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="about.html" class="footer__link">About Us</a>
+            <a href="ministries.html" class="footer__link">Ministries</a>
+            <a href="sermons.html" class="footer__link">Sermons</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+          </div>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Visit</h4>
+          <div class="footer__links">
+            <span class="footer__link">1234 Grace Avenue</span>
+            <span class="footer__link">Austin, TX 78701</span>
+          </div>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Connect</h4>
+          <div class="footer__links">
+            <a href="tel:+15125551234" class="footer__link">(512) 555-1234</a>
+            <a href="mailto:hello@sanctum.church" class="footer__link">hello@sanctum.church</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© <span class="current-year">2026</span> Sanctum Church. All rights reserved.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link">Instagram</a>
+          <a href="#" class="footer__social-link">Facebook</a>
+          <a href="#" class="footer__social-link">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="scripts/main.js"></script>
+</body>
+</html>

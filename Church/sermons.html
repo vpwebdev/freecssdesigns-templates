@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Watch and listen to sermons from Sanctum Church. Explore our message archive and current teaching series.">
+  <title>Sermons | Sanctum Church</title>
+  
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝</text></svg>">
+  
+  <style>
+    .hero-sermons {
+      min-height: 50vh;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-16) 0;
+      background: var(--color-white);
+      position: relative;
+    }
+    
+    .hero-sermons__accent {
+      position: absolute;
+      top: var(--header-height);
+      right: 0;
+      bottom: 0;
+      width: 40%;
+      background: var(--color-gray-100);
+      z-index: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-sermons__accent { display: none; }
+    }
+    
+    .hero-sermons__content { position: relative; z-index: 1; }
+    
+    .hero-sermons__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-4);
+    }
+    
+    .hero-sermons__title {
+      font-size: var(--text-6xl);
+      margin-bottom: var(--space-6);
+    }
+    
+    .hero-sermons__subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-gray-600);
+      max-width: 500px;
+    }
+    
+    .current-series {
+      background: var(--color-black);
+      color: var(--color-white);
+      padding: var(--space-24) 0;
+    }
+    
+    .series-feature {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+    
+    @media (min-width: 1024px) {
+      .series-feature { grid-template-columns: 1fr 1fr; align-items: center; }
+    }
+    
+    .series-feature__image {
+      aspect-ratio: 16 / 9;
+      background: var(--color-gray-900);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .series-feature__image-text {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      font-style: italic;
+      color: var(--color-gray-700);
+      text-align: center;
+      padding: var(--space-8);
+    }
+    
+    .series-feature__play {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--color-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    
+    .series-feature__play:hover {
+      background: var(--color-white);
+      transform: scale(1.1);
+    }
+    
+    .series-feature__play::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 20px solid var(--color-white);
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      margin-left: 4px;
+      transition: border-color var(--transition-base);
+    }
+    
+    .series-feature__play:hover::after { border-left-color: var(--color-black); }
+    
+    .series-feature__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-3);
+    }
+    
+    .series-feature__title {
+      font-size: var(--text-4xl);
+      color: var(--color-white);
+      margin-bottom: var(--space-4);
+    }
+    
+    .series-feature__desc {
+      font-size: var(--text-lg);
+      color: var(--color-gray-400);
+      line-height: 1.8;
+      margin-bottom: var(--space-6);
+    }
+    
+    .series-feature__meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-6);
+    }
+    
+    .archive-section { padding: var(--space-24) 0; }
+    
+    .archive-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      margin-bottom: var(--space-12);
+    }
+    
+    @media (min-width: 768px) {
+      .archive-header { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+    }
+    
+    .filter-tabs {
+      display: flex;
+      gap: var(--space-1);
+      flex-wrap: wrap;
+    }
+    
+    .filter-tab {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: var(--space-3) var(--space-5);
+      border: 1px solid var(--color-gray-300);
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    
+    .filter-tab:hover, .filter-tab--active {
+      background: var(--color-black);
+      border-color: var(--color-black);
+      color: var(--color-white);
+    }
+    
+    .sermon-list { display: flex; flex-direction: column; }
+    
+    .sermon-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      padding: var(--space-6) 0;
+      border-bottom: var(--border-thin);
+      transition: all var(--transition-fast);
+    }
+    
+    @media (min-width: 768px) {
+      .sermon-item { grid-template-columns: 100px 1fr 120px 100px; align-items: center; gap: var(--space-6); }
+    }
+    
+    .sermon-item:hover { background: var(--color-gray-100); margin: 0 calc(var(--space-6) * -1); padding-left: var(--space-6); padding-right: var(--space-6); }
+    
+    .sermon-date {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+    }
+    
+    .sermon-info__title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-1);
+    }
+    
+    .sermon-info__speaker {
+      font-size: var(--text-sm);
+      color: var(--color-gray-600);
+    }
+    
+    .sermon-series {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.05em;
+      color: var(--color-gray-500);
+      display: none;
+    }
+    
+    @media (min-width: 768px) {
+      .sermon-series { display: block; }
+    }
+    
+    .sermon-action { text-align: right; }
+    
+    .sermon-action__link {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      transition: gap var(--transition-fast);
+    }
+    
+    .sermon-action__link:hover { gap: var(--space-3); }
+    
+    .past-series { background: var(--color-gray-100); padding: var(--space-24) 0; }
+    
+    .series-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      margin-top: var(--space-12);
+    }
+    
+    @media (min-width: 768px) { .series-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .series-grid { grid-template-columns: repeat(3, 1fr); } }
+    
+    .series-card {
+      background: var(--color-white);
+      border: var(--border-thin);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+    
+    .series-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    
+    .series-card__image {
+      aspect-ratio: 16 / 9;
+      background: var(--color-gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: var(--border-thin);
+    }
+    
+    .series-card__image-text {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-style: italic;
+      color: var(--color-gray-400);
+    }
+    
+    .series-card__content { padding: var(--space-6); }
+    
+    .series-card__title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-2);
+    }
+    
+    .series-card__meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+    }
+    
+    .subscribe-section { padding: var(--space-24) 0; text-align: center; }
+    
+    .subscribe-section__title {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-4);
+    }
+    
+    .subscribe-section__text {
+      font-size: var(--text-lg);
+      color: var(--color-gray-600);
+      margin-bottom: var(--space-8);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .subscribe-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
+    
+    .subscribe-link {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition-fast);
+    }
+    
+    .subscribe-link:hover { border-bottom-color: var(--color-black); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo"><span class="header__logo-cross">✝</span>SANCTUM</a>
+        <nav class="nav">
+          <a href="index.html" class="nav__link">Home</a>
+          <a href="about.html" class="nav__link">About</a>
+          <a href="ministries.html" class="nav__link">Ministries</a>
+          <a href="sermons.html" class="nav__link nav__link--active">Sermons</a>
+          <a href="contact.html" class="nav__link">Contact</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav__link">Home</a>
+    <a href="about.html" class="mobile-nav__link">About</a>
+    <a href="ministries.html" class="mobile-nav__link">Ministries</a>
+    <a href="sermons.html" class="mobile-nav__link">Sermons</a>
+    <a href="contact.html" class="mobile-nav__link">Contact</a>
+  </nav>
+  
+  <main class="page-enter">
+    <section class="hero-sermons">
+      <div class="hero-sermons__accent"></div>
+      <div class="container">
+        <div class="hero-sermons__content">
+          <p class="hero-sermons__label reveal">Listen & Watch</p>
+          <h1 class="hero-sermons__title reveal reveal-delay-1">Sermons</h1>
+          <p class="hero-sermons__subtitle reveal reveal-delay-2">
+            Explore our teaching archive and stay connected 
+            with our latest messages.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="current-series">
+      <div class="container">
+        <div class="series-feature">
+          <div class="series-feature__image reveal">
+            <div class="series-feature__image-text">Unshakeable</div>
+            <div class="series-feature__play"></div>
+          </div>
+          
+          <div class="reveal reveal-delay-1">
+            <p class="series-feature__label">Current Series</p>
+            <h2 class="series-feature__title">Unshakeable</h2>
+            <p class="series-feature__desc">
+              In a world of constant change and uncertainty, how do we build 
+              a faith that stands firm? Join us as we explore what it means 
+              to be rooted in something eternal.
+            </p>
+            <p class="series-feature__meta">6 Week Series — Started January 12</p>
+            <a href="#archive" class="btn btn--white">View All Messages</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="archive" class="archive-section">
+      <div class="container">
+        <div class="archive-header">
+          <div class="section-header reveal">
+            <p class="section-header__label">Archive</p>
+            <h2 class="section-header__title">Recent Messages</h2>
+          </div>
+          
+          <div class="filter-tabs reveal">
+            <button class="filter-tab filter-tab--active">All</button>
+            <button class="filter-tab">2026</button>
+            <button class="filter-tab">2025</button>
+            <button class="filter-tab">2024</button>
+          </div>
+        </div>
+        
+        <div class="sermon-list">
+          <article class="sermon-item reveal">
+            <span class="sermon-date">Feb 2</span>
+            <div class="sermon-info">
+              <h3 class="sermon-info__title">Built on the Rock</h3>
+              <p class="sermon-info__speaker">Rev. James Mitchell</p>
+            </div>
+            <span class="sermon-series">Unshakeable</span>
+            <div class="sermon-action">
+              <a href="#" class="sermon-action__link">Watch →</a>
+            </div>
+          </article>
+          
+          <article class="sermon-item reveal reveal-delay-1">
+            <span class="sermon-date">Jan 26</span>
+            <div class="sermon-info">
+              <h3 class="sermon-info__title">When the Ground Shakes</h3>
+              <p class="sermon-info__speaker">Dr. Elena Martinez</p>
+            </div>
+            <span class="sermon-series">Unshakeable</span>
+            <div class="sermon-action">
+              <a href="#" class="sermon-action__link">Watch →</a>
+            </div>
+          </article>
+          
+          <article class="sermon-item reveal reveal-delay-2">
+            <span class="sermon-date">Jan 19</span>
+            <div class="sermon-info">
+              <h3 class="sermon-info__title">Anchored in Hope</h3>
+              <p class="sermon-info__speaker">Rev. James Mitchell</p>
+            </div>
+            <span class="sermon-series">Unshakeable</span>
+            <div class="sermon-action">
+              <a href="#" class="sermon-action__link">Watch →</a>
+            </div>
+          </article>
+          
+          <article class="sermon-item reveal">
+            <span class="sermon-date">Jan 12</span>
+            <div class="sermon-info">
+              <h3 class="sermon-info__title">Foundations That Last</h3>
+              <p class="sermon-info__speaker">Rev. James Mitchell</p>
+            </div>
+            <span class="sermon-series">Unshakeable</span>
+            <div class="sermon-action">
+              <a href="#" class="sermon-action__link">Watch →</a>
+            </div>
+          </article>
+          
+          <article class="sermon-item reveal reveal-delay-1">
+            <span class="sermon-date">Jan 5</span>
+            <div class="sermon-info">
+              <h3 class="sermon-info__title">New Year, New Creation</h3>
+              <p class="sermon-info__speaker">Dr. Elena Martinez</p>
+            </div>
+            <span class="sermon-series">Stand Alone</span>
+            <div class="sermon-action">
+              <a href="#" class="sermon-action__link">Watch →</a>
+            </div>
+          </article>
+          
+          <article class="sermon-item reveal reveal-delay-2">
+            <span class="sermon-date">Dec 29</span>
+            <div class="sermon-info">
+              <h3 class="sermon-info__title">The Light Has Come</h3>
+              <p class="sermon-info__speaker">Rev. James Mitchell</p>
+            </div>
+            <span class="sermon-series">Advent</span>
+            <div class="sermon-action">
+              <a href="#" class="sermon-action__link">Watch →</a>
+            </div>
+          </article>
+        </div>
+        
+        <div style="text-align: center; margin-top: var(--space-12);">
+          <a href="#" class="btn btn--secondary">Load More Messages</a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="past-series">
+      <div class="container">
+        <div class="section-header section-header--center reveal">
+          <p class="section-header__label">Explore</p>
+          <h2 class="section-header__title">Past Series</h2>
+        </div>
+        
+        <div class="series-grid">
+          <article class="series-card reveal">
+            <div class="series-card__image">
+              <span class="series-card__image-text">Advent</span>
+            </div>
+            <div class="series-card__content">
+              <h3 class="series-card__title">Advent: Waiting in Hope</h3>
+              <p class="series-card__meta">4 Messages — Dec 2025</p>
+            </div>
+          </article>
+          
+          <article class="series-card reveal reveal-delay-1">
+            <div class="series-card__image">
+              <span class="series-card__image-text">Restore</span>
+            </div>
+            <div class="series-card__content">
+              <h3 class="series-card__title">Restore: Finding Wholeness</h3>
+              <p class="series-card__meta">8 Messages — Oct–Nov 2025</p>
+            </div>
+          </article>
+          
+          <article class="series-card reveal reveal-delay-2">
+            <div class="series-card__image">
+              <span class="series-card__image-text">Rooted</span>
+            </div>
+            <div class="series-card__content">
+              <h3 class="series-card__title">Rooted: Growing Deep</h3>
+              <p class="series-card__meta">6 Messages — Sep 2025</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    
+    <section class="subscribe-section">
+      <div class="container">
+        <div class="cross-decoration" style="margin: 0 auto var(--space-8);"></div>
+        <h2 class="subscribe-section__title reveal">Never Miss a Message</h2>
+        <p class="subscribe-section__text reveal reveal-delay-1">
+          Subscribe to our podcast or follow us on your favorite platform.
+        </p>
+        <div class="subscribe-links reveal reveal-delay-2">
+          <a href="#" class="subscribe-link">Apple Podcasts</a>
+          <a href="#" class="subscribe-link">Spotify</a>
+          <a href="#" class="subscribe-link">YouTube</a>
+          <a href="#" class="subscribe-link">RSS Feed</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">✝ SANCTUM</div>
+          <p class="footer__tagline">"Come to me, all who labor and are heavy laden, and I will give you rest."</p>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Navigate</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="about.html" class="footer__link">About Us</a>
+            <a href="ministries.html" class="footer__link">Ministries</a>
+            <a href="sermons.html" class="footer__link">Sermons</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+          </div>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Visit</h4>
+          <div class="footer__links">
+            <span class="footer__link">1234 Grace Avenue</span>
+            <span class="footer__link">Austin, TX 78701</span>
+          </div>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Connect</h4>
+          <div class="footer__links">
+            <a href="tel:+15125551234" class="footer__link">(512) 555-1234</a>
+            <a href="mailto:hello@sanctum.church" class="footer__link">hello@sanctum.church</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© <span class="current-year">2026</span> Sanctum Church. All rights reserved.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link">Instagram</a>
+          <a href="#" class="footer__social-link">Facebook</a>
+          <a href="#" class="footer__social-link">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="scripts/main.js"></script>
+</body>
+</html>

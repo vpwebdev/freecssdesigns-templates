@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialPulse - Social Media Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-sidebar: #0d0d0d;
+            --bg-card: #161616;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --text-muted: #555555;
+            --accent-blue: #3b82f6;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-orange: #f97316;
+            --accent-pink: #ec4899;
+            --accent-cyan: #06b6d4;
+            --border-color: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: var(--bg-sidebar);
+            min-height: 100vh;
+            padding: 1.5rem 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        .logo {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        .user-profile {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff, #888888);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #000000;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+            background: var(--accent-blue);
+            border-radius: 0;
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-cyan);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+        .nav-arrow {
+            margin-left: auto;
+            opacity: 0.5;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 240px;
+            padding: 1.5rem 2rem;
+        }
+
+        /* Top Bar */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .topbar-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .topbar-icon:hover {
+            color: var(--text-primary);
+        }
+
+        .notification-badge {
+            position: relative;
+        }
+
+        .notification-badge::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-red);
+            border-radius: 50%;
+        }
+
+        .user-avatar-small {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff, #888888);
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .date-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #ffffff;
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .stat-card.sales::before { background: var(--accent-green); }
+        .stat-card.purchase::before { background: var(--accent-blue); }
+        .stat-card.return::before { background: var(--accent-cyan); }
+        .stat-card.marketing::before { background: var(--accent-red); }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card.sales .stat-value { color: var(--accent-green); }
+        .stat-card.purchase .stat-value { color: var(--accent-blue); }
+        .stat-card.return .stat-value { color: var(--accent-cyan); }
+        .stat-card.marketing .stat-value { color: var(--accent-red); }
+
+        .stat-compare {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .stat-change.up { color: var(--accent-green); }
+        .stat-change.down { color: var(--accent-red); }
+
+        .stat-sparkline {
+            width: 80px;
+            height: 30px;
+        }
+
+        /* Charts Row */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .card-legend {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.online { background: var(--accent-orange); }
+        .legend-dot.store { background: var(--accent-pink); }
+
+        .card-menu {
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .chart-container {
+            height: 250px;
+            position: relative;
+        }
+
+        /* Stats Row Below Chart */
+        .chart-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chart-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chart-stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-stat-icon.balance { background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); }
+        .chart-stat-icon.ads { background: rgba(34, 197, 94, 0.15); color: var(--accent-green); }
+        .chart-stat-icon.sales { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+        .chart-stat-icon.earning { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); }
+
+        .chart-stat-value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .chart-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Donut Chart */
+        .donut-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .donut-chart {
+            width: 180px;
+            height: 180px;
+            position: relative;
+        }
+
+        .donut-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .donut-stat {
+            text-align: center;
+        }
+
+        .donut-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .donut-stat-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .donut-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .donut-dot.instagram { background: var(--accent-pink); }
+        .donut-dot.youtube { background: var(--accent-red); }
+        .donut-dot.facebook { background: var(--accent-blue); }
+
+        /* Table Section */
+        .table-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .table-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 1rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .product-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .product-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .product-placeholder {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .product-placeholder.orange { background: linear-gradient(135deg, #ffffff, #cccccc); }
+        .product-placeholder.blue { background: linear-gradient(135deg, #888888, #aaaaaa); }
+        .product-placeholder.green { background: linear-gradient(135deg, #666666, #888888); }
+        .product-placeholder.purple { background: linear-gradient(135deg, #444444, #666666); }
+        .product-placeholder.pink { background: linear-gradient(135deg, #333333, #555555); }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-badge.paid {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--accent-green);
+        }
+
+        .status-badge.pending {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .status-badge.cancelled {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Date Dropdown */
+        .date-badge {
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .date-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .date-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .date-option {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .date-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-stat {
+            text-align: center;
+        }
+
+        .modal-stat-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-stat-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .modal-stat-value.positive {
+            color: var(--accent-green);
+        }
+
+        .modal-stat-value.negative {
+            color: var(--accent-red);
+        }
+
+        .modal-chart {
+            height: 200px;
+        }
+
+        /* Search Overlay */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 15vh;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .search-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-container {
+            background: var(--bg-card);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(-20px);
+            transition: transform 0.3s;
+        }
+
+        .search-overlay.show .search-container {
+            transform: translateY(0);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-results {
+            border-top: 1px solid var(--border-color);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .search-result-title {
+            font-size: 0.95rem;
+        }
+
+        .search-result-type {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* Notification Panel */
+        .notification-panel {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 300px;
+            z-index: 100;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .notification-header {
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .notification-item {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .notification-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .notification-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .notification-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .notification-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .notification-footer {
+            padding: 0.75rem 1.25rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .notification-footer:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Table Row Selection */
+        .data-table tbody tr.selected {
+            background: rgba(66, 133, 244, 0.1);
+        }
+
+        .data-table tbody tr {
+            transition: background 0.2s;
+        }
+
+        /* Stat Card Transitions */
+        .stat-card {
+            transition: transform 0.15s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Chart Stat Transitions */
+        .chart-stat {
+            transition: transform 0.2s;
+        }
+
+        /* Donut Stat Transitions */
+        .donut-stat {
+            transition: opacity 0.3s;
+        }
+
+        /* Topbar Right Positioning */
+        .topbar-right {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">Social<span>Pulse</span></div>
+        
+        <div class="user-profile">
+            <div class="avatar">JD</div>
+            <div class="user-name">John Doe</div>
+            <div class="user-status">
+                <span class="status-dot"></span>
+                Online
+            </div>
+        </div>
+
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <button class="menu-toggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="topbar-right">
+                <svg class="topbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <div class="notification-badge">
+                    <svg class="topbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </div>
+                <div class="notification-badge">
+                    <svg class="topbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                </div>
+                <div class="user-avatar-small"></div>
+                <svg class="topbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Dashboard</h1>
+            <div class="date-badge">
+                Today: Jul 13
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card sales">
+                <div class="stat-label">Total Followers</div>
+                <div class="stat-value">2.4M</div>
+                <div class="stat-compare">(1.8M Last Month)</div>
+                <div class="stat-footer">
+                    <div class="stat-change up">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 15l-6-6-6 6"/>
+                        </svg>
+                        33.2%
+                    </div>
+                    <canvas id="sparkline1" class="stat-sparkline"></canvas>
+                </div>
+            </div>
+            <div class="stat-card purchase">
+                <div class="stat-label">Engagement Rate</div>
+                <div class="stat-value">8.7%</div>
+                <div class="stat-compare">(6.2% Last Month)</div>
+                <div class="stat-footer">
+                    <div class="stat-change up">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 15l-6-6-6 6"/>
+                        </svg>
+                        40.3%
+                    </div>
+                    <canvas id="sparkline2" class="stat-sparkline"></canvas>
+                </div>
+            </div>
+            <div class="stat-card return">
+                <div class="stat-label">Video Views</div>
+                <div class="stat-value">12.8M</div>
+                <div class="stat-compare">(9.1M Last Month)</div>
+                <div class="stat-footer">
+                    <div class="stat-change up">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 15l-6-6-6 6"/>
+                        </svg>
+                        40.6%
+                    </div>
+                    <canvas id="sparkline3" class="stat-sparkline"></canvas>
+                </div>
+            </div>
+            <div class="stat-card marketing">
+                <div class="stat-label">Revenue</div>
+                <div class="stat-value">$48.5k</div>
+                <div class="stat-compare">($32.1k Last Month)</div>
+                <div class="stat-footer">
+                    <div class="stat-change up">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 15l-6-6-6 6"/>
+                        </svg>
+                        51.1%
+                    </div>
+                    <canvas id="sparkline4" class="stat-sparkline"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Content Performance</h2>
+                        <div class="card-legend">
+                            <span class="legend-item"><span class="legend-dot online"></span> YouTube</span>
+                            <span class="legend-item"><span class="legend-dot store"></span> Instagram</span>
+                        </div>
+                    </div>
+                    <div class="card-menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"/>
+                            <line x1="3" y1="6" x2="21" y2="6"/>
+                            <line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+                <div class="chart-stats">
+                    <div class="chart-stat">
+                        <div class="chart-stat-icon balance">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="chart-stat-value">847K</div>
+                            <div class="chart-stat-label">Subscribers</div>
+                        </div>
+                    </div>
+                    <div class="chart-stat">
+                        <div class="chart-stat-icon ads">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="chart-stat-value">1.2M</div>
+                            <div class="chart-stat-label">Total Likes</div>
+                        </div>
+                    </div>
+                    <div class="chart-stat">
+                        <div class="chart-stat-icon sales">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="chart-stat-value">89.4K</div>
+                            <div class="chart-stat-label">Comments</div>
+                        </div>
+                    </div>
+                    <div class="chart-stat">
+                        <div class="chart-stat-icon earning">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="18" cy="5" r="3"/>
+                                <circle cx="6" cy="12" r="3"/>
+                                <circle cx="18" cy="19" r="3"/>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="chart-stat-value">234K</div>
+                            <div class="chart-stat-label">Shares</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Audience by Platform</h2>
+                </div>
+                <div class="donut-container">
+                    <div class="donut-chart">
+                        <canvas id="donutChart"></canvas>
+                    </div>
+                    <div class="donut-stats">
+                        <div class="donut-stat">
+                            <div class="donut-stat-value">42%</div>
+                            <div class="donut-stat-label">
+                                <span class="donut-dot instagram"></span>
+                                YouTube
+                            </div>
+                        </div>
+                        <div class="donut-stat">
+                            <div class="donut-stat-value">31%</div>
+                            <div class="donut-stat-label">
+                                <span class="donut-dot youtube"></span>
+                                TikTok
+                            </div>
+                        </div>
+                        <div class="donut-stat">
+                            <div class="donut-stat-value">27%</div>
+                            <div class="donut-stat-label">
+                                <span class="donut-dot facebook"></span>
+                                Instagram
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-section">
+            <h2 class="table-title">Scheduled Content</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Content</th>
+                        <th>Platform</th>
+                        <th>Schedule</th>
+                        <th>Creator</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <div class="product-placeholder orange">YT</div>
+                                How to Grow Your Channel in 2024
+                            </div>
+                        </td>
+                        <td>YouTube</td>
+                        <td>Today, 3:00 PM</td>
+                        <td>Sarah</td>
+                        <td><span class="status-badge paid">Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <div class="product-placeholder blue">IG</div>
+                                Behind the Scenes Reel
+                            </div>
+                        </td>
+                        <td>Instagram</td>
+                        <td>Tomorrow, 11:00 AM</td>
+                        <td>Mike</td>
+                        <td><span class="status-badge pending">In Review</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <div class="product-placeholder green">TT</div>
+                                Trending Sound Challenge
+                            </div>
+                        </td>
+                        <td>TikTok</td>
+                        <td>Tomorrow, 6:00 PM</td>
+                        <td>Emma</td>
+                        <td><span class="status-badge paid">Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <div class="product-placeholder purple">YT</div>
+                                Weekly Q&A Livestream
+                            </div>
+                        </td>
+                        <td>YouTube</td>
+                        <td>Friday, 7:00 PM</td>
+                        <td>James</td>
+                        <td><span class="status-badge pending">Editing</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <div class="product-placeholder pink">IG</div>
+                                Product Launch Carousel
+                            </div>
+                        </td>
+                        <td>Instagram</td>
+                        <td>Saturday, 10:00 AM</td>
+                        <td>Olivia</td>
+                        <td><span class="status-badge cancelled">Draft</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // Chart.js configuration
+        Chart.defaults.color = '#8b92a5';
+        Chart.defaults.borderColor = '#2d3548';
+
+        // Dashboard State
+        const dashboardState = {
+            currentPeriod: 'today',
+            followers: 2400000,
+            engagement: 8.7,
+            views: 12800000,
+            revenue: 48500,
+            notifications: 3,
+            messages: 5
+        };
+
+        // Utility Functions
+        function formatCurrency(value) {
+            if (value >= 1000) {
+                return '$' + (value / 1000).toFixed(1) + 'k';
+            }
+            return '$' + value;
+        }
+
+        function randomInRange(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function animateValue(element, start, end, duration) {
+            const startTime = performance.now();
+            const update = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = start + (end - start) * easeOut;
+                element.textContent = formatCurrency(Math.round(current));
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            };
+            requestAnimationFrame(update);
+        }
+
+        // Sparkline charts
+        const sparklineConfig = (color, data) => ({
+            type: 'line',
+            data: {
+                labels: ['', '', '', '', '', '', ''],
+                datasets: [{
+                    data: data,
+                    borderColor: color,
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { display: false },
+                    y: { display: false }
+                }
+            }
+        });
+
+        const sparkline1 = new Chart(document.getElementById('sparkline1'), sparklineConfig('#22c55e', [30, 40, 35, 50, 49, 60, 70]));
+        const sparkline2 = new Chart(document.getElementById('sparkline2'), sparklineConfig('#3b82f6', [50, 45, 60, 55, 40, 45, 35]));
+        const sparkline3 = new Chart(document.getElementById('sparkline3'), sparklineConfig('#06b6d4', [20, 30, 25, 40, 35, 50, 60]));
+        const sparkline4 = new Chart(document.getElementById('sparkline4'), sparklineConfig('#ef4444', [60, 55, 50, 45, 40, 35, 30]));
+
+        // Sales Chart
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+        const gradient1 = salesCtx.createLinearGradient(0, 0, 0, 250);
+        gradient1.addColorStop(0, 'rgba(249, 115, 22, 0.3)');
+        gradient1.addColorStop(1, 'rgba(249, 115, 22, 0)');
+
+        const gradient2 = salesCtx.createLinearGradient(0, 0, 0, 250);
+        gradient2.addColorStop(0, 'rgba(236, 72, 153, 0.3)');
+        gradient2.addColorStop(1, 'rgba(236, 72, 153, 0)');
+
+        const salesChart = new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                datasets: [{
+                    label: 'YouTube',
+                    data: [40, 80, 60, 90, 70, 85, 75, 95, 100, 120],
+                    borderColor: '#f97316',
+                    backgroundColor: gradient1,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    pointHoverBackgroundColor: '#f97316',
+                    pointHoverBorderColor: '#000',
+                    pointHoverBorderWidth: 2
+                }, {
+                    label: 'Instagram',
+                    data: [20, 40, 35, 50, 60, 45, 55, 65, 70, 55],
+                    borderColor: '#ec4899',
+                    backgroundColor: gradient2,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    pointHoverBackgroundColor: '#ec4899',
+                    pointHoverBorderColor: '#000',
+                    pointHoverBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1e2536',
+                        titleColor: '#fff',
+                        bodyColor: '#8b92a5',
+                        borderColor: '#2d3548',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: true,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y + 'K views';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 160,
+                        ticks: {
+                            callback: (value) => value + 'K'
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+
+        // Donut Chart
+        const donutChart = new Chart(document.getElementById('donutChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['YouTube', 'TikTok', 'Instagram'],
+                datasets: [{
+                    data: [42, 31, 27],
+                    backgroundColor: ['#ec4899', '#ef4444', '#3b82f6'],
+                    borderWidth: 0,
+                    cutout: '70%',
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1e2536',
+                        titleColor: '#fff',
+                        bodyColor: '#8b92a5',
+                        borderColor: '#2d3548',
+                        borderWidth: 1,
+                        padding: 12,
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Interactive Elements
+
+        // Date Picker Dropdown
+        const dateBadge = document.querySelector('.date-badge');
+        const dateDropdown = document.createElement('div');
+        dateDropdown.className = 'date-dropdown';
+        dateDropdown.innerHTML = `
+            <div class="date-option" data-period="today">Today</div>
+            <div class="date-option" data-period="week">This Week</div>
+            <div class="date-option" data-period="month">This Month</div>
+            <div class="date-option" data-period="year">This Year</div>
+        `;
+        dateBadge.appendChild(dateDropdown);
+
+        dateBadge.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dateDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => {
+            dateDropdown.classList.remove('show');
+        });
+
+        dateDropdown.querySelectorAll('.date-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const period = option.dataset.period;
+                dashboardState.currentPeriod = period;
+                updateDateBadge(period);
+                updateDashboardData(period);
+                dateDropdown.classList.remove('show');
+            });
+        });
+
+        function updateDateBadge(period) {
+            const dateText = dateBadge.childNodes[0];
+            const labels = {
+                today: 'Today: Jul 13',
+                week: 'This Week',
+                month: 'July 2024',
+                year: 'Year 2024'
+            };
+            dateText.textContent = labels[period] + ' ';
+        }
+
+        function updateDashboardData(period) {
+            // Static dashboard - no chart updates
+        }
+
+        // Sparkline updates disabled for static dashboard
+
+        // Stat Cards Click Interaction
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+                
+                // Simulate drill-down modal
+                const type = this.classList[1];
+                showModal(type);
+            });
+        });
+
+        // Modal System
+        function showModal(type) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            
+            const titles = {
+                sales: 'Followers Breakdown',
+                purchase: 'Engagement Details',
+                return: 'Video Views Analytics',
+                marketing: 'Revenue Breakdown'
+            };
+
+            const data = generateModalData(type);
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>${titles[type]}</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-stats">
+                            <div class="modal-stat">
+                                <span class="modal-stat-label">Total</span>
+                                <span class="modal-stat-value">${data.total}</span>
+                            </div>
+                            <div class="modal-stat">
+                                <span class="modal-stat-label">Average</span>
+                                <span class="modal-stat-value">${data.average}</span>
+                            </div>
+                            <div class="modal-stat">
+                                <span class="modal-stat-label">Growth</span>
+                                <span class="modal-stat-value ${data.growth > 0 ? 'positive' : 'negative'}">${data.growth > 0 ? '+' : ''}${data.growth}%</span>
+                            </div>
+                        </div>
+                        <div class="modal-chart">
+                            <canvas id="modalChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animate modal in
+            requestAnimationFrame(() => {
+                modal.classList.add('show');
+            });
+
+            // Create modal chart
+            const modalCtx = document.getElementById('modalChart').getContext('2d');
+            new Chart(modalCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        data: data.chartData,
+                        backgroundColor: data.color,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Close modal
+            modal.querySelector('.modal-close').addEventListener('click', () => {
+                modal.classList.remove('show');
+                setTimeout(() => modal.remove(), 300);
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    setTimeout(() => modal.remove(), 300);
+                }
+            });
+        }
+
+        function generateModalData(type) {
+            const colors = {
+                sales: '#22c55e',
+                purchase: '#3b82f6',
+                return: '#06b6d4',
+                marketing: '#ef4444'
+            };
+            
+            return {
+                total: formatCurrency(randomInRange(10000, 50000)),
+                average: formatCurrency(randomInRange(1000, 5000)),
+                growth: randomInRange(-20, 50),
+                chartData: Array.from({length: 7}, () => randomInRange(500, 3000)),
+                color: colors[type]
+            };
+        }
+
+        // Search Functionality
+        const searchIcon = document.querySelector('.topbar-icon');
+        searchIcon.style.cursor = 'pointer';
+        searchIcon.addEventListener('click', () => {
+            const searchOverlay = document.createElement('div');
+            searchOverlay.className = 'search-overlay';
+            searchOverlay.innerHTML = `
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search dashboard..." autofocus>
+                    <div class="search-results"></div>
+                </div>
+            `;
+            document.body.appendChild(searchOverlay);
+            
+            requestAnimationFrame(() => searchOverlay.classList.add('show'));
+            
+            const input = searchOverlay.querySelector('.search-input');
+            const results = searchOverlay.querySelector('.search-results');
+            
+            const searchItems = [
+                { title: 'Content Calendar', type: 'Schedule' },
+                { title: 'YouTube Analytics', type: 'Report' },
+                { title: 'Instagram Insights', type: 'Report' },
+                { title: 'TikTok Performance', type: 'Chart' },
+                { title: 'Scheduled Posts', type: 'Table' },
+                { title: 'Revenue Dashboard', type: 'Report' },
+                { title: 'Audience Demographics', type: 'Analytics' },
+                { title: 'Account Settings', type: 'Settings' }
+            ];
+            
+            input.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                if (query.length < 1) {
+                    results.innerHTML = '';
+                    return;
+                }
+                
+                const filtered = searchItems.filter(item => 
+                    item.title.toLowerCase().includes(query)
+                );
+                
+                results.innerHTML = filtered.map(item => `
+                    <div class="search-result-item">
+                        <span class="search-result-title">${item.title}</span>
+                        <span class="search-result-type">${item.type}</span>
+                    </div>
+                `).join('');
+            });
+            
+            searchOverlay.addEventListener('click', (e) => {
+                if (e.target === searchOverlay) {
+                    searchOverlay.classList.remove('show');
+                    setTimeout(() => searchOverlay.remove(), 300);
+                }
+            });
+            
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    searchOverlay.classList.remove('show');
+                    setTimeout(() => searchOverlay.remove(), 300);
+                }
+            });
+        });
+
+        // Notification Badge Click
+        document.querySelectorAll('.notification-badge').forEach((badge, index) => {
+            badge.style.cursor = 'pointer';
+            badge.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showNotificationPanel(index === 0 ? 'messages' : 'notifications');
+            });
+        });
+
+        function showNotificationPanel(type) {
+            // Remove existing panel
+            const existing = document.querySelector('.notification-panel');
+            if (existing) {
+                existing.remove();
+                return;
+            }
+            
+            const panel = document.createElement('div');
+            panel.className = 'notification-panel';
+            
+            const items = type === 'messages' ? [
+                { title: 'Brand Collab', text: 'New sponsorship inquiry from Nike', time: '2m ago' },
+                { title: 'Sarah (Editor)', text: 'Video edit is ready for review', time: '1h ago' },
+                { title: 'Mike (Manager)', text: 'Q4 content strategy meeting at 3pm', time: '3h ago' }
+            ] : [
+                { title: 'Viral Alert', text: 'Your TikTok hit 1M views!', time: '5m ago' },
+                { title: 'New Milestone', text: 'You reached 500K subscribers!', time: '1h ago' },
+                { title: 'Engagement Spike', text: 'Latest reel getting 3x avg engagement', time: '2h ago' }
+            ];
+            
+            panel.innerHTML = `
+                <div class="notification-header">${type === 'messages' ? 'Messages' : 'Notifications'}</div>
+                ${items.map(item => `
+                    <div class="notification-item">
+                        <div class="notification-title">${item.title}</div>
+                        <div class="notification-text">${item.text}</div>
+                        <div class="notification-time">${item.time}</div>
+                    </div>
+                `).join('')}
+                <div class="notification-footer">View All</div>
+            `;
+            
+            document.querySelector('.topbar-right').appendChild(panel);
+            
+            document.addEventListener('click', function closePanel(e) {
+                if (!panel.contains(e.target)) {
+                    panel.remove();
+                    document.removeEventListener('click', closePanel);
+                }
+            });
+        }
+
+        // Table Row Interactions
+        document.querySelectorAll('.data-table tbody tr').forEach(row => {
+            row.style.cursor = 'pointer';
+            row.addEventListener('click', function() {
+                document.querySelectorAll('.data-table tbody tr').forEach(r => r.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+            
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.02)';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('selected')) {
+                    this.style.backgroundColor = '';
+                }
+            });
+        });
+
+        // Real-time data simulation removed for static dashboard
+
+        // Real-time updates disabled - static dashboard
+
+        // User Status Toggle
+        const userStatus = document.querySelector('.user-status');
+        userStatus.style.cursor = 'pointer';
+        userStatus.addEventListener('click', function() {
+            const dot = this.querySelector('.status-dot');
+            const text = this.childNodes[2];
+            
+            if (dot.style.background === 'rgb(248, 113, 113)') {
+                dot.style.background = '#34d399';
+                text.textContent = ' Online';
+            } else {
+                dot.style.background = '#f87171';
+                text.textContent = ' Away';
+            }
+        });
+
+        // Chart stats are static - no click interactions
+
+        // Donut Chart Legend Click
+        document.querySelectorAll('.donut-stat').forEach((stat, index) => {
+            stat.style.cursor = 'pointer';
+            stat.addEventListener('click', function() {
+                const meta = donutChart.getDatasetMeta(0);
+                meta.data[index].hidden = !meta.data[index].hidden;
+                donutChart.update();
+                
+                this.style.opacity = meta.data[index].hidden ? '0.4' : '1';
+            });
+        });
+
+        // Fullscreen Toggle
+        const fullscreenBtn = document.querySelectorAll('.menu-toggle')[1];
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        });
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + K for search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                searchIcon.click();
+            }
+            // Escape to close modals
+            if (e.key === 'Escape') {
+                const modal = document.querySelector('.modal-overlay');
+                if (modal) {
+                    modal.classList.remove('show');
+                    setTimeout(() => modal.remove(), 300);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

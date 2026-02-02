@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about Sanctum Church - our story, values, and the team dedicated to serving our community.">
+  <title>About Us | Sanctum Church</title>
+  
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝</text></svg>">
+  
+  <style>
+    .hero-about {
+      min-height: 70vh;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-16) 0;
+      background: var(--color-white);
+      position: relative;
+    }
+    
+    .hero-about__number {
+      position: absolute;
+      top: calc(var(--header-height) + var(--space-8));
+      right: var(--space-8);
+      font-family: var(--font-display);
+      font-size: clamp(120px, 20vw, 300px);
+      line-height: 1;
+      color: var(--color-gray-100);
+      z-index: 0;
+    }
+    
+    .hero-about__content { position: relative; z-index: 1; }
+    
+    .hero-about__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-4);
+    }
+    
+    .hero-about__title { font-size: var(--text-6xl); margin-bottom: var(--space-6); }
+    
+    .hero-about__subtitle {
+      font-family: var(--font-body);
+      font-size: var(--text-xl);
+      color: var(--color-gray-600);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+    
+    .story-section { padding: var(--space-24) 0; border-top: var(--border-thin); }
+    
+    .story-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-16); }
+    
+    @media (min-width: 1024px) {
+      .story-grid { grid-template-columns: 300px 1fr; }
+    }
+    
+    .story-nav { position: sticky; top: calc(var(--header-height) + var(--space-8)); align-self: start; }
+    
+    .story-nav__item {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gray-400);
+      padding: var(--space-3) 0;
+      border-left: 2px solid transparent;
+      padding-left: var(--space-4);
+      transition: all var(--transition-fast);
+    }
+    
+    .story-nav__item:hover, .story-nav__item--active {
+      color: var(--color-black);
+      border-left-color: var(--color-black);
+    }
+    
+    .story-content { max-width: 700px; }
+    .story-block { margin-bottom: var(--space-16); }
+    .story-block__title { font-size: var(--text-2xl); margin-bottom: var(--space-6); }
+    
+    .story-block__text {
+      font-size: var(--text-lg);
+      line-height: 1.9;
+      color: var(--color-gray-700);
+    }
+    
+    .story-block__text + .story-block__text { margin-top: var(--space-6); }
+    
+    .values-section { background: var(--color-black); color: var(--color-white); padding: var(--space-24) 0; }
+    .values-section .section-header__label { color: var(--color-gray-500); }
+    .values-section .section-header__title { color: var(--color-white); }
+    
+    .values-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-1); margin-top: var(--space-12); }
+    
+    @media (min-width: 768px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1200px) { .values-grid { grid-template-columns: repeat(4, 1fr); } }
+    
+    .value-card {
+      border: 1px solid var(--color-gray-800);
+      padding: var(--space-8);
+      transition: background var(--transition-base), border-color var(--transition-base);
+    }
+    
+    .value-card:hover { background: var(--color-gray-900); border-color: var(--color-gray-700); }
+    .value-card__number { font-family: var(--font-display); font-size: var(--text-4xl); color: var(--color-gray-700); margin-bottom: var(--space-4); }
+    .value-card__title { font-family: var(--font-accent); font-size: var(--text-lg); letter-spacing: 0.1em; color: var(--color-white); margin-bottom: var(--space-3); }
+    .value-card__desc { font-size: var(--text-sm); color: var(--color-gray-400); line-height: 1.7; }
+    
+    .team-section { padding: var(--space-24) 0; }
+    .team-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-8); margin-top: var(--space-12); }
+    
+    @media (min-width: 768px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+    
+    .team-card { text-align: center; padding: var(--space-8); border: var(--border-thin); transition: transform var(--transition-base); }
+    .team-card:hover { transform: translateY(-4px); }
+    
+    .team-card__image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--color-gray-200);
+      margin: 0 auto var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      color: var(--color-gray-400);
+    }
+    
+    .team-card__name { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-2); }
+    .team-card__role { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gray-500); margin-bottom: var(--space-4); }
+    .team-card__bio { font-size: var(--text-sm); color: var(--color-gray-600); line-height: 1.7; }
+    
+    .beliefs-section { background: var(--color-gray-100); padding: var(--space-24) 0; }
+    .beliefs-list { max-width: 800px; margin: var(--space-12) auto 0; }
+    .belief-item { padding: var(--space-6) 0; border-bottom: var(--border-thin); }
+    .belief-item__title { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-3); }
+    .belief-item__text { font-size: var(--text-base); color: var(--color-gray-600); line-height: 1.8; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo"><span class="header__logo-cross">✝</span>SANCTUM</a>
+        <nav class="nav">
+          <a href="index.html" class="nav__link">Home</a>
+          <a href="about.html" class="nav__link nav__link--active">About</a>
+          <a href="ministries.html" class="nav__link">Ministries</a>
+          <a href="sermons.html" class="nav__link">Sermons</a>
+          <a href="contact.html" class="nav__link">Contact</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav__link">Home</a>
+    <a href="about.html" class="mobile-nav__link">About</a>
+    <a href="ministries.html" class="mobile-nav__link">Ministries</a>
+    <a href="sermons.html" class="mobile-nav__link">Sermons</a>
+    <a href="contact.html" class="mobile-nav__link">Contact</a>
+  </nav>
+  
+  <main class="page-enter">
+    <section class="hero-about">
+      <div class="hero-about__number">A</div>
+      <div class="container">
+        <div class="hero-about__content">
+          <p class="hero-about__label reveal">Our Story</p>
+          <h1 class="hero-about__title reveal reveal-delay-1">About Sanctum</h1>
+          <p class="hero-about__subtitle reveal reveal-delay-2">
+            We are a diverse community united by a common purpose: 
+            to know God deeply, to love others fully, and to serve 
+            the world around us with humility and grace.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="story-section">
+      <div class="container">
+        <div class="story-grid">
+          <aside class="story-nav reveal">
+            <a href="#origin" class="story-nav__item story-nav__item--active">Our Origin</a>
+            <a href="#mission" class="story-nav__item">Our Mission</a>
+            <a href="#vision" class="story-nav__item">Our Vision</a>
+          </aside>
+          
+          <div class="story-content">
+            <article id="origin" class="story-block reveal">
+              <h2 class="story-block__title">Our Origin</h2>
+              <p class="story-block__text">
+                Sanctum Church began in 2015 as a small gathering of twelve 
+                individuals meeting in a living room. United by a desire for 
+                authentic community and meaningful spiritual growth, we asked 
+                a simple question: What would church look like if we stripped 
+                away everything nonessential?
+              </p>
+              <p class="story-block__text">
+                From those humble beginnings, we've grown into a community of 
+                hundreds, yet we've never lost sight of our founding vision.
+              </p>
+            </article>
+            
+            <article id="mission" class="story-block reveal">
+              <h2 class="story-block__title">Our Mission</h2>
+              <p class="story-block__text">
+                To create sacred space where people can encounter God's presence, 
+                discover their purpose, and experience transformative community. 
+                We believe that faith is not a private matter but a journey 
+                best traveled together.
+              </p>
+            </article>
+            
+            <article id="vision" class="story-block reveal">
+              <h2 class="story-block__title">Our Vision</h2>
+              <p class="story-block__text">
+                We envision a city transformed by communities of faith that 
+                embody radical hospitality, pursue justice, and demonstrate 
+                the boundless love of God.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="values-section">
+      <div class="container">
+        <div class="section-header section-header--center reveal">
+          <p class="section-header__label">What Guides Us</p>
+          <h2 class="section-header__title">Our Core Values</h2>
+        </div>
+        
+        <div class="values-grid">
+          <div class="value-card reveal">
+            <div class="value-card__number">01</div>
+            <h3 class="value-card__title">Authenticity</h3>
+            <p class="value-card__desc">We come as we are—broken, hopeful, questioning. Pretense has no place here.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-1">
+            <div class="value-card__number">02</div>
+            <h3 class="value-card__title">Hospitality</h3>
+            <p class="value-card__desc">Every person who walks through our doors is welcomed as a beloved guest.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-2">
+            <div class="value-card__number">03</div>
+            <h3 class="value-card__title">Service</h3>
+            <p class="value-card__desc">Faith finds its fullest expression in humble service to others.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-3">
+            <div class="value-card__number">04</div>
+            <h3 class="value-card__title">Growth</h3>
+            <p class="value-card__desc">We are lifelong learners, continually transformed by grace and truth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="team-section">
+      <div class="container">
+        <div class="section-header section-header--center reveal">
+          <p class="section-header__label">Our Leadership</p>
+          <h2 class="section-header__title">Meet the Team</h2>
+        </div>
+        
+        <div class="team-grid">
+          <article class="team-card reveal">
+            <div class="team-card__image">JM</div>
+            <h3 class="team-card__name">Rev. James Mitchell</h3>
+            <p class="team-card__role">Lead Pastor</p>
+            <p class="team-card__bio">James founded Sanctum in 2015 after 15 years in ministry.</p>
+          </article>
+          <article class="team-card reveal reveal-delay-1">
+            <div class="team-card__image">EM</div>
+            <h3 class="team-card__name">Dr. Elena Martinez</h3>
+            <p class="team-card__role">Teaching Pastor</p>
+            <p class="team-card__bio">Elena brings depth and insight to our teaching ministry.</p>
+          </article>
+          <article class="team-card reveal reveal-delay-2">
+            <div class="team-card__image">DK</div>
+            <h3 class="team-card__name">David Kim</h3>
+            <p class="team-card__role">Worship Director</p>
+            <p class="team-card__bio">David leads our worship experience with creativity and reverence.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    
+    <section class="beliefs-section">
+      <div class="container">
+        <div class="section-header section-header--center reveal">
+          <p class="section-header__label">What We Believe</p>
+          <h2 class="section-header__title">Statement of Faith</h2>
+        </div>
+        
+        <div class="beliefs-list">
+          <div class="belief-item reveal">
+            <h3 class="belief-item__title">The Bible</h3>
+            <p class="belief-item__text">We believe the Bible is the inspired Word of God—a living text that speaks to every generation.</p>
+          </div>
+          <div class="belief-item reveal reveal-delay-1">
+            <h3 class="belief-item__title">God</h3>
+            <p class="belief-item__text">We believe in one God, eternally existing in three persons: Father, Son, and Holy Spirit.</p>
+          </div>
+          <div class="belief-item reveal reveal-delay-2">
+            <h3 class="belief-item__title">Jesus Christ</h3>
+            <p class="belief-item__text">We believe Jesus is fully God and fully human, who lived, died, and rose for our salvation.</p>
+          </div>
+          <div class="belief-item reveal reveal-delay-3">
+            <h3 class="belief-item__title">Salvation</h3>
+            <p class="belief-item__text">We believe salvation is a gift of grace received through faith in Jesus Christ.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">✝ SANCTUM</div>
+          <p class="footer__tagline">"Come to me, all who labor and are heavy laden, and I will give you rest."</p>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Navigate</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="about.html" class="footer__link">About Us</a>
+            <a href="ministries.html" class="footer__link">Ministries</a>
+            <a href="sermons.html" class="footer__link">Sermons</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+          </div>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Visit</h4>
+          <div class="footer__links">
+            <span class="footer__link">1234 Grace Avenue</span>
+            <span class="footer__link">Austin, TX 78701</span>
+          </div>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Connect</h4>
+          <div class="footer__links">
+            <a href="tel:+15125551234" class="footer__link">(512) 555-1234</a>
+            <a href="mailto:hello@sanctum.church" class="footer__link">hello@sanctum.church</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© <span class="current-year">2026</span> Sanctum Church. All rights reserved.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link">Instagram</a>
+          <a href="#" class="footer__social-link">Facebook</a>
+          <a href="#" class="footer__social-link">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="scripts/main.js"></script>
+</body>
+</html>

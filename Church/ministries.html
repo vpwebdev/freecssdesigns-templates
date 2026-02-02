@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore ministries at Sanctum Church - opportunities to grow, serve, and connect with our community.">
+  <title>Ministries | Sanctum Church</title>
+  
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝</text></svg>">
+  
+  <style>
+    .hero-ministries {
+      min-height: 60vh;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-16) 0;
+      background: var(--color-black);
+      color: var(--color-white);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-ministries__bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 100px,
+          rgba(255,255,255,0.02) 100px,
+          rgba(255,255,255,0.02) 101px
+        );
+    }
+    
+    .hero-ministries__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-4);
+    }
+    
+    .hero-ministries__title {
+      font-size: var(--text-6xl);
+      color: var(--color-white);
+      margin-bottom: var(--space-6);
+    }
+    
+    .hero-ministries__subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-gray-400);
+      max-width: 600px;
+    }
+    
+    .ministries-section { padding: var(--space-24) 0; }
+    
+    .ministry-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+      margin-top: var(--space-12);
+    }
+    
+    @media (min-width: 768px) {
+      .ministry-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    .ministry-card {
+      border: var(--border-thin);
+      padding: var(--space-8);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .ministry-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: var(--color-black);
+      transition: height var(--transition-slow) var(--ease-out-expo);
+    }
+    
+    .ministry-card:hover::before { height: 100%; }
+    .ministry-card:hover { transform: translateX(4px); }
+    
+    .ministry-card__icon {
+      font-size: var(--text-4xl);
+      margin-bottom: var(--space-4);
+    }
+    
+    .ministry-card__title {
+      font-family: var(--font-accent);
+      font-size: var(--text-xl);
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-3);
+    }
+    
+    .ministry-card__desc {
+      font-size: var(--text-base);
+      color: var(--color-gray-600);
+      line-height: 1.7;
+      margin-bottom: var(--space-4);
+    }
+    
+    .ministry-card__meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+    }
+    
+    .events-section {
+      background: var(--color-gray-100);
+      padding: var(--space-24) 0;
+    }
+    
+    .events-list { margin-top: var(--space-12); }
+    
+    .event-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      padding: var(--space-8) 0;
+      border-bottom: var(--border-thin);
+      transition: background var(--transition-fast);
+    }
+    
+    @media (min-width: 768px) {
+      .event-item { grid-template-columns: 120px 1fr auto; align-items: center; }
+    }
+    
+    .event-item:hover { background: var(--color-white); margin: 0 calc(var(--space-4) * -1); padding-left: var(--space-4); padding-right: var(--space-4); }
+    
+    .event-date {
+      text-align: center;
+    }
+    
+    @media (min-width: 768px) {
+      .event-date { text-align: left; }
+    }
+    
+    .event-date__day {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      line-height: 1;
+      color: var(--color-black);
+    }
+    
+    .event-date__month {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+    }
+    
+    .event-content__title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-2);
+    }
+    
+    .event-content__details {
+      font-size: var(--text-sm);
+      color: var(--color-gray-600);
+    }
+    
+    .event-action {
+      text-align: center;
+    }
+    
+    @media (min-width: 768px) {
+      .event-action { text-align: right; }
+    }
+    
+    .groups-section { padding: var(--space-24) 0; }
+    
+    .groups-intro {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+      margin-bottom: var(--space-16);
+    }
+    
+    @media (min-width: 1024px) {
+      .groups-intro { grid-template-columns: 1fr 1fr; align-items: center; }
+    }
+    
+    .groups-intro__text {
+      font-size: var(--text-lg);
+      color: var(--color-gray-700);
+      line-height: 1.8;
+    }
+    
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+    
+    @media (min-width: 768px) {
+      .groups-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    
+    .group-tag {
+      background: var(--color-gray-100);
+      padding: var(--space-4) var(--space-6);
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all var(--transition-fast);
+    }
+    
+    .group-tag:hover {
+      background: var(--color-black);
+      color: var(--color-white);
+    }
+    
+    .volunteer-section {
+      background: var(--color-black);
+      color: var(--color-white);
+      padding: var(--space-24) 0;
+    }
+    
+    .volunteer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+    
+    @media (min-width: 1024px) {
+      .volunteer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    
+    .volunteer-content__title {
+      font-size: var(--text-4xl);
+      color: var(--color-white);
+      margin-bottom: var(--space-6);
+    }
+    
+    .volunteer-content__text {
+      font-size: var(--text-lg);
+      color: var(--color-gray-400);
+      margin-bottom: var(--space-8);
+      line-height: 1.8;
+    }
+    
+    .volunteer-areas {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    
+    @media (min-width: 768px) {
+      .volunteer-areas { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    .volunteer-area {
+      border: 1px solid var(--color-gray-800);
+      padding: var(--space-6);
+      transition: all var(--transition-fast);
+    }
+    
+    .volunteer-area:hover {
+      background: var(--color-gray-900);
+      border-color: var(--color-gray-700);
+    }
+    
+    .volunteer-area__title {
+      font-family: var(--font-accent);
+      font-size: var(--text-base);
+      letter-spacing: 0.1em;
+      color: var(--color-white);
+      margin-bottom: var(--space-2);
+    }
+    
+    .volunteer-area__desc {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo"><span class="header__logo-cross">✝</span>SANCTUM</a>
+        <nav class="nav">
+          <a href="index.html" class="nav__link">Home</a>
+          <a href="about.html" class="nav__link">About</a>
+          <a href="ministries.html" class="nav__link nav__link--active">Ministries</a>
+          <a href="sermons.html" class="nav__link">Sermons</a>
+          <a href="contact.html" class="nav__link">Contact</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav__link">Home</a>
+    <a href="about.html" class="mobile-nav__link">About</a>
+    <a href="ministries.html" class="mobile-nav__link">Ministries</a>
+    <a href="sermons.html" class="mobile-nav__link">Sermons</a>
+    <a href="contact.html" class="mobile-nav__link">Contact</a>
+  </nav>
+  
+  <main class="page-enter">
+    <section class="hero-ministries">
+      <div class="hero-ministries__bg"></div>
+      <div class="container">
+        <p class="hero-ministries__label reveal">Get Involved</p>
+        <h1 class="hero-ministries__title reveal reveal-delay-1">Ministries</h1>
+        <p class="hero-ministries__subtitle reveal reveal-delay-2">
+          Discover opportunities to grow in faith, build meaningful 
+          relationships, and serve our community.
+        </p>
+      </div>
+    </section>
+    
+    <section class="ministries-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-header__label">Explore</p>
+          <h2 class="section-header__title">Our Ministries</h2>
+        </div>
+        
+        <div class="ministry-grid">
+          <article class="ministry-card reveal">
+            <div class="ministry-card__icon">👶</div>
+            <h3 class="ministry-card__title">Children's Ministry</h3>
+            <p class="ministry-card__desc">
+              A safe, nurturing environment where children ages 0-12 learn about 
+              God's love through age-appropriate teaching, worship, and play.
+            </p>
+            <p class="ministry-card__meta">Sundays during all services</p>
+          </article>
+          
+          <article class="ministry-card reveal reveal-delay-1">
+            <div class="ministry-card__icon">🎓</div>
+            <h3 class="ministry-card__title">Youth Ministry</h3>
+            <p class="ministry-card__desc">
+              A vibrant community for teens ages 13-18 to explore faith, 
+              build friendships, and discover their identity in Christ.
+            </p>
+            <p class="ministry-card__meta">Fridays 6:30 PM</p>
+          </article>
+          
+          <article class="ministry-card reveal reveal-delay-2">
+            <div class="ministry-card__icon">🎵</div>
+            <h3 class="ministry-card__title">Worship Arts</h3>
+            <p class="ministry-card__desc">
+              Join our team of musicians, vocalists, and tech volunteers 
+              who create meaningful worship experiences each week.
+            </p>
+            <p class="ministry-card__meta">Rehearsals Thursdays 7 PM</p>
+          </article>
+          
+          <article class="ministry-card reveal reveal-delay-3">
+            <div class="ministry-card__icon">🤝</div>
+            <h3 class="ministry-card__title">Community Outreach</h3>
+            <p class="ministry-card__desc">
+              Partner with us to serve our neighbors through food drives, 
+              homeless ministry, and local community partnerships.
+            </p>
+            <p class="ministry-card__meta">Various times throughout the month</p>
+          </article>
+          
+          <article class="ministry-card reveal">
+            <div class="ministry-card__icon">📖</div>
+            <h3 class="ministry-card__title">Bible Studies</h3>
+            <p class="ministry-card__desc">
+              Dive deeper into Scripture through our variety of studies 
+              offered throughout the week for all ages and stages.
+            </p>
+            <p class="ministry-card__meta">Multiple weekly options</p>
+          </article>
+          
+          <article class="ministry-card reveal reveal-delay-1">
+            <div class="ministry-card__icon">💑</div>
+            <h3 class="ministry-card__title">Marriage & Family</h3>
+            <p class="ministry-card__desc">
+              Resources, counseling, and community for couples and families 
+              at every stage of life.
+            </p>
+            <p class="ministry-card__meta">Workshops & weekly groups</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    
+    <section class="events-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-header__label">What's Happening</p>
+          <h2 class="section-header__title">Upcoming Events</h2>
+        </div>
+        
+        <div class="events-list">
+          <article class="event-item reveal">
+            <div class="event-date">
+              <span class="event-date__day">12</span>
+              <span class="event-date__month">Feb</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-content__title">Community Outreach Day</h3>
+              <p class="event-content__details">9:00 AM — Meet at main campus</p>
+            </div>
+            <div class="event-action">
+              <a href="contact.html" class="btn btn--secondary">Register</a>
+            </div>
+          </article>
+          
+          <article class="event-item reveal reveal-delay-1">
+            <div class="event-date">
+              <span class="event-date__day">18</span>
+              <span class="event-date__month">Feb</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-content__title">Marriage Enrichment Workshop</h3>
+              <p class="event-content__details">9:00 AM – 4:00 PM — Fellowship Hall</p>
+            </div>
+            <div class="event-action">
+              <a href="contact.html" class="btn btn--secondary">Register</a>
+            </div>
+          </article>
+          
+          <article class="event-item reveal reveal-delay-2">
+            <div class="event-date">
+              <span class="event-date__day">25</span>
+              <span class="event-date__month">Feb</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-content__title">New Members Gathering</h3>
+              <p class="event-content__details">12:30 PM — After second service</p>
+            </div>
+            <div class="event-action">
+              <a href="contact.html" class="btn btn--secondary">Register</a>
+            </div>
+          </article>
+          
+          <article class="event-item reveal reveal-delay-3">
+            <div class="event-date">
+              <span class="event-date__day">02</span>
+              <span class="event-date__month">Mar</span>
+            </div>
+            <div class="event-content">
+              <h3 class="event-content__title">Ash Wednesday Service</h3>
+              <p class="event-content__details">7:00 PM — Main Sanctuary</p>
+            </div>
+            <div class="event-action">
+              <a href="contact.html" class="btn btn--secondary">Learn More</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    
+    <section class="groups-section">
+      <div class="container">
+        <div class="groups-intro">
+          <div class="reveal">
+            <div class="section-header">
+              <p class="section-header__label">Connect</p>
+              <h2 class="section-header__title">Small Groups</h2>
+            </div>
+            <p class="groups-intro__text">
+              Small groups are the heartbeat of Sanctum. It's where we move 
+              from attendance to belonging—sharing life, studying Scripture, 
+              and supporting one another through every season.
+            </p>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <a href="contact.html" class="btn btn--primary btn--large">Find a Group</a>
+          </div>
+        </div>
+        
+        <div class="groups-grid reveal">
+          <div class="group-tag">Young Adults</div>
+          <div class="group-tag">Women's Groups</div>
+          <div class="group-tag">Men's Groups</div>
+          <div class="group-tag">Couples</div>
+          <div class="group-tag">Parents</div>
+          <div class="group-tag">Empty Nesters</div>
+          <div class="group-tag">Recovery</div>
+          <div class="group-tag">Grief Support</div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="volunteer-section">
+      <div class="container">
+        <div class="volunteer-grid">
+          <div class="volunteer-content reveal">
+            <h2 class="volunteer-content__title">Serve With Us</h2>
+            <p class="volunteer-content__text">
+              Every person has gifts to offer. Whether you have an hour a month 
+              or an hour a week, there's a place for you to make an impact.
+            </p>
+            <a href="contact.html" class="btn btn--white">Start Serving</a>
+          </div>
+          
+          <div class="volunteer-areas reveal reveal-delay-1">
+            <div class="volunteer-area">
+              <h3 class="volunteer-area__title">Welcome Team</h3>
+              <p class="volunteer-area__desc">Create a warm first impression for guests</p>
+            </div>
+            <div class="volunteer-area">
+              <h3 class="volunteer-area__title">Tech & Production</h3>
+              <p class="volunteer-area__desc">Sound, lighting, and livestream</p>
+            </div>
+            <div class="volunteer-area">
+              <h3 class="volunteer-area__title">Children's Ministry</h3>
+              <p class="volunteer-area__desc">Teach and care for our youngest members</p>
+            </div>
+            <div class="volunteer-area">
+              <h3 class="volunteer-area__title">Hospitality</h3>
+              <p class="volunteer-area__desc">Coffee, setup, and event coordination</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">✝ SANCTUM</div>
+          <p class="footer__tagline">"Come to me, all who labor and are heavy laden, and I will give you rest."</p>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Navigate</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="about.html" class="footer__link">About Us</a>
+            <a href="ministries.html" class="footer__link">Ministries</a>
+            <a href="sermons.html" class="footer__link">Sermons</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+          </div>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Visit</h4>
+          <div class="footer__links">
+            <span class="footer__link">1234 Grace Avenue</span>
+            <span class="footer__link">Austin, TX 78701</span>
+          </div>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">Connect</h4>
+          <div class="footer__links">
+            <a href="tel:+15125551234" class="footer__link">(512) 555-1234</a>
+            <a href="mailto:hello@sanctum.church" class="footer__link">hello@sanctum.church</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© <span class="current-year">2026</span> Sanctum Church. All rights reserved.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link">Instagram</a>
+          <a href="#" class="footer__social-link">Facebook</a>
+          <a href="#" class="footer__social-link">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="scripts/main.js"></script>
+</body>
+</html>

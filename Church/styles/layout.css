@@ -1,0 +1,254 @@
+/* ========================================
+   SANCTUM CHURCH - LAYOUT STYLES
+   Grid, Containers, Structural Elements
+======================================== */
+
+/* Main Container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-12);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding: 0 var(--space-16);
+  }
+}
+
+/* Content Container - Narrower for readability */
+.container--content {
+  max-width: var(--content-width);
+}
+
+/* Full Bleed */
+.full-bleed {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+/* Section Spacing */
+.section {
+  padding: var(--space-24) 0;
+}
+
+.section--large {
+  padding: var(--space-32) 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--space-32) 0;
+  }
+  
+  .section--large {
+    padding: var(--space-48) 0;
+  }
+}
+
+/* Main Content Area */
+main {
+  min-height: calc(100vh - var(--header-height));
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.grid--2 {
+  grid-template-columns: 1fr;
+}
+
+.grid--3 {
+  grid-template-columns: 1fr;
+}
+
+.grid--4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Asymmetric Layouts */
+.grid--asymmetric {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid--asymmetric {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.grid--asymmetric-reverse {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid--asymmetric-reverse {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* Flex Utilities */
+.flex {
+  display: flex;
+}
+
+.flex--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex--between {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--gap-sm {
+  gap: var(--space-4);
+}
+
+.flex--gap-md {
+  gap: var(--space-8);
+}
+
+.flex--gap-lg {
+  gap: var(--space-12);
+}
+
+/* Spacing Utilities */
+.mt-auto { margin-top: auto; }
+.mb-0 { margin-bottom: 0; }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+.mb-16 { margin-bottom: var(--space-16); }
+.mb-24 { margin-bottom: var(--space-24); }
+
+.pt-0 { padding-top: 0; }
+.pb-0 { padding-bottom: 0; }
+
+/* Text Alignment */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Hero Layout */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: var(--space-16);
+  overflow: hidden;
+}
+
+.hero--centered {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero__background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Split Layout */
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.split__side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .split__side {
+    padding: var(--space-16);
+  }
+}
+
+.split__side--dark {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.split__side--dark h1,
+.split__side--dark h2,
+.split__side--dark h3,
+.split__side--dark h4 {
+  color: var(--color-white);
+}
+
+.split__side--dark p {
+  color: var(--color-gray-300);
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.overlay--full {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Sticky Elements */
+.sticky {
+  position: sticky;
+  top: var(--header-height);
+}
+
+/* Z-Index Scale */
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-50 { z-index: 50; }
+.z-100 { z-index: 100; }
