@@ -1,0 +1,699 @@
+/* ============================================================
+   AZURE TIDE RESORT — Page-Specific Styles
+   ============================================================ */
+
+/* ============================================================
+   HOME — HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-midnight);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  transform: scale(1.05);
+  animation: heroZoom 25s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  0%   { transform: scale(1.05); }
+  100% { transform: scale(1.12); }
+}
+
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10,22,40,0.35) 0%, rgba(10,22,40,0.15) 40%, rgba(10,22,40,0.65) 100%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 780px;
+  padding: 0 var(--gutter);
+}
+
+.hero__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-ultra);
+  text-transform: uppercase;
+  color: var(--color-seafoam);
+  margin-bottom: var(--space-md);
+}
+
+.hero__label::before,
+.hero__label::after {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--color-seafoam);
+  opacity: 0.5;
+}
+
+.hero__title {
+  font-size: var(--fs-hero);
+  color: var(--color-pure-white);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-md);
+  letter-spacing: var(--ls-tight);
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--color-seafoam);
+}
+
+.hero__subtitle {
+  font-size: var(--fs-md);
+  color: rgba(255,255,255,0.6);
+  line-height: var(--lh-relaxed);
+  max-width: 540px;
+  margin: 0 auto var(--space-lg);
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.35);
+  font-size: 10px;
+  letter-spacing: var(--ls-ultra);
+  text-transform: uppercase;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.8; }
+}
+
+
+/* ============================================================
+   HOME — AMENITIES
+   ============================================================ */
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .amenities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .amenities-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================================
+   HOME — ROOMS PREVIEW
+   ============================================================ */
+.rooms-preview-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 960px) {
+  .rooms-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================================
+   HOME — OCEAN CTA BAND
+   ============================================================ */
+.cta-band {
+  position: relative;
+  padding: var(--space-3xl) 0;
+  overflow: hidden;
+}
+
+.cta-band__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.cta-band__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+.cta-band__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay-deep);
+}
+
+.cta-band__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.cta-band__title {
+  font-size: var(--fs-2xl);
+  color: var(--color-pure-white);
+  margin-bottom: var(--space-xs);
+}
+
+.cta-band__text {
+  font-size: var(--fs-md);
+  color: rgba(255,255,255,0.6);
+  max-width: var(--max-text);
+  margin: 0 auto var(--space-lg);
+}
+
+
+/* ============================================================
+   HOME — TESTIMONIALS
+   ============================================================ */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 960px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+  }
+}
+
+
+/* ============================================================
+   HOME — STATS BAND
+   ============================================================ */
+.stats-band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-xl) 0;
+}
+
+@media (max-width: 600px) {
+  .stats-band {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+}
+
+
+/* ============================================================
+   ROOMS PAGE
+   ============================================================ */
+.rooms-full-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .rooms-full-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.room-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.room-detail:nth-child(even) {
+  direction: rtl;
+}
+
+.room-detail:nth-child(even) > * {
+  direction: ltr;
+}
+
+.room-detail__image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--color-linen);
+}
+
+.room-detail__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-detail__amenity-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xs) var(--space-sm);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.room-detail__amenity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.room-detail__amenity svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-teal);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .room-detail {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .room-detail:nth-child(even) {
+    direction: ltr;
+  }
+}
+
+
+/* ============================================================
+   DINING PAGE
+   ============================================================ */
+.dining-venues {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+.dining-venue {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.dining-venue:nth-child(even) {
+  grid-template-columns: 1fr 1.2fr;
+}
+
+.dining-venue:nth-child(even) .dining-venue__image {
+  order: 2;
+}
+
+.dining-venue__image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  background: var(--color-linen);
+}
+
+.dining-venue__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dining-venue__cuisine {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-ultra);
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-3xs);
+}
+
+.dining-venue__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  color: var(--color-midnight);
+  margin-bottom: var(--space-xs);
+}
+
+.dining-venue__desc {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-sm);
+}
+
+.dining-venue__hours {
+  font-size: var(--fs-sm);
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--space-md);
+}
+
+.dining-venue__hours svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .dining-venue,
+  .dining-venue:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .dining-venue:nth-child(even) .dining-venue__image {
+    order: 0;
+  }
+}
+
+/* Menu highlights */
+.menu-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.menu-item {
+  padding: var(--space-md);
+  background: var(--color-pure-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+}
+
+.menu-item__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  color: var(--color-midnight);
+  margin-bottom: var(--space-3xs);
+}
+
+.menu-item__desc {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-xs);
+}
+
+.menu-item__price {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  color: var(--color-ocean);
+}
+
+@media (max-width: 768px) {
+  .menu-highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================================
+   SPA PAGE
+   ============================================================ */
+.spa-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.spa-intro__image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--color-linen);
+}
+
+.spa-intro__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .spa-intro {
+    grid-template-columns: 1fr;
+  }
+}
+
+.treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.treatment-card {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-pure-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.treatment-card:hover {
+  border-color: var(--color-mist);
+  box-shadow: var(--shadow-md);
+}
+
+.treatment-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-mist), var(--color-pearl));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ocean);
+  flex-shrink: 0;
+}
+
+.treatment-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.treatment-card__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  color: var(--color-midnight);
+  margin-bottom: 4px;
+}
+
+.treatment-card__desc {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-2xs);
+}
+
+.treatment-card__meta {
+  display: flex;
+  gap: var(--space-sm);
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+}
+
+.treatment-card__meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (max-width: 768px) {
+  .treatment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: var(--space-xl);
+}
+
+.contact-info-block {
+  display: flex;
+  gap: 16px;
+  margin-bottom: var(--space-md);
+}
+
+.contact-info-block__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-pearl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ocean);
+  flex-shrink: 0;
+}
+
+.contact-info-block__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.contact-info-block__label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 2px;
+}
+
+.contact-info-block__value {
+  font-size: var(--fs-base);
+  color: var(--color-text);
+}
+
+.contact-info-block__value a {
+  color: var(--color-ocean);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-form {
+  background: var(--color-pure-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border-light);
+}
+
+.contact-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.contact-form__grid .form-group:last-child:nth-child(odd) {
+  grid-column: span 2;
+}
+
+.contact-form__full {
+  margin-bottom: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form__grid .form-group:last-child:nth-child(odd) {
+    grid-column: span 1;
+  }
+}
+
+/* Map placeholder */
+.map-container {
+  width: 100%;
+  height: 380px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-linen);
+  position: relative;
+}
+
+.map-container__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  color: var(--color-text-light);
+  background:
+    linear-gradient(135deg, var(--color-linen) 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, var(--color-linen) 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, var(--color-linen) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-linen) 25%, transparent 25%);
+  background-size: 100px 100px;
+  background-color: var(--color-pearl);
+}
+
+.map-container__placeholder svg {
+  width: 40px;
+  height: 40px;
+  opacity: 0.4;
+}
+
+.map-container__placeholder span {
+  font-size: var(--fs-sm);
+  opacity: 0.6;
+}

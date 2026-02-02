@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spa & Wellness at Azure Tide Resort — ocean-inspired treatments, thermal circuits, yoga, and holistic wellness in a serene coastal sanctuary.">
+  <title>Spa &amp; Wellness — Azure Tide Resort</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/base.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>">
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">AT</div>
+        <div class="logo-text-group">
+          <span class="logo-name">Azure Tide</span>
+          <span class="logo-tagline">Resort &middot; Oceanfront</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="rooms.html" class="nav-link">Rooms</a></li>
+          <li><a href="dining.html" class="nav-link">Dining</a></li>
+          <li><a href="spa.html" class="nav-link active">Spa</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Reserve</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <ul class="mobile-nav__links">
+      <li><a href="../index.html" class="mobile-nav__link">Home</a></li>
+      <li><a href="rooms.html" class="mobile-nav__link">Rooms &amp; Suites</a></li>
+      <li><a href="dining.html" class="mobile-nav__link">Dining</a></li>
+      <li><a href="spa.html" class="mobile-nav__link">Spa &amp; Wellness</a></li>
+      <li><a href="contact.html" class="mobile-nav__link">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="mobile-nav__cta">Reserve Your Stay</a>
+  </div>
+
+
+  <!-- ========== PAGE HERO ========== -->
+  <section class="page-hero">
+    <div class="page-hero__bg">
+      <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=2400&q=80" alt="Serene spa environment with natural stone, warm lighting, and lush greenery">
+    </div>
+    <div class="container page-hero__content">
+      <span class="section-label section-label--light" data-animate="fade-up">Wellness</span>
+      <h1 class="page-hero__title" data-animate="fade-up" data-delay="1">Spa &amp; Wellness</h1>
+      <p class="page-hero__subtitle" data-animate="fade-up" data-delay="2">
+        A sanctuary where the healing power of the ocean meets ancient wellness traditions. Restore, renew, and return to yourself.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ========== SPA INTRO ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="spa-intro">
+        <div class="spa-intro__image" data-animate="fade-up">
+          <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80" alt="Tranquil spa treatment room with ocean-view window and natural materials">
+        </div>
+        <div data-animate="fade-up" data-delay="1">
+          <span class="section-label">The Coastal Spa</span>
+          <h2 class="section-heading">Drawn from the Sea</h2>
+          <div class="divider"></div>
+          <p style="margin-bottom:var(--space-sm);">
+            Our 8,000-square-foot spa draws its philosophy from the ocean itself. Each treatment incorporates marine minerals, sea botanicals, and the natural rhythm of the tides to create experiences that are as deeply restorative as they are luxurious.
+          </p>
+          <p style="margin-bottom:var(--space-md);">
+            The facility includes eight treatment rooms, a thermal circuit with plunge pools, a salt inhalation chamber, and a meditation terrace overlooking the water. Whether you seek deep-tissue relief or quiet contemplation, the Coastal Spa offers a path back to balance.
+          </p>
+          <a href="contact.html" class="btn btn--primary btn--sm">
+            Book a Treatment
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== TREATMENTS ========== -->
+  <section class="section section--pearl">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:var(--space-xl);">
+        <span class="section-label" data-animate="fade-up">Treatments</span>
+        <h2 class="section-heading" data-animate="fade-up" data-delay="1">Signature Experiences</h2>
+        <p class="section-subheading" style="margin:0 auto;" data-animate="fade-up" data-delay="2">
+          Each treatment is designed to reconnect you with the restorative power of the coast.
+        </p>
+      </div>
+
+      <div class="treatment-grid">
+        <div class="treatment-card" data-animate="fade-up" data-delay="1">
+          <div class="treatment-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h3 class="treatment-card__name">Ocean Mineral Wrap</h3>
+            <p class="treatment-card__desc">A full-body detoxifying treatment using mineral-rich Atlantic sea mud, warm kelp compresses, and a hydrating coconut oil finish.</p>
+            <div class="treatment-card__meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                90 min
+              </span>
+              <span>$195</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="treatment-card" data-animate="fade-up" data-delay="2">
+          <div class="treatment-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <div>
+            <h3 class="treatment-card__name">Tidal Deep Tissue</h3>
+            <p class="treatment-card__desc">Rhythmic deep-pressure massage inspired by the ocean's wave patterns. Targets chronic tension using heated basalt stones and marine magnesium oil.</p>
+            <div class="treatment-card__meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                75 min
+              </span>
+              <span>$175</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="treatment-card" data-animate="fade-up" data-delay="3">
+          <div class="treatment-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <div>
+            <h3 class="treatment-card__name">Sea Glass Facial</h3>
+            <p class="treatment-card__desc">A luminosity-boosting facial using sea-algae extracts, hyaluronic acid, and a cooling jade roller massage. Leaves skin dewy and radiant.</p>
+            <div class="treatment-card__meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                60 min
+              </span>
+              <span>$155</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="treatment-card" data-animate="fade-up" data-delay="4">
+          <div class="treatment-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h1m3.07-6.93l.71.71M12 2v1m5.93 3.07l-.71.71M22 12h-1m-3.07 6.93l-.71-.71M12 22v-1m-5.93-3.07l.71-.71"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <div>
+            <h3 class="treatment-card__name">Sunrise Yoga Session</h3>
+            <p class="treatment-card__desc">A guided morning yoga flow on the oceanfront terrace as the sun rises over the Atlantic. Open to all levels, mats and refreshments provided.</p>
+            <div class="treatment-card__meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                60 min
+              </span>
+              <span>Complimentary</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="treatment-card" data-animate="fade-up" data-delay="5">
+          <div class="treatment-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 00-6 0v4"/><rect x="2" y="9" width="20" height="11" rx="2"/></svg>
+          </div>
+          <div>
+            <h3 class="treatment-card__name">Salt Inhalation Therapy</h3>
+            <p class="treatment-card__desc">Relax in our Himalayan salt chamber as micro-particles of salt cleanse your respiratory system and calm the mind. Profoundly restorative.</p>
+            <div class="treatment-card__meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                45 min
+              </span>
+              <span>$85</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="treatment-card" data-animate="fade-up" data-delay="6">
+          <div class="treatment-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="9" x2="12" y2="2"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg>
+          </div>
+          <div>
+            <h3 class="treatment-card__name">Couples' Shoreline Ritual</h3>
+            <p class="treatment-card__desc">A shared experience beginning with a thermal circuit, followed by side-by-side massages, and finishing with champagne on the spa terrace.</p>
+            <div class="treatment-card__meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                120 min
+              </span>
+              <span>$420 / couple</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== WELLNESS FEATURES ========== -->
+  <section class="section">
+    <div class="container text-center">
+      <span class="section-label" data-animate="fade-up">Facilities</span>
+      <h2 class="section-heading" data-animate="fade-up" data-delay="1">Wellness Spaces</h2>
+      <div class="divider divider--center" data-animate="fade-up" data-delay="2"></div>
+
+      <div class="amenities-grid" style="margin-top:var(--space-lg);">
+        <div class="feature-block" data-animate="fade-up" data-delay="1">
+          <div class="feature-block__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3 class="feature-block__title">Thermal Circuit</h3>
+          <p class="feature-block__text">Hot and cold plunge pools, steam room, and a Finnish sauna with ocean views.</p>
+        </div>
+        <div class="feature-block" data-animate="fade-up" data-delay="2">
+          <div class="feature-block__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3 class="feature-block__title">Fitness Center</h3>
+          <p class="feature-block__text">State-of-the-art equipment, free weights, and floor-to-ceiling ocean views. Open 24/7.</p>
+        </div>
+        <div class="feature-block" data-animate="fade-up" data-delay="3">
+          <div class="feature-block__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-4 8"/></svg>
+          </div>
+          <h3 class="feature-block__title">Meditation Garden</h3>
+          <p class="feature-block__text">A landscaped oceanside garden designed for guided meditation and quiet reflection.</p>
+        </div>
+        <div class="feature-block" data-animate="fade-up" data-delay="4">
+          <div class="feature-block__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          </div>
+          <h3 class="feature-block__title">Salt Chamber</h3>
+          <p class="feature-block__text">Himalayan salt walls and micro-salt diffusion for respiratory and skin wellness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">
+            <div class="logo-icon">AT</div>
+            <div class="logo-text-group">
+              <span class="logo-name">Azure Tide</span>
+              <span class="logo-tagline">Resort &middot; Oceanfront</span>
+            </div>
+          </a>
+          <p class="footer-desc">A luxury oceanfront retreat on the Atlantic coast, where refined coastal living meets the rhythm of the sea.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-col-links">
+            <li><a href="rooms.html">Rooms &amp; Suites</a></li>
+            <li><a href="dining.html">Dining</a></li>
+            <li><a href="spa.html">Spa &amp; Wellness</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Experiences</h4>
+          <ul class="footer-col-links">
+            <li><a href="#">Water Sports</a></li>
+            <li><a href="#">Private Beach</a></li>
+            <li><a href="#">Sunset Cruises</a></li>
+            <li><a href="#">Yoga Retreats</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <ul class="footer-col-links">
+            <li>1 Azure Tide Drive</li>
+            <li>Emerald Coast, FL 32541</li>
+            <li><a href="tel:+18505550190">+1 (850) 555-0190</a></li>
+            <li><a href="mailto:reservations@azuretide.com">reservations@azuretide.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Azure Tide Resort. All rights reserved.</span>
+        <span>Template by <a href="https://github.com/vpwebdev/freecssdesigns-templates" target="_blank" rel="noopener">FreeCSSDesigns</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/main.js"></script>
+  <script src="../../template-banner.js"></script>
+</body>
+</html>
