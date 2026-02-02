@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Wines — Domaine Noir</title>
+    <meta name="description" content="Explore the Domaine Noir wine collection. Award-winning Pinot Noir, Chardonnay, Syrah, and Rosé from our estate vineyards.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230F0A0C'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='serif' font-style='italic' font-weight='400' font-size='20' fill='%23722F37'>D</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="../index.html" class="nav__logo"><span class="nav__logo-icon">D</span> Domaine Noir</a>
+            <div class="nav__links">
+                <a href="../index.html" class="nav__link">Home</a>
+                <a href="wines.html" class="nav__link nav__link--active">Wines</a>
+                <a href="story.html" class="nav__link">Our Story</a>
+                <a href="visit.html" class="nav__link">Visit</a>
+            </div>
+            <button class="nav__toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
+        </div>
+    </nav>
+    <div class="nav__overlay" id="navOverlay">
+        <a href="../index.html" class="nav__overlay-link">Home</a>
+        <a href="wines.html" class="nav__overlay-link">Wines</a>
+        <a href="story.html" class="nav__overlay-link">Our Story</a>
+        <a href="visit.html" class="nav__overlay-link">Visit</a>
+    </div>
+
+    <main>
+
+    <section class="page-header">
+        <div class="container">
+            <div class="section-label" data-animate="fade-up">The Collection</div>
+            <h1 class="page-header__title" data-animate="fade-up" data-delay="1">Our Wines</h1>
+            <p class="page-header__subtitle" data-animate="fade-up" data-delay="2">Each wine is a reflection of our terroir, our craft, and the singular character of each vintage.</p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="wines-grid">
+
+                <article class="wine-card" data-animate="fade-up" data-delay="1">
+                    <div class="wine-card__image">
+                        <span class="wine-card__vintage">2019</span>
+                        <span class="wine-card__type">Red</span>
+                    </div>
+                    <div class="wine-card__body">
+                        <h3 class="wine-card__name">Clos du Vallon</h3>
+                        <div class="wine-card__region">Pinot Noir &mdash; Willamette Valley</div>
+                        <p class="wine-card__notes">Dark cherry, forest floor, and a whisper of clove. Silky tannins with a lingering finish.</p>
+                        <div class="wine-card__meta">
+                            <div class="wine-card__meta-item"><strong>94</strong> Points</div>
+                            <div class="wine-card__meta-item"><strong>14.2%</strong> ABV</div>
+                        </div>
+                        <div class="wine-card__price">$68</div>
+                    </div>
+                </article>
+
+                <article class="wine-card" data-animate="fade-up" data-delay="2">
+                    <div class="wine-card__image" style="background: linear-gradient(135deg, #3D1A1F, #5A242B 50%, #2A1015);">
+                        <span class="wine-card__vintage">2021</span>
+                        <span class="wine-card__type">White</span>
+                    </div>
+                    <div class="wine-card__body">
+                        <h3 class="wine-card__name">Les Pierres Blanches</h3>
+                        <div class="wine-card__region">Chardonnay &mdash; Estate Vineyard</div>
+                        <p class="wine-card__notes">Crisp pear, honeysuckle, and toasted brioche. Elegant acidity with a mineral-driven palate.</p>
+                        <div class="wine-card__meta">
+                            <div class="wine-card__meta-item"><strong>92</strong> Points</div>
+                            <div class="wine-card__meta-item"><strong>13.5%</strong> ABV</div>
+                        </div>
+                        <div class="wine-card__price">$52</div>
+                    </div>
+                </article>
+
+                <article class="wine-card" data-animate="fade-up" data-delay="3">
+                    <div class="wine-card__image" style="background: linear-gradient(135deg, #4A1E24, #722F37 55%, #3D1A1F);">
+                        <span class="wine-card__vintage">2018</span>
+                        <span class="wine-card__type">Reserve</span>
+                    </div>
+                    <div class="wine-card__body">
+                        <h3 class="wine-card__name">Noir Absolu</h3>
+                        <div class="wine-card__region">Syrah Blend &mdash; Hillside Block</div>
+                        <p class="wine-card__notes">Blackberry, smoked violet, and cracked pepper. Bold structure with extraordinary depth.</p>
+                        <div class="wine-card__meta">
+                            <div class="wine-card__meta-item"><strong>96</strong> Points</div>
+                            <div class="wine-card__meta-item"><strong>14.8%</strong> ABV</div>
+                        </div>
+                        <div class="wine-card__price">$120</div>
+                    </div>
+                </article>
+
+                <article class="wine-card" data-animate="fade-up" data-delay="1">
+                    <div class="wine-card__image" style="background: linear-gradient(135deg, #2A1015, #4A1E24 45%, #1A1315);">
+                        <span class="wine-card__vintage">2022</span>
+                        <span class="wine-card__type">Ros&eacute;</span>
+                    </div>
+                    <div class="wine-card__body">
+                        <h3 class="wine-card__name">Pétale de Rose</h3>
+                        <div class="wine-card__region">Pinot Noir Ros&eacute; &mdash; Estate</div>
+                        <p class="wine-card__notes">Strawberry, white peach, and dried lavender. Bright and refreshing with a dry, clean finish.</p>
+                        <div class="wine-card__meta">
+                            <div class="wine-card__meta-item"><strong>90</strong> Points</div>
+                            <div class="wine-card__meta-item"><strong>12.8%</strong> ABV</div>
+                        </div>
+                        <div class="wine-card__price">$38</div>
+                    </div>
+                </article>
+
+                <article class="wine-card" data-animate="fade-up" data-delay="2">
+                    <div class="wine-card__image" style="background: linear-gradient(135deg, #1A1315, #3D1A1F 50%, #0F0A0C);">
+                        <span class="wine-card__vintage">2020</span>
+                        <span class="wine-card__type">Red</span>
+                    </div>
+                    <div class="wine-card__body">
+                        <h3 class="wine-card__name">Le Terroir Sauvage</h3>
+                        <div class="wine-card__region">Pinot Noir &mdash; Old Vines Block</div>
+                        <p class="wine-card__notes">Raspberry, earth, and dried rose petals. Delicate yet complex with remarkable aging potential.</p>
+                        <div class="wine-card__meta">
+                            <div class="wine-card__meta-item"><strong>93</strong> Points</div>
+                            <div class="wine-card__meta-item"><strong>13.9%</strong> ABV</div>
+                        </div>
+                        <div class="wine-card__price">$78</div>
+                    </div>
+                </article>
+
+                <article class="wine-card" data-animate="fade-up" data-delay="3">
+                    <div class="wine-card__image" style="background: linear-gradient(135deg, #150F11, #5A242B 60%, #3D1A1F);">
+                        <span class="wine-card__vintage">2021</span>
+                        <span class="wine-card__type">White</span>
+                    </div>
+                    <div class="wine-card__body">
+                        <h3 class="wine-card__name">Brume Matinale</h3>
+                        <div class="wine-card__region">Pinot Gris &mdash; Valley Floor</div>
+                        <p class="wine-card__notes">Green apple, citrus zest, and almond blossom. Vibrant and precise with a silky texture.</p>
+                        <div class="wine-card__meta">
+                            <div class="wine-card__meta-item"><strong>91</strong> Points</div>
+                            <div class="wine-card__meta-item"><strong>13.2%</strong> ABV</div>
+                        </div>
+                        <div class="wine-card__price">$44</div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__top">
+                <div>
+                    <div class="footer__brand-name">Domaine Noir</div>
+                    <p class="footer__brand-text">Estate wines crafted with care in the Willamette Valley since 1987.</p>
+                </div>
+                <div>
+                    <h4 class="footer__col-title">Explore</h4>
+                    <a href="../index.html" class="footer__link">Home</a>
+                    <a href="wines.html" class="footer__link">Our Wines</a>
+                    <a href="story.html" class="footer__link">Our Story</a>
+                    <a href="visit.html" class="footer__link">Visit Us</a>
+                </div>
+                <div>
+                    <h4 class="footer__col-title">Wines</h4>
+                    <a href="wines.html" class="footer__link">Pinot Noir</a>
+                    <a href="wines.html" class="footer__link">Chardonnay</a>
+                    <a href="wines.html" class="footer__link">Syrah Blend</a>
+                    <a href="wines.html" class="footer__link">Ros&eacute;</a>
+                </div>
+                <div>
+                    <h4 class="footer__col-title">Contact</h4>
+                    <span class="footer__link">1987 Vineyard Road</span>
+                    <span class="footer__link">Willamette Valley, OR 97128</span>
+                    <span class="footer__link">(503) 555-0187</span>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span class="footer__copy">&copy; 2025 Domaine Noir. All rights reserved. Please drink responsibly.</span>
+                <div class="footer__bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+    <script src="../../template-banner.js"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings — Crestline Realty</title>
+    <meta name="description" content="Browse luxury properties for sale. From waterfront estates to modern penthouses, find your perfect home with Crestline Realty.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230B1A0F'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='serif' font-weight='700' font-size='20' fill='%232D6A4F'>C</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/variables.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="../index.html" class="nav__logo">
+                <span class="nav__logo-icon">C</span>
+                Crestline Realty
+            </a>
+            <div class="nav__links">
+                <a href="../index.html" class="nav__link">Home</a>
+                <a href="listings.html" class="nav__link nav__link--active">Listings</a>
+                <a href="agents.html" class="nav__link">Agents</a>
+                <a href="contact.html" class="nav__link">Contact</a>
+            </div>
+            <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav__overlay" id="navOverlay">
+        <a href="../index.html" class="nav__overlay-link">Home</a>
+        <a href="listings.html" class="nav__overlay-link">Listings</a>
+        <a href="agents.html" class="nav__overlay-link">Agents</a>
+        <a href="contact.html" class="nav__overlay-link">Contact</a>
+    </div>
+
+    <main>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="section-label" data-animate="fade-up">Properties</div>
+            <h1 class="page-header__title" data-animate="fade-up" data-delay="1">Our Listings</h1>
+            <p class="page-header__subtitle" data-animate="fade-up" data-delay="2">Explore our curated selection of luxury homes, estates, and penthouses across the region's most sought-after neighborhoods.</p>
+        </div>
+    </section>
+
+    <!-- Listings Grid -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="listings-grid">
+
+                <article class="property-card" data-animate="fade-up" data-delay="1">
+                    <div class="property-card__image">
+                        <div class="property-card__image-bg"></div>
+                        <span class="property-card__badge">$1,200,000</span>
+                        <span class="property-card__tag">Featured</span>
+                    </div>
+                    <div class="property-card__body">
+                        <h3 class="property-card__name">The Meridian Estate</h3>
+                        <div class="property-card__location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Riverside Heights
+                        </div>
+                        <div class="property-card__details">
+                            <div class="property-card__detail"><strong>4</strong> Beds</div>
+                            <div class="property-card__detail"><strong>3</strong> Baths</div>
+                            <div class="property-card__detail"><strong>3,400</strong> sqft</div>
+                        </div>
+                        <div class="property-card__footer">
+                            <span class="property-card__price">$1.2M</span>
+                            <a href="#" class="btn btn--small btn--primary">View Details</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="property-card" data-animate="fade-up" data-delay="2">
+                    <div class="property-card__image">
+                        <div class="property-card__image-bg" style="background: linear-gradient(135deg, #0F2A1A, #1A3A2A 40%, #0E1F13);"></div>
+                        <span class="property-card__badge">$850,000</span>
+                    </div>
+                    <div class="property-card__body">
+                        <h3 class="property-card__name">Oakwood Manor</h3>
+                        <div class="property-card__location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Oakwood Estates
+                        </div>
+                        <div class="property-card__details">
+                            <div class="property-card__detail"><strong>3</strong> Beds</div>
+                            <div class="property-card__detail"><strong>2.5</strong> Baths</div>
+                            <div class="property-card__detail"><strong>2,650</strong> sqft</div>
+                        </div>
+                        <div class="property-card__footer">
+                            <span class="property-card__price">$850K</span>
+                            <a href="#" class="btn btn--small btn--primary">View Details</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="property-card" data-animate="fade-up" data-delay="3">
+                    <div class="property-card__image">
+                        <div class="property-card__image-bg" style="background: linear-gradient(135deg, #152418, #2D6A4F 60%, #1A3A2A);"></div>
+                        <span class="property-card__badge">$2,400,000</span>
+                        <span class="property-card__tag">New</span>
+                    </div>
+                    <div class="property-card__body">
+                        <h3 class="property-card__name">Harborview Penthouse</h3>
+                        <div class="property-card__location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Harborview District
+                        </div>
+                        <div class="property-card__details">
+                            <div class="property-card__detail"><strong>5</strong> Beds</div>
+                            <div class="property-card__detail"><strong>4</strong> Baths</div>
+                            <div class="property-card__detail"><strong>4,800</strong> sqft</div>
+                        </div>
+                        <div class="property-card__footer">
+                            <span class="property-card__price">$2.4M</span>
+                            <a href="#" class="btn btn--small btn--primary">View Details</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="property-card" data-animate="fade-up" data-delay="1">
+                    <div class="property-card__image">
+                        <div class="property-card__image-bg" style="background: linear-gradient(135deg, #111F15, #1A3A2A 50%, #0B1A0F);"></div>
+                        <span class="property-card__badge">$425,000</span>
+                    </div>
+                    <div class="property-card__body">
+                        <h3 class="property-card__name">Birchwood Cottage</h3>
+                        <div class="property-card__location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Oakwood Estates
+                        </div>
+                        <div class="property-card__details">
+                            <div class="property-card__detail"><strong>2</strong> Beds</div>
+                            <div class="property-card__detail"><strong>1.5</strong> Baths</div>
+                            <div class="property-card__detail"><strong>1,400</strong> sqft</div>
+                        </div>
+                        <div class="property-card__footer">
+                            <span class="property-card__price">$425K</span>
+                            <a href="#" class="btn btn--small btn--primary">View Details</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="property-card" data-animate="fade-up" data-delay="2">
+                    <div class="property-card__image">
+                        <div class="property-card__image-bg" style="background: linear-gradient(135deg, #0E1F13, #245840 45%, #152418);"></div>
+                        <span class="property-card__badge">$3,200,000</span>
+                        <span class="property-card__tag">Exclusive</span>
+                    </div>
+                    <div class="property-card__body">
+                        <h3 class="property-card__name">The Grand Cascade</h3>
+                        <div class="property-card__location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Riverside Heights
+                        </div>
+                        <div class="property-card__details">
+                            <div class="property-card__detail"><strong>6</strong> Beds</div>
+                            <div class="property-card__detail"><strong>5</strong> Baths</div>
+                            <div class="property-card__detail"><strong>6,200</strong> sqft</div>
+                        </div>
+                        <div class="property-card__footer">
+                            <span class="property-card__price">$3.2M</span>
+                            <a href="#" class="btn btn--small btn--primary">View Details</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="property-card" data-animate="fade-up" data-delay="3">
+                    <div class="property-card__image">
+                        <div class="property-card__image-bg" style="background: linear-gradient(135deg, #1A3A2A, #0F2A1A 55%, #152418);"></div>
+                        <span class="property-card__badge">$975,000</span>
+                    </div>
+                    <div class="property-card__body">
+                        <h3 class="property-card__name">Harbor Loft Residence</h3>
+                        <div class="property-card__location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Harborview District
+                        </div>
+                        <div class="property-card__details">
+                            <div class="property-card__detail"><strong>3</strong> Beds</div>
+                            <div class="property-card__detail"><strong>2</strong> Baths</div>
+                            <div class="property-card__detail"><strong>2,100</strong> sqft</div>
+                        </div>
+                        <div class="property-card__footer">
+                            <span class="property-card__price">$975K</span>
+                            <a href="#" class="btn btn--small btn--primary">View Details</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__top">
+                <div>
+                    <div class="footer__brand-name">Crestline Realty</div>
+                    <p class="footer__brand-text">Luxury real estate with a personal touch. Serving distinguished buyers and sellers since 2009.</p>
+                </div>
+                <div>
+                    <h4 class="footer__col-title">Navigation</h4>
+                    <a href="../index.html" class="footer__link">Home</a>
+                    <a href="listings.html" class="footer__link">Listings</a>
+                    <a href="agents.html" class="footer__link">Our Agents</a>
+                    <a href="contact.html" class="footer__link">Contact</a>
+                </div>
+                <div>
+                    <h4 class="footer__col-title">Neighborhoods</h4>
+                    <a href="../index.html#neighborhoods" class="footer__link">Riverside Heights</a>
+                    <a href="../index.html#neighborhoods" class="footer__link">Oakwood Estates</a>
+                    <a href="../index.html#neighborhoods" class="footer__link">Harborview District</a>
+                </div>
+                <div>
+                    <h4 class="footer__col-title">Contact</h4>
+                    <span class="footer__link">420 Crestline Blvd, Suite 200</span>
+                    <span class="footer__link">(555) 824-7100</span>
+                    <span class="footer__link">hello@crestlinerealty.com</span>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span class="footer__copy">&copy; 2025 Crestline Realty. All rights reserved.</span>
+                <div class="footer__bottom-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+    <script src="../../template-banner.js"></script>
+</body>
+</html>

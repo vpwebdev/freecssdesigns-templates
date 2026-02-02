@@ -1,0 +1,108 @@
+/* ============================================================
+   DOMAINE NOIR — Design Tokens
+   Rich winery aesthetic with burgundy and gold
+   ============================================================ */
+
+:root {
+  /* ---- Color: Wine Palette ---- */
+  --color-bg:          #0F0A0C;
+  --color-bg-raised:   #150F11;
+  --color-bg-card:     #1A1315;
+  --color-bg-surface:  #1F171A;
+  --color-wine:        #722F37;
+  --color-wine-light:  #8B3A44;
+  --color-wine-dark:   #5A242B;
+  --color-wine-deep:   #3D1A1F;
+  --color-burgundy:    #4A1E24;
+  --color-rose:        #C4717A;
+  --color-rose-muted:  #8C5A60;
+
+  /* ---- Color: Gold & Warm Neutrals ---- */
+  --color-gold:        #B8860B;
+  --color-gold-light:  #D4A832;
+  --color-gold-soft:   #C9A84C;
+  --color-gold-dim:    #8A6B20;
+  --color-cream:       #F5F0EB;
+  --color-cream-soft:  #E8E0D8;
+  --color-linen:       #D4CBC2;
+  --color-white:       #FAF8F5;
+  --color-pure-white:  #ffffff;
+
+  /* ---- Color: Utility ---- */
+  --color-text:        #F5F0EB;
+  --color-text-muted:  #8C5A60;
+  --color-text-dim:    #6B4A50;
+  --color-border:      rgba(245, 240, 235, 0.06);
+  --color-border-hover:rgba(245, 240, 235, 0.12);
+  --color-overlay:     rgba(15, 10, 12, 0.65);
+  --color-overlay-deep:rgba(15, 10, 12, 0.85);
+
+  /* ---- Typography ---- */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
+
+  --fs-xs:   clamp(0.7rem, 0.65rem + 0.25vw, 0.78rem);
+  --fs-sm:   clamp(0.8rem, 0.75rem + 0.3vw, 0.9rem);
+  --fs-base: clamp(0.95rem, 0.88rem + 0.35vw, 1.06rem);
+  --fs-md:   clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  --fs-lg:   clamp(1.25rem, 1.05rem + 1vw, 1.65rem);
+  --fs-xl:   clamp(1.6rem, 1.25rem + 1.75vw, 2.4rem);
+  --fs-2xl:  clamp(2rem, 1.5rem + 2.5vw, 3.2rem);
+  --fs-3xl:  clamp(2.5rem, 1.8rem + 3.5vw, 4.2rem);
+  --fs-hero: clamp(3rem, 2rem + 5vw, 5.8rem);
+
+  --lh-tight:   1.15;
+  --lh-snug:    1.3;
+  --lh-normal:  1.65;
+  --lh-relaxed: 1.8;
+
+  --ls-tight:  -0.03em;
+  --ls-normal:  0;
+  --ls-wide:    0.06em;
+  --ls-ultra:   0.14em;
+
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+
+  /* ---- Spacing Scale ---- */
+  --space-3xs: clamp(0.25rem, 0.2rem + 0.15vw, 0.35rem);
+  --space-2xs: clamp(0.45rem, 0.4rem + 0.25vw, 0.6rem);
+  --space-xs:  clamp(0.7rem, 0.6rem + 0.4vw, 0.95rem);
+  --space-sm:  clamp(1rem, 0.85rem + 0.6vw, 1.35rem);
+  --space-md:  clamp(1.5rem, 1.2rem + 1.2vw, 2.2rem);
+  --space-lg:  clamp(2rem, 1.5rem + 2vw, 3.2rem);
+  --space-xl:  clamp(3rem, 2rem + 3.5vw, 5rem);
+  --space-2xl: clamp(4rem, 3rem + 5vw, 7.5rem);
+  --space-3xl: clamp(6rem, 4rem + 7vw, 10rem);
+
+  /* ---- Layout ---- */
+  --max-width:   1320px;
+  --max-narrow:  860px;
+  --max-text:    640px;
+  --gutter:      clamp(1.25rem, 1rem + 2vw, 3rem);
+  --section-pad: clamp(5rem, 4rem + 5vw, 9rem);
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   14px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* ---- Motion ---- */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast:   0.2s;
+  --duration-normal: 0.4s;
+  --duration-slow:   0.7s;
+
+  /* ---- Shadows ---- */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.18);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.18);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.2);
+  --shadow-xl:  0 24px 64px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.22);
+  --shadow-glow:0 0 40px rgba(114,47,55,0.2);
+}

@@ -1,0 +1,350 @@
+/* ============================================================
+   CRESTLINE REALTY — Page-Specific Styles
+   ============================================================ */
+
+/* ==========================================================================
+   HOMEPAGE — HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl) var(--gutter) var(--space-xl);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(45,106,79,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(26,58,42,0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 90%, rgba(45,106,79,0.06) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--color-bg), transparent);
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 860px;
+}
+
+.hero__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-ultra);
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin-bottom: var(--space-md);
+  padding: 8px 20px;
+  border: 1px solid rgba(45, 106, 79, 0.3);
+  border-radius: var(--radius-full);
+  background: rgba(45, 106, 79, 0.08);
+}
+
+.hero__label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-green);
+  animation: pulse-dot 2.4s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-regular);
+  color: var(--color-cream);
+  line-height: 1.08;
+  margin-bottom: var(--space-sm);
+  letter-spacing: var(--ls-tight);
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--color-gold);
+}
+
+.hero__subtitle {
+  font-size: var(--fs-md);
+  color: var(--color-sage);
+  line-height: var(--lh-relaxed);
+  max-width: 580px;
+  margin: 0 auto var(--space-lg);
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--color-green), transparent);
+  animation: scroll-line 2s ease infinite;
+}
+
+@keyframes scroll-line {
+  0% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.3; transform: scaleY(0.5); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+.hero__scroll span {
+  font-size: var(--fs-xs);
+  color: var(--color-text-dim);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+
+/* ---- Decorative lines ---- */
+.hero__deco {
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero__deco--1 {
+  top: 15%;
+  left: 5%;
+  width: 1px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--color-green), transparent);
+  opacity: 0.15;
+}
+
+.hero__deco--2 {
+  bottom: 25%;
+  right: 8%;
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--color-green), transparent);
+  opacity: 0.12;
+}
+
+/* ==========================================================================
+   HOMEPAGE — FEATURED LISTINGS
+   ========================================================================== */
+.featured {
+  padding: var(--section-pad) 0;
+}
+
+.featured__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+@media (max-width: 900px) {
+  .featured__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .featured__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   HOMEPAGE — STATS
+   ========================================================================== */
+.stats {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================================
+   HOMEPAGE — NEIGHBORHOODS
+   ========================================================================== */
+.neighborhoods {
+  padding: var(--section-pad) 0;
+}
+
+.neighborhoods__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+@media (max-width: 900px) {
+  .neighborhoods__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .neighborhoods__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   HOMEPAGE — TESTIMONIAL
+   ========================================================================== */
+.testimonial-section {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==========================================================================
+   HOMEPAGE — CTA
+   ========================================================================== */
+.cta-section {
+  padding: 0 0 var(--section-pad);
+}
+
+/* ==========================================================================
+   LISTINGS PAGE
+   ========================================================================== */
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  padding-bottom: var(--section-pad);
+}
+
+@media (max-width: 900px) {
+  .listings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .listings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   AGENTS PAGE
+   ========================================================================== */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  padding-bottom: var(--section-pad);
+}
+
+@media (max-width: 1024px) {
+  .agents-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .agents-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* ==========================================================================
+   CONTACT PAGE
+   ========================================================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-lg);
+  padding-bottom: var(--section-pad);
+}
+
+.contact-form-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.contact-form-card__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  color: var(--color-cream);
+  margin-bottom: var(--space-md);
+}
+
+.contact-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE HERO
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 90vh;
+    padding-top: calc(72px + var(--space-xl));
+  }
+
+  .hero__title {
+    font-size: clamp(2.2rem, 1.5rem + 4vw, 3.5rem);
+  }
+
+  .hero__deco--1,
+  .hero__deco--2 {
+    display: none;
+  }
+}
